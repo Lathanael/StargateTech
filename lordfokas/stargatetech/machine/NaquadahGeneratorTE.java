@@ -68,7 +68,7 @@ public class NaquadahGeneratorTE extends TileEntity implements ISidedInventory{
 		if(!enabled){
 			if(inventory != null) if(inventory.stackSize < 1) inventory = null;
 			if(inventory != null){
-				if(inventory.itemID == StargateTech.naquadahIngot.shiftedIndex){
+				if(inventory.itemID == StargateTech.naquadahIngot.itemID){
 					inventory.stackSize--;
 					if(inventory.stackSize < 1) inventory = null;
 					enabled = true;

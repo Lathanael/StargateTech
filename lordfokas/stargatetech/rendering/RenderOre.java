@@ -25,8 +25,11 @@ public class RenderOre extends BaseBlockRenderer {
 		int ore = (block.blockID == StargateTech.naquadahOre.blockID) ? TextureIndex.naquadahGlow : TextureIndex.naquadriaGlow;
 		r.overrideBlockTexture = base;
 		r.renderStandardBlock(block, x, y, z);
+		r.overrideBlockTexture = ore;
+		block.setLightValue(15);
+		r.renderStandardBlock(block, x, y, z);
+		block.setLightValue(0);
 		r.overrideBlockTexture = -1;
-		renderBlock(r, x, y, z, ore);
 		return false;
 	}
 }

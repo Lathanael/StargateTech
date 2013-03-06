@@ -26,9 +26,11 @@ public final class EventListener {
 		blocked.add(DamageSource.anvil);
 		blocked.add(DamageSource.cactus);
 		blocked.add(DamageSource.explosion);
+		blocked.add(DamageSource.explosion2);
 		blocked.add(DamageSource.fall);
 		blocked.add(DamageSource.fallingBlock);
-		blocked.add(DamageSource.field_76375_l);
+		// What was this before?
+		// blocked.add(DamageSource.field_76375_l);
 		blocked.add(DamageSource.inFire);
 		blocked.add(DamageSource.lava);
 		blocked.add(DamageSource.magic);
@@ -47,7 +49,7 @@ public final class EventListener {
 	public void onPlayerDamaged(LivingHurtEvent event){
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer) event.entity;
-			int shieldID = StargateTech.personalShield.shiftedIndex;
+			int shieldID = StargateTech.personalShield.itemID;
 			if(player.inventory.hasItem(shieldID)){ // Does the Player have a Personal Shield?
 				if(blocked.contains(event.source) || event.source.isProjectile() || event.source instanceof EntityDamageSource){
 					boolean deny = false;

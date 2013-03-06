@@ -21,7 +21,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 		float min = 0.5F - 0.1875F;
 		float max = 0.5F + 0.1875F;
 		block.setBlockBounds(min, 0.0F, min, max, 1.0F, max);
-		renderer.func_83018_a(block);
+		renderer.setRenderBoundsFromBlock(block);
 		renderAsItem(block, renderer);
 	}
 
@@ -36,7 +36,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 		if(Helper.getBlockInstance(world, x-1, y, z) instanceof IPowerNetComponent){
 			if(((IPowerNetComponent)Helper.getBlockInstance(world, x-1, y, z)).canConduitConnectOnSide(world, x-1, y, z, Helper.dirXPos)){
 				block.setBlockBounds(bordermin, coremin, coremin, coremin, coremax, coremax);
-				renderer.func_83018_a(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 				joints++;
 			}
@@ -44,7 +44,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 		if(Helper.getBlockInstance(world, x+1, y, z) instanceof IPowerNetComponent){
 			if(((IPowerNetComponent)Helper.getBlockInstance(world, x+1, y, z)).canConduitConnectOnSide(world, x+1, y, z, Helper.dirXNeg)){
 				block.setBlockBounds(coremax, coremin, coremin, bordermax, coremax, coremax);
-				renderer.func_83018_a(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 				joints++;
 			}
@@ -52,7 +52,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 		if(Helper.getBlockInstance(world, x, y-1, z) instanceof IPowerNetComponent){
 			if(((IPowerNetComponent)Helper.getBlockInstance(world, x, y-1, z)).canConduitConnectOnSide(world, x, y-1, z, Helper.dirYPos)){
 				block.setBlockBounds(coremin, bordermin, coremin, coremax, coremin, coremax);
-				renderer.func_83018_a(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 				joints++;
 			}
@@ -60,7 +60,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 		if(Helper.getBlockInstance(world, x, y+1, z) instanceof IPowerNetComponent){
 			if(((IPowerNetComponent)Helper.getBlockInstance(world, x, y+1, z)).canConduitConnectOnSide(world, x, y+1, z, Helper.dirYNeg)){
 				block.setBlockBounds(coremin, coremax, coremin, coremax, bordermax, coremax);
-				renderer.func_83018_a(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 				joints++;
 			}
@@ -68,7 +68,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 		if(Helper.getBlockInstance(world, x, y, z-1) instanceof IPowerNetComponent){
 			if(((IPowerNetComponent)Helper.getBlockInstance(world, x, y, z-1)).canConduitConnectOnSide(world, x, y, z-1, Helper.dirZPos)){
 				block.setBlockBounds(coremin, coremin, bordermin, coremax, coremax, coremin);
-				renderer.func_83018_a(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 				joints++;
 			}
@@ -76,7 +76,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 		if(Helper.getBlockInstance(world, x, y, z+1) instanceof IPowerNetComponent){
 			if(((IPowerNetComponent)Helper.getBlockInstance(world, x, y, z+1)).canConduitConnectOnSide(world, x, y, z+1, Helper.dirZNeg)){
 				block.setBlockBounds(coremin, coremin, coremax, coremax, coremax, bordermax);
-				renderer.func_83018_a(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 				joints++;
 			}
@@ -85,7 +85,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 			coremin -= 0.0625F;
 			coremax += 0.0625F;
 			block.setBlockBounds(coremin, coremin, coremin, coremax, coremax, coremax);
-			renderer.func_83018_a(block);
+			renderer.setRenderBoundsFromBlock(block);
 			renderer.renderNorthFace(block, x, y, z, TextureIndex.powerConduitJoint);
 			renderer.renderSouthFace(block, x, y, z, TextureIndex.powerConduitJoint);
 			renderer.renderWestFace(block, x, y, z, TextureIndex.powerConduitJoint);
@@ -94,7 +94,7 @@ public class RenderPowerConduit  extends BaseBlockRenderer{
 			renderer.renderBottomFace(block, x, y, z, TextureIndex.powerConduitJoint);
 		}else{
 			block.setBlockBounds(coremin, coremin, coremin, coremax, coremax, coremax);
-			renderer.func_83018_a(block);
+			renderer.setRenderBoundsFromBlock(block);
 			renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 		}
 		block.setBlockBoundsBasedOnState(world, x, y, z);

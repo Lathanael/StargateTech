@@ -19,7 +19,7 @@ public class NaquadahOre extends NaquadahExplosive implements IDisintegrable{
 	
 	@Override
 	public int idDropped(int i, Random r, int j){
-		return StargateTech.naquadahShard.shiftedIndex;
+		return StargateTech.naquadahShard.itemID;
 	}
 	
 	@Override // Drop 1 or 2 shards when broken

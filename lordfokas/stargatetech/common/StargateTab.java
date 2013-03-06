@@ -1,8 +1,8 @@
 package lordfokas.stargatetech.common;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
 import lordfokas.stargatetech.StargateTech;
 
 /**
@@ -19,7 +19,7 @@ public class StargateTab extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
     {
-        return StargateTech.naquadriaIngot.shiftedIndex;
+        return StargateTech.naquadriaIngot.itemID;
     }
 	
 	@SideOnly(Side.CLIENT)

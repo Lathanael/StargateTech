@@ -15,8 +15,8 @@ import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.rendering.RenderIonTube;
 import lordfokas.stargatetech.util.TextureIndex;
 
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class Shield extends BaseBlock {
 	public static int id;
