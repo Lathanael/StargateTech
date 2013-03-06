@@ -22,12 +22,12 @@ public class NaquadahOre extends NaquadahExplosive implements IDisintegrable{
 		return StargateTech.naquadahShard.shiftedIndex;
 	}
 	
-	@Override
+	@Override // Drop 1 or 2 shards when broken
 	public int quantityDropped(Random r){
 		return 1 + r.nextInt(2);
 	}
 	
-	@Override
+	@Override // Drop 3 shards when disintegrated
 	public boolean disintegrate(World w, int x, int y, int z){
 		if(w.isRemote) return true;
 		w.setBlock(x, y, z, 0);

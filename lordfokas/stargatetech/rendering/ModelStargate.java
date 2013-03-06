@@ -5,6 +5,11 @@ import net.minecraft.client.model.ModelRenderer;
 import lordfokas.stargatetech.machine.StargateTE;
 import lordfokas.stargatetech.util.Helper;
 
+/**
+ * Renders a Stargate. It will be changed soon to a pure OpenGL renderer,
+ * instead of using Minecraft's stuff, for the sake of client performance.
+ * @author LordFokas
+ */
 public class ModelStargate extends ModelBase {
 	private ModelRenderer ring, chevron, base;
 	

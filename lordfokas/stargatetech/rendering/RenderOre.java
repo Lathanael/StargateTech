@@ -7,6 +7,11 @@ import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * Renders Naquadah and Naquadria ore blocks.
+ * It may have some issues. See issue list on GitHub.
+ * @author LordFokas
+ */
 public class RenderOre extends BaseBlockRenderer {
 	private static RenderOre INSTANCE = new RenderOre();
 	

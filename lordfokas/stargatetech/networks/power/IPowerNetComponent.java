@@ -2,6 +2,10 @@ package lordfokas.stargatetech.networks.power;
 
 import net.minecraft.world.IBlockAccess;
 
+/**
+ * A component in the Power Network. Should be implemented by Blocks.
+ * @author LordFokas
+ */
 public interface IPowerNetComponent {
 	public enum EPowerComponentType{
 		SINK,

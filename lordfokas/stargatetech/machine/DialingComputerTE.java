@@ -6,13 +6,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import lordfokas.stargatetech.common.BaseTileEntity;
 import lordfokas.stargatetech.items.AddressMemoryCrystal;
 import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.Symbol;
 
-public class DialingComputerTE extends BaseTileEntity implements IInventory {
+public class DialingComputerTE extends TileEntity implements IInventory {
 	public static final String ID = "DialingComputerTE";
 	private ItemStack inventory = null;
 	
@@ -22,12 +23,14 @@ public class DialingComputerTE extends BaseTileEntity implements IInventory {
 	public boolean canDial = false;
 	
 	@Override public boolean canUpdate(){ return false; }
-	@Override public String getID(){ return ID; }
 	
+	// called from the GUI. Will use packets later.
 	public void load(){
 		
 	}
 	
+	// called from the GUI. Will use packets later.
+	// also, it doesn't feel like working. Not sure what's wrong.
 	public void save(){
 		if(inventory != null && inventory.getItem() instanceof AddressMemoryCrystal){
 			ArrayList<Symbol> tmp = new ArrayList<Symbol>(9);
@@ -49,6 +52,18 @@ public class DialingComputerTE extends BaseTileEntity implements IInventory {
 			else System.out.println("FAILED TO SAVE: " + attempt.getName());
 		}
 	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt){
+		super.readFromNBT(nbt);
+		// Nothing yet
+	}
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt){
+    	super.writeToNBT(nbt);
+    	// Nothing yet
+    }
 	
 	// ***************************************************************************************
 	// * IInventory stuff 

@@ -58,9 +58,7 @@ public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponen
 
 	@Override
 	public TileEntity createNewTileEntity(World w) {
-		ShieldEmitterTE te = new ShieldEmitterTE();
-		te.setWorldObj(w);
-		return te;
+		return new ShieldEmitterTE();
 	}
 
 	@Override

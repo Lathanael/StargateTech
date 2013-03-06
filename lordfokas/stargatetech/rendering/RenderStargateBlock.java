@@ -7,6 +7,11 @@ import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * Sits back and relaxes. Stargate blocks are not to be rendered.
+ * Makes the Stargate Item render in 2D.
+ * @author LordFokas
+ */
 public class RenderStargateBlock extends BaseBlockRenderer {
 	private static RenderStargateBlock INSTANCE = new RenderStargateBlock();
 	

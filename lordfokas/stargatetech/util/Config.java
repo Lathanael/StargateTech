@@ -2,6 +2,10 @@ package lordfokas.stargatetech.util;
 
 import net.minecraftforge.common.Configuration;
 
+/**
+ * Configuration handler. Takes care of every config-related values.
+ * @author LordFokas
+ */
 public final class Config {
 	private Config(){}
 	
@@ -124,11 +128,13 @@ public final class Config {
 		cfg.save();
 	}
 	
+	// Cap some values to hardcoded limits.
 	private static void enforceConstraints(){
 		if(maxShieldGap > 10) maxShieldGap = 10;
 		if(maxShieldGap < 3) maxShieldGap = 3;
 	}
 	
+	// Allow the player to disable specific mod integration plugins.
 	private static void processPlugins(){
 		pluginBC3 = cfg.get(PLUGINS, "enableBuildcraft3", true).getBoolean(true);
 		pluginCC = cfg.get(PLUGINS, "enableComputerCraft", true).getBoolean(true);

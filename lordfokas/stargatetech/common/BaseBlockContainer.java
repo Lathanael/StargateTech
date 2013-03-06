@@ -6,6 +6,10 @@ import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.util.IOverrideableTexture;
 
+/**
+ * A base for all the tile entity container blocks used by this mod.
+ * @author LordFokas
+ */
 public abstract class BaseBlockContainer extends BlockContainer implements IOverrideableTexture {
 	protected int[] override = new int[6];
 	protected boolean isOverride = false;

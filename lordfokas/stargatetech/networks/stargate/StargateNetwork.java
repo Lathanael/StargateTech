@@ -14,6 +14,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
 
+/**
+ * Manages -ALL- the Stargate Addresses. It is a potential bug hive: As stargates don't yet dial,
+ * there's no way to know if this will actually do it's job or not.
+ * @author LordFokas
+ */
 public class StargateNetwork {
 	private static class SpecialAddresses{
 		public static final Address Earth				= new Address(new short[]{28, 26,  5, 36, 11, 29,  1});

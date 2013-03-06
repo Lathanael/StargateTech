@@ -6,6 +6,11 @@ import net.minecraft.item.ItemStack;
 import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * As long as the player has this on his inventory, he'll be immune to most damage.
+ * It will wear off eventually though.
+ * @author LordFokas
+ */
 public class PersonalShield extends BaseItem {
 
 	public PersonalShield(int id) {

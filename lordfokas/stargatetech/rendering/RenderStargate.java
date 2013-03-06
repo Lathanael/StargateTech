@@ -8,6 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+/**
+ * Renders a Stargate Model in the world. Block metadata defines the gate's orientation.
+ * Should be upgraded soon to remove the need for a Model and render stuff directly through OpenGL.
+ * @author LordFokas
+ */
 public class RenderStargate extends TileEntitySpecialRenderer {
 	public static final RenderStargate instance = new RenderStargate();
 	private static final ModelStargate model = new ModelStargate();

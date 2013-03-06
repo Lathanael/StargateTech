@@ -1,5 +1,10 @@
 package lordfokas.stargatetech.util;
 
+/**
+ * This is supposed to be used along with packets as an utility to read and write values to byte arrays.
+ * Very early WIP... (Isn't the whole mod?)
+ * @author LordFokas
+ */
 public class ByteUtil {
 	private ByteUtil(){}
 	

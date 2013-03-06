@@ -1,11 +1,11 @@
 package lordfokas.stargatetech.machine;
 
-import lordfokas.stargatetech.common.BaseTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.StargateNetwork;
 import lordfokas.stargatetech.util.Helper;
 
-public class StargateTE extends BaseTileEntity {
+public class StargateTE extends TileEntity {
 	public static final String ID = "StargateTE";
 	public Address addr;
 	
@@ -25,6 +25,4 @@ public class StargateTE extends BaseTileEntity {
 	public void setDirection(int d){
 		worldObj.setBlockMetadata(xCoord, yCoord, zCoord, d);
 	}
-	
-	@Override public String getID(){ return ID; }
 }

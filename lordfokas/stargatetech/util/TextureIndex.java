@@ -1,5 +1,10 @@
 package lordfokas.stargatetech.util;
 
+/**
+ * Holds the texture index for everything in every sprite.
+ * It provides an easier way to manage these values in case the sprite sheet indexes need to be changed.
+ * @author LordFokas
+ */
 public final class TextureIndex {
 	private TextureIndex(){}
 	

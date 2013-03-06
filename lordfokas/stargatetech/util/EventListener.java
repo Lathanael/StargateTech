@@ -17,9 +17,12 @@ import net.minecraftforge.event.world.WorldEvent;
 public final class EventListener {
 	private static final EventListener instance = new EventListener();
 	private static boolean registered = false;
+	
+	/** What types of damage the Personal Shield blocks. */
 	private ArrayList<DamageSource> blocked = new ArrayList<DamageSource>();
 	
 	private EventListener(){
+		// Add Damage Sources to the blocked list.
 		blocked.add(DamageSource.anvil);
 		blocked.add(DamageSource.cactus);
 		blocked.add(DamageSource.explosion);
@@ -33,21 +36,22 @@ public final class EventListener {
 		blocked.add(DamageSource.wither);
 	}
 	
+	// Register itself to Forge Event Bus
 	public static void register(){
 		if(registered) return;
 		MinecraftForge.EVENT_BUS.register(instance);
 		registered = true;
 	}
 	
-	@ForgeSubscribe
+	@ForgeSubscribe // Block damage if the player has any Personal Shield.
 	public void onPlayerDamaged(LivingHurtEvent event){
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer) event.entity;
 			int shieldID = StargateTech.personalShield.shiftedIndex;
-			if(player.inventory.hasItem(shieldID)){
+			if(player.inventory.hasItem(shieldID)){ // Does the Player have a Personal Shield?
 				if(blocked.contains(event.source) || event.source.isProjectile() || event.source instanceof EntityDamageSource){
 					boolean deny = false;
-					for(int i = 0; i < 36; i++){
+					for(int i = 0; i < 36; i++){ // Find the shield. Discharge it a bit.
 						ItemStack stack = player.inventory.mainInventory[i];
 						if(stack != null){
 							if(stack.itemID == shieldID){

@@ -12,6 +12,10 @@ import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * Acts as both a Dismantler and a Disintegrator.
+ * @author LordFokas
+ */
 public class MechanusClavia extends BaseItem {
 	public MechanusClavia(int id) {
 		super(id, TextureIndex.mechanusClavia); // REM cg

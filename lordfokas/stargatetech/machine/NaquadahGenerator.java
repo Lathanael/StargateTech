@@ -19,7 +19,7 @@ public class NaquadahGenerator extends BaseBlockContainer implements IPowerNetSo
 		setBlockName("naquadahGenerator");
 	}
 	
-	@Override
+	@Override // Power conduits can only connect on the sides, not on the top or bottom.
 	public boolean canConduitConnectOnSide(IBlockAccess w, int x, int y, int z, int side) {
 		return side > 1;
 	}

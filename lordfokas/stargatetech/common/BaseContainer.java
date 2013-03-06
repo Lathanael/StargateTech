@@ -6,6 +6,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Common code for GUI Containers
+ * @author LordFokas
+ */
 public class BaseContainer extends Container {
 	@Override public boolean canInteractWith(EntityPlayer var1){ return true; }
 	

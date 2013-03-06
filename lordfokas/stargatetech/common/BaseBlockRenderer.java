@@ -9,6 +9,10 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
+/**
+ * A base for all the custom block renderers we're using.
+ * @author LordFokas
+ */
 public abstract class BaseBlockRenderer implements ISimpleBlockRenderingHandler{
 	protected int rid;
 	

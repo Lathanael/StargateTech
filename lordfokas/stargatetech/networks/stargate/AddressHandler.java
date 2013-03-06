@@ -5,6 +5,11 @@ import java.io.RandomAccessFile;
 
 import net.minecraft.world.World;
 
+/**
+ * Maps Stargate Addresses to physical locations.
+ * Used by the StargateNetwork,
+ * @author LordFokas
+ */
 public class AddressHandler{
 	private Address address;
 	private int dim = 0;

@@ -7,6 +7,10 @@ import net.minecraft.block.Block;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 
+/**
+ * An utility to draw power from the PowerNet.
+ * @author LordFokas
+ */
 public final class PowerNetStaticRouter {
 	private static final PowerNetStaticRouter router = new PowerNetStaticRouter();
 	private PowerNetStaticRouter(){}

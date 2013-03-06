@@ -1,29 +1,33 @@
 package lordfokas.stargatetech.machine;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
-import lordfokas.stargatetech.common.BaseTileEntity;
 import lordfokas.stargatetech.networks.ion.IonNetStaticRouter;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.NBTAutomation;
-import lordfokas.stargatetech.util.NBTAutomation.NBTField;
-import lordfokas.stargatetech.util.NBTAutomation.NBTFieldCompound;
 
-@NBTFieldCompound
-public class ShieldEmitterTE extends BaseTileEntity{
+public class ShieldEmitterTE extends TileEntity{
 	public static final String ID = "ShieldEmitterTE";
 	public static final int SEARCH_TICKS = 20;
 	
+	/** How far away can this emitter's pair be */
 	private int range = StargateTech.shieldEmitter.getMaxShieldRange();
+	/** The instance of this emitter's pair */
 	private ShieldEmitterTE pair = null;
-	@NBTField private int power = 0;
-	@NBTField private int bufferSize = 2000;
+	/** How many ions do we have inside.*/
+	private int ionAmount = 0;
+	/** How many ions can be stored in the internal buffer */
+	private int bufferSize = 2000;
+	/** This emitter's position */
 	private CoordinateSet pos = null;
-	@NBTField private int searchTicks = 0;
-	@NBTField private boolean disabled = true;
-	@NBTField private boolean canEnable = false;
+	/** How many ticks since we last searched for ions */
+	private int searchTicks = 0;
+	/** Is this emitter and it's pair enabled? */
+	private boolean disabled = true;
+	/** Wether this emitter has enough ions to be enabled again or not */
+	private boolean canEnable = false;
 	
 	@Override
 	public void invalidate(){
@@ -33,23 +37,25 @@ public class ShieldEmitterTE extends BaseTileEntity{
 	}
 	
 	public void updateEntity(){
-		if(power > 0 && !disabled){
-			power--;
-			if(power == 0){
+		// Use ions. If the buffer is empty, stop this emitter and it's pair.
+		if(ionAmount > 0 && !disabled){
+			ionAmount--;
+			if(ionAmount == 0){
 				shutdown();
 			}
 		}
-		if(power < (bufferSize/10)){
+		// If the buffer is below 10%, request more ions.
+		if(ionAmount < (bufferSize/10)){
 			if(searchTicks == 0){
 				if(pos == null) updatePos();
-				power += IonNetStaticRouter.route(bufferSize - power, pos, true);
+				ionAmount += IonNetStaticRouter.route(bufferSize - ionAmount, pos, true);
 			}
 			searchTicks++;
 			if(searchTicks == SEARCH_TICKS){
 				searchTicks = 0;
 			}
 		}
-		if(disabled && power > 0){
+		if(disabled && ionAmount > 0){
 			restart();
 		}
 	}
@@ -176,13 +182,21 @@ public class ShieldEmitterTE extends BaseTileEntity{
 		}
 	}
 	
-	public static ShieldEmitterTE createAndLoadEntity(NBTTagCompound nbt){
-        ShieldEmitterTE te = new ShieldEmitterTE();
-        te.readFromNBT(nbt);
-        return te;
-    }
-
 	@Override
-	public String getID()
-		{ return ID; }
+	public void readFromNBT(NBTTagCompound nbt){
+		super.readFromNBT(nbt);
+		canEnable = nbt.getBoolean("canEnable");
+		disabled = nbt.getBoolean("disabled");
+		ionAmount = nbt.getInteger("power");
+		searchTicks = nbt.getInteger("searchTicks");
+	}
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt){
+    	super.writeToNBT(nbt);
+    	nbt.setBoolean("canEnable", canEnable);
+    	nbt.setBoolean("disabled", disabled);
+    	nbt.setInteger("power", ionAmount);
+    	nbt.setInteger("searchTicks", searchTicks);
+    }
 }

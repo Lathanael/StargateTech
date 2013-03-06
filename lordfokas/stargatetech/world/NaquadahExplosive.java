@@ -3,11 +3,21 @@ package lordfokas.stargatetech.world;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseBlock;
-import lordfokas.stargatetech.util.Helper;
 
+/**
+ * A naquadah-based explosive.
+ * All blocks with naquadah-derived properties should extend this.
+ * @author LordFokas
+ */
 public class NaquadahExplosive extends BaseBlock {
-	protected float power; 
+	/** Explosion Radius */
+	protected float power;
 	
+	/**
+	 * @param id Block ID
+	 * @param textureIndex Texture Sheet Index
+	 * @param p Explosion Radius
+	 */
 	public NaquadahExplosive(int id, int textureIndex, float p) {
 		super(id, textureIndex, false);
 		this.setResistance(-1.0F);

@@ -3,6 +3,11 @@ package lordfokas.stargatetech.common;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
+/**
+ * Custom item renderer base code.
+ * It will be used later to give Dismantler / Disintegrator / Mechanus Clavia a better (3D) look.
+ * @author LordFokas
+ */
 public class BaseItemRenderer implements IItemRenderer {
 
 	@Override

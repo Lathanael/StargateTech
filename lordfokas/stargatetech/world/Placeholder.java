@@ -6,6 +6,11 @@ import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * Invisible block, that takes space and colides with entities.
+ * Used by multi-block structures like Stargates
+ * @author LordFokas
+ */
 public class Placeholder extends BaseBlock {
 	public Placeholder(int id) {
 		super(id, TextureIndex.voidTexture);

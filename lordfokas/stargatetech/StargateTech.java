@@ -25,7 +25,7 @@ import lordfokas.stargatetech.plugins.PluginTC3;
 import lordfokas.stargatetech.plugins.PluginTE;
 import lordfokas.stargatetech.util.Config;
 import lordfokas.stargatetech.util.TextureIndex;
-import lordfokas.stargatetech.world.LanteanWorldGen;
+import lordfokas.stargatetech.world.WorldGenerator;
 import lordfokas.stargatetech.world.NaquadahOre;
 import lordfokas.stargatetech.world.NaquadriaOre;
 import lordfokas.stargatetech.world.Placeholder;
@@ -44,7 +44,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class StargateTech {
 	// General Stuff
-	public static final LanteanWorldGen worldGen = new LanteanWorldGen();
+	public static final WorldGenerator worldGen = new WorldGenerator();
 	public static final StargateTab tab = StargateTab.instance;
 	
 	// Blocks

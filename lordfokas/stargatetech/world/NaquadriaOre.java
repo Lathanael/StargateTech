@@ -19,7 +19,7 @@ public class NaquadriaOre extends NaquadriaExplosive implements IDisintegrable{
 		this.setTickRandomly(true);
 	}
 	
-	@Override
+	@Override // Transform adjacent Naquadah Ore into Naquadria Ore over time.
 	public void updateTick(World w, int x, int y, int z, Random r){
 		int naquadah = StargateTech.naquadahOre.blockID;
 		if(r.nextBoolean() && w.getBlockId(x+1, y, z) == naquadah) w.setBlock(x+1, y, z, this.blockID);
@@ -30,7 +30,7 @@ public class NaquadriaOre extends NaquadriaExplosive implements IDisintegrable{
 		if(r.nextBoolean() && w.getBlockId(x, y, z-1) == naquadah) w.setBlock(x, y, z-1, this.blockID);
 	}
 	
-	@Override
+	@Override // Tick fast
 	public int tickRate(){
 		return 1;
 	}

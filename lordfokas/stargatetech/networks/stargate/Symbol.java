@@ -1,5 +1,9 @@
 package lordfokas.stargatetech.networks.stargate;
 
+/**
+ * Represents a Stargate Address Symbol.
+ * @author LordFokas
+ */
 public final class Symbol {
 	private short id;
 	private String name;

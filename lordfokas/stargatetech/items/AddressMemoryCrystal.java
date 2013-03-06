@@ -11,6 +11,10 @@ import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.Symbol;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * Stores a Stargate Address
+ * @author LordFokas
+ */
 public class AddressMemoryCrystal extends BaseItem {
 	public AddressMemoryCrystal(int id){
 		super(id, TextureIndex.addressMemoryCrystal);

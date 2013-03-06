@@ -4,6 +4,10 @@ import net.minecraft.item.Item;
 import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.StargateTech;
 
+/**
+ * Common code for items. Not really much for now.
+ * @author LordFokas
+ */
 public class BaseItem extends Item {
 
 	public BaseItem(int id, int textureIndex) {

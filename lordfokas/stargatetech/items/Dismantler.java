@@ -11,6 +11,11 @@ import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * Dismantles any block that implements IDismantleable.
+ * Intended to be used on machines.
+ * @author LordFokas
+ */
 public class Dismantler extends BaseItem {
 	public Dismantler(int id) {
 		super(id, TextureIndex.dismantler); // REM cg

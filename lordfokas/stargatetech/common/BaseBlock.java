@@ -7,6 +7,10 @@ import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.util.Config;
 import lordfokas.stargatetech.util.IOverrideableTexture;
 
+/**
+ * A base for all the blocks used on this mod.
+ * @author LordFokas
+ */
 public class BaseBlock extends Block implements IOverrideableTexture {
 	protected int[] override = new int[6];
 	protected boolean isOverride = false;

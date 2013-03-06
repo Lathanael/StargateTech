@@ -1,6 +1,7 @@
 package lordfokas.stargatetech;
 
 import lordfokas.stargatetech.common.ParticleIonizerRecipes;
+import lordfokas.stargatetech.machine.DialingComputerTE;
 import lordfokas.stargatetech.machine.NaquadahGeneratorTE;
 import lordfokas.stargatetech.machine.ParticleIonizerTE;
 import lordfokas.stargatetech.machine.ShieldEmitterTE;
@@ -79,6 +80,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(ParticleIonizerTE.class, ParticleIonizerTE.ID);
 		GameRegistry.registerTileEntity(NaquadahGeneratorTE.class, NaquadahGeneratorTE.ID);
 		GameRegistry.registerTileEntity(StargateTE.class, StargateTE.ID);
+		GameRegistry.registerTileEntity(DialingComputerTE.class, DialingComputerTE.ID);
 	}
 	
 	private void refineContentProperties(){

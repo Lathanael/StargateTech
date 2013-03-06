@@ -4,6 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 
+/**
+ * Your everyday helper, with bits of common and useful code.
+ * Mostly direction handling and Block class fetching.
+ * @author LordFokas
+ */
 public final class Helper {
 	// Cardinal Orientation
 	public static final int dirBottom = 0;

@@ -11,6 +11,11 @@ import lordfokas.stargatetech.common.IDisintegrable;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;
 
+/**
+ * Disintegrates any blocks that implement IDisintegrable.
+ * Used for ores and similar blocks.
+ * @author LordFokas
+ */
 public class Disintegrator extends BaseItem {
 	public Disintegrator(int id) {
 		super(id, TextureIndex.disintegrator);

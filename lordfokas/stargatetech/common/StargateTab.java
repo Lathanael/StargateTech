@@ -5,6 +5,10 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import lordfokas.stargatetech.StargateTech;
 
+/**
+ * The tab under which all our items and blocks will show up.
+ * @author LordFokas
+ */
 public class StargateTab extends CreativeTabs {
 	public static final StargateTab instance = new StargateTab();
 	

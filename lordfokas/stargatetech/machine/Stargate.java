@@ -97,6 +97,7 @@ public class Stargate extends BaseBlockContainer implements IDismantleable {
 		StargateNetwork.instance().remove(w, addr);
 	}
 	
+	// TODO: Fix this
 	public void setPlaceholders(World w, int x, int y, int z, int dir, boolean set){
 		int bid = set ? StargateTech.placeholder.blockID : 0;
 		boolean dirX = (dir == Helper.dirXNeg || dir == Helper.dirXPos);

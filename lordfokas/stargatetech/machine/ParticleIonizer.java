@@ -59,9 +59,7 @@ public class ParticleIonizer extends BaseBlockContainer implements IIonNetSource
 	
 	@Override
 	public ParticleIonizerTE createNewTileEntity(World w) {
-		ParticleIonizerTE te = new ParticleIonizerTE();
-		te.setWorldObj(w);
-		return te;
+		return new ParticleIonizerTE();
 	}
 	
 	@Override

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 
+/**
+ * A manager for items usable in the Particle Ionizer.
+ * It still needs some work.
+ * @author LordFokas
+ */
 public final class ParticleIonizerRecipes {
 	public static final ParticleIonizerRecipes instance = new ParticleIonizerRecipes();
 	private ParticleIonizerRecipes(){}

@@ -10,7 +10,12 @@ import lordfokas.stargatetech.StargateTech;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class LanteanWorldGen implements IWorldGenerator {
+/**
+ * StargateTech's custom world generator.
+ * So far only generates stuff on Overworld chunks.
+ * @author LordFokas
+ */
+public class WorldGenerator implements IWorldGenerator {
 
 	@Override
 	public void generate(Random r, int cX, int cZ, World w, IChunkProvider cGen, IChunkProvider cProv) {
@@ -19,6 +24,8 @@ public class LanteanWorldGen implements IWorldGenerator {
 		generateLanteanBase(r, cX, cZ, w);
 	}
 	
+	// Generate Naquadah veins in ~10% of chunks.
+	// If Naquadah was generated, generate Naquadria as well.
 	private void generateNaquadah(Random r, int cX, int cZ, World w){
 		if(r.nextInt(10) != 0) return;
 		for(int i = 0; i < 2; i++){
@@ -39,5 +46,7 @@ public class LanteanWorldGen implements IWorldGenerator {
 		}
 	}
 	
+	// Spawn Lantean bases on the world.
+	// Not implemented yet because there are a lot of dependencies to implement.
 	private void generateLanteanBase(Random r, int cX, int cZ, World w){}
 }

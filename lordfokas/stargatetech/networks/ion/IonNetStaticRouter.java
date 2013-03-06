@@ -7,6 +7,10 @@ import net.minecraft.block.Block;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 
+/**
+ * An utility to draw Ions from Ion Sources.
+ * @author LordFokas
+ */
 public final class IonNetStaticRouter {
 	private static final IonNetStaticRouter router = new IonNetStaticRouter();
 	private IonNetStaticRouter(){}

@@ -9,7 +9,7 @@ import lordfokas.stargatetech.networks.ion.IIonNetComponent;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;
 
-public class RenderIonTube  extends BaseBlockRenderer{
+public class RenderIonTube extends BaseBlockRenderer{
 	private static RenderIonTube INSTANCE = new RenderIonTube();
 	
 	public static RenderIonTube instance(){
