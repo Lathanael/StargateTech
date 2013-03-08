@@ -1,4 +1,4 @@
-package lordfokas.stargatetech.util;
+package lordfokas.stargatetech.packet;
 
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;

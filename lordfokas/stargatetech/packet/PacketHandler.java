@@ -1,4 +1,4 @@
-package lordfokas.stargatetech.util;
+package lordfokas.stargatetech.packet;
 
 import cpw.mods.fml.common.network.IPacketHandler;
 

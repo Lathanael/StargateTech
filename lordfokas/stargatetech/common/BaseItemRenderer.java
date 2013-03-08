@@ -2,28 +2,35 @@ package lordfokas.stargatetech.common;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 /**
  * Custom item renderer base code.
  * It will be used later to give Dismantler / Disintegrator / Mechanus Clavia a better (3D) look.
  * @author LordFokas
  */
-public class BaseItemRenderer implements IItemRenderer {
-
-	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		// AUTOGEN Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-		// AUTOGEN Auto-generated method stub
-		return false;
-	}
+public abstract class BaseItemRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		// AUTOGEN Auto-generated method stub
+		switch(type){
+		case ENTITY:
+			renderEntity(item, data);
+			break;
+		case EQUIPPED:
+			renderEquipped(item, data);
+			break;
+		case FIRST_PERSON_MAP:
+			renderFirstPerson(item, data);
+			break;
+		case INVENTORY:
+			renderInventory(item, data);
+			break;
+		}
 	}
+	
+	protected void renderEntity(ItemStack item, Object... data){}
+	protected void renderEquipped(ItemStack item, Object... data){}
+	protected void renderFirstPerson(ItemStack item, Object... data){}
+	protected void renderInventory(ItemStack item, Object... data){}
 }

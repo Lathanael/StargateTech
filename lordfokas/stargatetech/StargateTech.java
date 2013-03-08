@@ -73,7 +73,7 @@ public class StargateTech {
 	public static PersonalShield personalShield;
 	public static AddressMemoryCrystal addressMemoryCrystal;
 	
-	// Mod Compatibility Plugins
+	// Mod Integration Plugins
 	public PluginBC3 buildcraft3;
 	public PluginCC computercraft;
 	public PluginForestry forestry;

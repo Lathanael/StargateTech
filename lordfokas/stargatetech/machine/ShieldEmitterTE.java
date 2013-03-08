@@ -10,7 +10,12 @@ import lordfokas.stargatetech.util.Helper;
 
 public class ShieldEmitterTE extends TileEntity{
 	public static final String ID = "ShieldEmitterTE";
-	public static final int SEARCH_TICKS = 20;
+	public static final int MAX_SEARCH_TICKS = 20;
+	
+	// Cumulative costs for the several shield modes:
+	public static final int COST_PLAYER		= 13;
+	public static final int COST_MOBS		= 2;
+	public static final int COST_FRIENDLY	= 5;
 	
 	/** How far away can this emitter's pair be */
 	private int range = StargateTech.shieldEmitter.getMaxShieldRange();
@@ -19,7 +24,7 @@ public class ShieldEmitterTE extends TileEntity{
 	/** How many ions do we have inside.*/
 	private int ionAmount = 0;
 	/** How many ions can be stored in the internal buffer */
-	private int bufferSize = 2000;
+	private int bufferSize = 50000;
 	/** This emitter's position */
 	private CoordinateSet pos = null;
 	/** How many ticks since we last searched for ions */
@@ -28,6 +33,10 @@ public class ShieldEmitterTE extends TileEntity{
 	private boolean disabled = true;
 	/** Wether this emitter has enough ions to be enabled again or not */
 	private boolean canEnable = false;
+	/** Metadata value for Shields. Tells them what to block. Default is all entities except players */
+	private int shieldMode = ~Shield.BLOCK_PLAYER;
+	/** Ion cost per tick. Based on shieldMode */
+	private int cost = COST_MOBS + COST_FRIENDLY;
 	
 	@Override
 	public void invalidate(){
@@ -38,9 +47,9 @@ public class ShieldEmitterTE extends TileEntity{
 	
 	public void updateEntity(){
 		// Use ions. If the buffer is empty, stop this emitter and it's pair.
-		if(ionAmount > 0 && !disabled){
-			ionAmount--;
-			if(ionAmount == 0){
+		if(ionAmount >= cost && !disabled){
+			ionAmount -= cost;
+			if(ionAmount < cost){
 				shutdown();
 			}
 		}
@@ -51,11 +60,11 @@ public class ShieldEmitterTE extends TileEntity{
 				ionAmount += IonNetStaticRouter.route(bufferSize - ionAmount, pos, true);
 			}
 			searchTicks++;
-			if(searchTicks == SEARCH_TICKS){
+			if(searchTicks == MAX_SEARCH_TICKS){
 				searchTicks = 0;
 			}
 		}
-		if(disabled && ionAmount > 0){
+		if(disabled && ionAmount >= cost){
 			restart();
 		}
 	}
@@ -88,11 +97,33 @@ public class ShieldEmitterTE extends TileEntity{
 		findPair();
 		if(pair != null){
 			if(pos == null) updatePos();
+			pair.setModeAndRecalculate(shieldMode);
 			if(!pair.canEnable) return;
-			createShields(pos.w, pos.x, pos.y, pos.z);
 			setEnabled(true);
 			pair.setEnabled(true);
+			createShields(pos.w, pos.x, pos.y, pos.z);
 		}
+	}
+	
+	private void setModeAndRecalculate(int mode){
+		shieldMode = mode;
+		cost = 0;
+		if((mode & Shield.BLOCK_PLAYER) != 0){
+			cost += COST_PLAYER;
+		}
+		if((mode & Shield.BLOCK_MOBS) != 0){
+			cost += COST_MOBS;
+		}
+		if((mode & Shield.BLOCK_FRIENDLY) != 0){
+			cost += COST_FRIENDLY;
+		}
+	}
+	
+	public void setMode(int mode){
+		setModeAndRecalculate(mode & 15);
+		// Half a byte just changed, reboot the whole system. Is this Microsoft code?
+		shutdown();
+		restart();
 	}
 	
 	public void findPair(){
@@ -124,6 +155,10 @@ public class ShieldEmitterTE extends TileEntity{
 	
 	public void updatePos(){
 		pos = new CoordinateSet(worldObj, xCoord, yCoord, zCoord);
+	}
+	
+	private void createShields(CoordinateSet cs){
+		createShields(cs.w, cs.x, cs.y, cs.z);
 	}
 	
 	private void createShields(World world, int x, int y, int z){
@@ -164,7 +199,7 @@ public class ShieldEmitterTE extends TileEntity{
 			}
 			if(spawnCycles != 0 && world.getBlockId(x + (spawnCycles+1) * xInc, y, z + (spawnCycles+1) * zInc) == StargateTech.shieldEmitter.blockID){
 				for(int i = 1; i<=spawnCycles; i++){
-					world.setBlock(x + (xInc * i), y, z + (zInc * i), Shield.id);
+					world.setBlockAndMetadata(x + (xInc * i), y, z + (zInc * i), StargateTech.shield.blockID, shieldMode);
 				}
 			}
 		}
@@ -174,7 +209,7 @@ public class ShieldEmitterTE extends TileEntity{
 		int dir = cs.w.getBlockMetadata(cs.x, cs.y, cs.z);
 		for(int i = 1; i <= range; i++){
 			cs = cs.fromDirection(dir);
-			if(cs.w.getBlockId(cs.x, cs.y, cs.z) == Shield.id){
+			if(cs.w.getBlockId(cs.x, cs.y, cs.z) == StargateTech.shield.blockID){
 				cs.w.setBlock(cs.x, cs.y, cs.z, 0);
 			}
 			if(cs.w.getBlockId(cs.x, cs.y, cs.z) == StargateTech.shieldEmitter.blockID)
@@ -186,17 +221,21 @@ public class ShieldEmitterTE extends TileEntity{
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
 		canEnable = nbt.getBoolean("canEnable");
+		cost = nbt.getInteger("cost");
 		disabled = nbt.getBoolean("disabled");
 		ionAmount = nbt.getInteger("power");
 		searchTicks = nbt.getInteger("searchTicks");
+		shieldMode = nbt.getInteger("shieldMode");
 	}
 
     @Override
     public void writeToNBT(NBTTagCompound nbt){
     	super.writeToNBT(nbt);
     	nbt.setBoolean("canEnable", canEnable);
+    	nbt.setInteger("cost", cost);
     	nbt.setBoolean("disabled", disabled);
     	nbt.setInteger("power", ionAmount);
     	nbt.setInteger("searchTicks", searchTicks);
+    	nbt.setInteger("shieldMode", shieldMode);
     }
 }

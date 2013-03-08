@@ -9,6 +9,8 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import lordfokas.stargatetech.machine.StargateTE;
+import lordfokas.stargatetech.packet.PacketHandler;
+import lordfokas.stargatetech.packet.PacketHandlerClient;
 import lordfokas.stargatetech.rendering.RenderIonTube;
 import lordfokas.stargatetech.rendering.RenderOre;
 import lordfokas.stargatetech.rendering.RenderParticleIonizer;
@@ -17,8 +19,6 @@ import lordfokas.stargatetech.rendering.RenderShieldEmitter;
 import lordfokas.stargatetech.rendering.RenderStargate;
 import lordfokas.stargatetech.rendering.RenderStargateBlock;
 import lordfokas.stargatetech.util.Config;
-import lordfokas.stargatetech.util.PacketHandler;
-import lordfokas.stargatetech.util.PacketHandlerClient;
 import lordfokas.stargatetech.util.TextureIndex;
 import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.src.ModTextureAnimation;
@@ -44,7 +44,7 @@ public class ClientProxy extends CommonProxy {
 		preloadTextures();
 		if(Config.animationsOn)
 			registerAnimatedTextures();
-		registerBlockRenderers();
+		registerRenderers();
 		NetworkRegistry.instance().registerChannel(PacketHandlerClient.instance, PacketHandler.CHANNEL_STARGATE, Side.CLIENT);
 	}
 	
@@ -63,7 +63,7 @@ public class ClientProxy extends CommonProxy {
 		tryAddAnimation(BLOCK_TEXTURES, TextureIndex.shield, SHIELD_PULSAR, 5);
 	}
 	
-	private void registerBlockRenderers(){
+	private void registerRenderers(){
 		RenderingRegistry.registerBlockHandler(RenderIonTube.instance());
 		RenderingRegistry.registerBlockHandler(RenderParticleIonizer.instance());
 		RenderingRegistry.registerBlockHandler(RenderShieldEmitter.instance());
