@@ -1,16 +1,14 @@
 package lordfokas.stargatetech.machine;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
-import lordfokas.stargatetech.networks.ion.IonNetStaticRouter;
+import lordfokas.stargatetech.networks.ion.BaseIonNetSinkTE;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 
-public class ShieldEmitterTE extends TileEntity{
+public class ShieldEmitterTE extends BaseIonNetSinkTE{
 	public static final String ID = "ShieldEmitterTE";
-	public static final int MAX_SEARCH_TICKS = 20;
 	
 	// Cumulative costs for the several shield modes:
 	public static final int COST_PLAYER		= 13;
@@ -21,14 +19,6 @@ public class ShieldEmitterTE extends TileEntity{
 	private int range = StargateTech.shieldEmitter.getMaxShieldRange();
 	/** The instance of this emitter's pair */
 	private ShieldEmitterTE pair = null;
-	/** How many ions do we have inside.*/
-	private int ionAmount = 0;
-	/** How many ions can be stored in the internal buffer */
-	private int bufferSize = 50000;
-	/** This emitter's position */
-	private CoordinateSet pos = null;
-	/** How many ticks since we last searched for ions */
-	private int searchTicks = 0;
 	/** Is this emitter and it's pair enabled? */
 	private boolean disabled = true;
 	/** Wether this emitter has enough ions to be enabled again or not */
@@ -37,6 +27,10 @@ public class ShieldEmitterTE extends TileEntity{
 	private int shieldMode = ~Shield.BLOCK_PLAYER;
 	/** Ion cost per tick. Based on shieldMode */
 	private int cost = COST_MOBS + COST_FRIENDLY;
+	
+	public ShieldEmitterTE() {
+		super(50000);
+	}
 	
 	@Override
 	public void invalidate(){
@@ -53,17 +47,7 @@ public class ShieldEmitterTE extends TileEntity{
 				shutdown();
 			}
 		}
-		// If the buffer is below 10%, request more ions.
-		if(ionAmount < (bufferSize/10)){
-			if(searchTicks == 0){
-				if(pos == null) updatePos();
-				ionAmount += IonNetStaticRouter.route(bufferSize - ionAmount, pos, true);
-			}
-			searchTicks++;
-			if(searchTicks == MAX_SEARCH_TICKS){
-				searchTicks = 0;
-			}
-		}
+		refillIonBuffer();
 		if(disabled && ionAmount >= cost){
 			restart();
 		}
@@ -78,15 +62,14 @@ public class ShieldEmitterTE extends TileEntity{
 	}
 	
 	public void setEnabled(boolean enabled){
-		searchTicks = 0;
+		ionSearchTicks = 0;
 		disabled = !enabled;
 	}
 	
 	private void shutdown(){
 		canEnable = false;
 		findPair();
-		if(pos == null) updatePos();
-		destroyShields(pos);
+		destroyShields(position);
 		setEnabled(false);
 		if(pair != null)
 			pair.setEnabled(false);
@@ -96,12 +79,11 @@ public class ShieldEmitterTE extends TileEntity{
 		canEnable = true;
 		findPair();
 		if(pair != null){
-			if(pos == null) updatePos();
 			pair.setModeAndRecalculate(shieldMode);
 			if(!pair.canEnable) return;
 			setEnabled(true);
 			pair.setEnabled(true);
-			createShields(pos.w, pos.x, pos.y, pos.z);
+			createShields(position.w, position.x, position.y, position.z);
 		}
 	}
 	
@@ -127,8 +109,7 @@ public class ShieldEmitterTE extends TileEntity{
 	}
 	
 	public void findPair(){
-		if(pos == null) updatePos();
-		int dir = pos.w.getBlockMetadata(pos.x, pos.y, pos.z);
+		int dir = position.w.getBlockMetadata(position.x, position.y, position.z);
 		int tMeta;
 		switch(dir){
 			case Helper.dirXPos: tMeta = Helper.dirXNeg; break;
@@ -137,7 +118,7 @@ public class ShieldEmitterTE extends TileEntity{
 			case Helper.dirZNeg: tMeta = Helper.dirZPos; break;
 			default: return;
 		}
-		CoordinateSet cs = pos.clone();
+		CoordinateSet cs = position.clone();
 		for(int i = 1; i <= range+1; i++){
 			cs = cs.fromDirection(dir);
 			int bid = cs.w.getBlockId(cs.x, cs.y, cs.z);
@@ -151,10 +132,6 @@ public class ShieldEmitterTE extends TileEntity{
 				return;
 			}
 		}
-	}
-	
-	public void updatePos(){
-		pos = new CoordinateSet(worldObj, xCoord, yCoord, zCoord);
 	}
 	
 	private void createShields(CoordinateSet cs){
@@ -223,8 +200,6 @@ public class ShieldEmitterTE extends TileEntity{
 		canEnable = nbt.getBoolean("canEnable");
 		cost = nbt.getInteger("cost");
 		disabled = nbt.getBoolean("disabled");
-		ionAmount = nbt.getInteger("power");
-		searchTicks = nbt.getInteger("searchTicks");
 		shieldMode = nbt.getInteger("shieldMode");
 	}
 
@@ -234,8 +209,6 @@ public class ShieldEmitterTE extends TileEntity{
     	nbt.setBoolean("canEnable", canEnable);
     	nbt.setInteger("cost", cost);
     	nbt.setBoolean("disabled", disabled);
-    	nbt.setInteger("power", ionAmount);
-    	nbt.setInteger("searchTicks", searchTicks);
     	nbt.setInteger("shieldMode", shieldMode);
     }
 }

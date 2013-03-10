@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockContainer;
 import lordfokas.stargatetech.common.IDismantleable;
-import lordfokas.stargatetech.networks.ion.IIonNetComponent;
+import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetComponent;
 import lordfokas.stargatetech.rendering.RenderShieldEmitter;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;

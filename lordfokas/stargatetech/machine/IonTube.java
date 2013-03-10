@@ -7,7 +7,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.common.IDismantleable;
-import lordfokas.stargatetech.networks.ion.IIonNetComponent;
+import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetComponent;
 import lordfokas.stargatetech.rendering.RenderIonTube;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;

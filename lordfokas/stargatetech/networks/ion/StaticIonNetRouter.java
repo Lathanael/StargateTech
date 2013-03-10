@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 
+import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetComponent;
+import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetSource;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 
@@ -11,9 +13,9 @@ import lordfokas.stargatetech.util.Helper;
  * An utility to draw Ions from Ion Sources.
  * @author LordFokas
  */
-public final class IonNetStaticRouter {
-	private static final IonNetStaticRouter router = new IonNetStaticRouter();
-	private IonNetStaticRouter(){}
+public final class StaticIonNetRouter {
+	private static final StaticIonNetRouter router = new StaticIonNetRouter();
+	private StaticIonNetRouter(){}
 	
 	private class Result{
 		public int power;
