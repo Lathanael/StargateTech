@@ -7,7 +7,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.common.IDismantleable;
-import lordfokas.stargatetech.networks.power.IPowerNetComponent;
+import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetComponent;
 import lordfokas.stargatetech.rendering.RenderPowerConduit;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;

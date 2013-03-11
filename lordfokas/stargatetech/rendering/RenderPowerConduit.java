@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
-import lordfokas.stargatetech.networks.power.IPowerNetComponent;
+import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetComponent;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;
 

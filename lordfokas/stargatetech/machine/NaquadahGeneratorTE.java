@@ -4,25 +4,19 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ISidedInventory;
 import lordfokas.stargatetech.StargateTech;
+import lordfokas.stargatetech.networks.power.BasePowerNetGeneratorTE;
 
-public class NaquadahGeneratorTE extends TileEntity implements ISidedInventory{
+public class NaquadahGeneratorTE extends BasePowerNetGeneratorTE implements ISidedInventory{
 	public static final String ID = "NaquadahGeneratorTE";
 	
-	/** How much power this generator can store */
-	private static final int MAX_POWER = 100000;
 	/** How much power is produced every tick */
 	private static final int TICK_PROD = 10;
 	/** How many ticks a Naquadah Ingot lasts*/
 	private static final int MAX_TICKS = 2400;
 	
-	/** How much power is stored inside */
-	public int power = 0;
-	/** Overflow Buffer: represents the excess power in this machine, because the 'power' cap can be exceeded in some situations */
-	private int buffer = 0;
 	/** How many ticks were used from this ingot. Capped to 'MAX_TICKS'. Resets to zero and uses a new ingot when the cap is hit. */
 	private int ticks = 0;
 	/** Wether or not this machine can run. 'power' must be below 'MAX_POWER'. */
@@ -34,6 +28,10 @@ public class NaquadahGeneratorTE extends TileEntity implements ISidedInventory{
 	private int sid;
 	private int sdmg;
 	
+	protected NaquadahGeneratorTE() {
+		super(100000);
+	}
+	
 	@Override
 	public void invalidate(){
 		super.invalidate();
@@ -42,25 +40,16 @@ public class NaquadahGeneratorTE extends TileEntity implements ISidedInventory{
 	}
 	
 	public void updateEntity(){
-		// Try to empty the overflow buffer
-		if(buffer > 0){
-			power += buffer;
-			if(power > MAX_POWER){
-				buffer = power - MAX_POWER;
-				power = MAX_POWER;
-			}else{
-				buffer = 0;
-			}
-		}
+		drainPowerOverflow();
 		// Produce power. If an ingot is depleted, the generator is disabled.
 		if(enabled){
-			if(ticks == MAX_TICKS){
+			if(ticks == MAX_TICKS || powerOverflow > 0){
 				enabled = false;
 			}else{
 				ticks++;
 				// Add power to the overflow buffer.
 				// It will be moved to the main capacitor in the next tick.
-				buffer += TICK_PROD;
+				powerOverflow += TICK_PROD;
 			}
 		}
 		// Try to get the generator running again.
@@ -78,42 +67,16 @@ public class NaquadahGeneratorTE extends TileEntity implements ISidedInventory{
 		}
 	}
 	
-	/**
-	 * Handle a power request from the PowerNet
-	 * @param p How much power was requested.
-	 * @return An int from 0 to 'p', the most power this machine can dispense for that request.
-	 */
-	public int requestPower(int p) {
-		if(p > power){
-			int ret = power;
-			power = 0;
-			return ret;
-		}else{
-			power -= p;
-			return p;
-		}
+	// This is a small workaround, I hope I can remove this soon.
+	@Deprecated
+	public void setPower(int power){
+		powerAmount = power;
 	}
-	
-	/**
-	 * Accept power back from a previous request that was only partially used.
-	 * @param p How much power put back.
-	 */
-	public void giveBack(int p){ buffer += p; }
-	
-	/**
-	 * How full is this machine's power capacitor?
-	 * Returns 200% so that routing systems use power from the generator
-	 * instead of a buffer in the network, reducing lag.
-	 * @return 200%. Made in Russia.
-	 */
-	public float getFill(){ return 200.0F; }
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
-		buffer = nbt.getInteger("buffer");
 		enabled = nbt.getBoolean("enabled");
-		power = nbt.getInteger("power");
 		sdmg = nbt.getInteger("sdmg");
 		sid = nbt.getInteger("sid");
 		ssize = nbt.getInteger("ssize");
@@ -137,9 +100,7 @@ public class NaquadahGeneratorTE extends TileEntity implements ISidedInventory{
 		//***********************************
 		
 		super.writeToNBT(nbt);
-		nbt.setInteger("buffer", buffer);
 		nbt.setBoolean("enabled", enabled);
-		nbt.setInteger("power", power);
 		nbt.setInteger("sdmg", sdmg);
 		nbt.setInteger("sid", sid);
 		nbt.setInteger("ssize", ssize);

@@ -40,14 +40,14 @@ public class NaquadahGeneratorContainer extends BaseContainer{
 	public void addCraftingToCrafters(ICrafting iCrafting)
     {
         super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 0, generator.power);
+        iCrafting.sendProgressBarUpdate(this, 0, generator.getPowerAmount());
     }
 	
 	@SideOnly(Side.CLIENT)
     public void updateProgressBar(int field, int value){
 		switch(field){
 			case 0:
-				generator.power = value;
+				generator.setPower(value);
 				break;
 		}
 	}

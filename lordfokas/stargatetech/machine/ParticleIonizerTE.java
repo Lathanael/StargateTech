@@ -2,7 +2,7 @@ package lordfokas.stargatetech.machine;
 
 import lordfokas.stargatetech.common.ParticleIonizerRecipes;
 import lordfokas.stargatetech.common.ParticleIonizerRecipes.IonizerRecipe;
-import lordfokas.stargatetech.networks.power.PowerNetStaticRouter;
+import lordfokas.stargatetech.networks.power.StaticPowerNetRouter;
 import lordfokas.stargatetech.util.CoordinateSet;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -107,7 +107,7 @@ public class ParticleIonizerTE extends TileEntity implements ISidedInventory{
 		if(power < (bufferSize/10)){
 			if(searchTicks == 0){
 				CoordinateSet pos = new CoordinateSet(this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-				power += PowerNetStaticRouter.route(bufferSize - power, pos, true);
+				power += StaticPowerNetRouter.route(bufferSize - power, pos, true);
 			}
 			searchTicks++;
 			if(searchTicks == SEARCH_TICKS){

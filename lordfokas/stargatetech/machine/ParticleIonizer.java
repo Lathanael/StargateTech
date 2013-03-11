@@ -9,7 +9,7 @@ import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockContainer;
 import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetSource;
-import lordfokas.stargatetech.networks.power.IPowerNetComponent;
+import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetComponent;
 import lordfokas.stargatetech.rendering.RenderParticleIonizer;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.GUIHandler;

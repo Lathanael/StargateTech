@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockContainer;
 import lordfokas.stargatetech.common.IDismantleable;
-import lordfokas.stargatetech.networks.power.IPowerNetSource;
+import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetSource;
 import lordfokas.stargatetech.util.GUIHandler;
 import lordfokas.stargatetech.util.TextureIndex;
 
@@ -34,8 +34,8 @@ public class NaquadahGenerator extends BaseBlockContainer implements IPowerNetSo
 	private NaquadahGeneratorTE getTileEntity(World w, int x, int y, int z){ return (NaquadahGeneratorTE) w.getBlockTileEntity(x, y, z); }
 	@Override public EPowerComponentType getPowerComponentType(){ return EPowerComponentType.SOURCE; }
 	@Override public int requestPower(World w, int x, int y, int z, int p){ return getTileEntity(w, x, y, z).requestPower(p); }
-	@Override public void giveBack(World w, int x, int y, int z, int p){ getTileEntity(w, x, y, z).giveBack(p); }
-	@Override public float getFill(World w, int x, int y, int z){ return getTileEntity(w, x, y, z).getFill(); }
+	@Override public void giveBack(World w, int x, int y, int z, int p){ getTileEntity(w, x, y, z).returnPower(p); }
+	@Override public float getFill(World w, int x, int y, int z){ return getTileEntity(w, x, y, z).getPowerFill(); }
 	@Override public NaquadahGeneratorTE createNewTileEntity(World w){ return new NaquadahGeneratorTE(); }
 	
 	@Override

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 
+import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetComponent;
+import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetSource;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 
@@ -11,9 +13,9 @@ import lordfokas.stargatetech.util.Helper;
  * An utility to draw power from the PowerNet.
  * @author LordFokas
  */
-public final class PowerNetStaticRouter {
-	private static final PowerNetStaticRouter router = new PowerNetStaticRouter();
-	private PowerNetStaticRouter(){}
+public final class StaticPowerNetRouter {
+	private static final StaticPowerNetRouter router = new StaticPowerNetRouter();
+	private StaticPowerNetRouter(){}
 	
 	private class Result{
 		public int power;

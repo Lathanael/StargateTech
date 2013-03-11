@@ -1,6 +1,7 @@
 package lordfokas.stargatetech.networks.ion;
 
 import lordfokas.stargatetech.networks.INetworkTE;
+
 /**
  * IonNet TileEntity Specification
  * IonNet Tile Entities don't have to implement any of these interfaces, but any IonNet TileEntity
@@ -39,6 +40,7 @@ public final class IonNetTE {
 	/** An Ion Relay. Is both a sink and a source. */
 	public interface IIonRelay extends IIonSink, IIonSource{}
 	
+	/** An Ion Generator. It's a source that produces it's own ions. */
 	public interface IIonGenerator extends IIonSource{
 		/** How many ions are in the overflow buffer */
 		public int getIonOverflow();

@@ -32,7 +32,7 @@ public class GUINaquadahGenerator extends GuiContainer{
 		NaquadahGeneratorContainer ngc = (NaquadahGeneratorContainer) this.inventorySlots;
 		fontRenderer.drawString("Naquadah Generator", 30, 8, 4210752);
 		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-		fontRenderer.drawString("Power: " + ngc.generator.power, 8, 28, 0x0000FF);
+		fontRenderer.drawString("Power: " + ngc.generator.getPowerAmount(), 8, 28, 0x0000FF);
 		fontRenderer.drawString("Max Power: 100.000", 8, 38, 0x0000FF);
 	}
 }
