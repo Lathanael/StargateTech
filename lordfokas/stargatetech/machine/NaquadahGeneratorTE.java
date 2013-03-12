@@ -22,14 +22,11 @@ public class NaquadahGeneratorTE extends BasePowerNetGeneratorTE implements ISid
 	/** Wether or not this machine can run. 'power' must be below 'MAX_POWER'. */
 	private boolean enabled = false;
 	
-	// Inventory
+	/** The inventory slot */
 	private ItemStack inventory = null;
-	private int ssize;
-	private int sid;
-	private int sdmg;
 	
-	protected NaquadahGeneratorTE() {
-		super(100000);
+	public NaquadahGeneratorTE() {
+		super(5000);
 	}
 	
 	@Override
@@ -56,13 +53,11 @@ public class NaquadahGeneratorTE extends BasePowerNetGeneratorTE implements ISid
 		// This means checking the inventory for usable Naquadah.
 		if(!enabled){
 			if(inventory != null) if(inventory.stackSize < 1) inventory = null;
-			if(inventory != null){
-				if(inventory.itemID == StargateTech.naquadahIngot.itemID){
-					inventory.stackSize--;
-					if(inventory.stackSize < 1) inventory = null;
-					enabled = true;
-					ticks = 0;
-				}
+			if(inventory != null && powerOverflow == 0 && inventory.itemID == StargateTech.naquadahIngot.itemID){
+				inventory.stackSize--;
+				if(inventory.stackSize < 1) inventory = null;
+				enabled = true;
+				ticks = 0;
 			}
 		}
 	}
@@ -77,33 +72,23 @@ public class NaquadahGeneratorTE extends BasePowerNetGeneratorTE implements ISid
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
 		enabled = nbt.getBoolean("enabled");
-		sdmg = nbt.getInteger("sdmg");
-		sid = nbt.getInteger("sid");
-		ssize = nbt.getInteger("ssize");
 		ticks = nbt.getInteger("ticks");
-		
-		// Inventories... should fix them soon
-		inventory = (sid != -1) ? new ItemStack(sid, ssize, sdmg) : null;
-		//***************************************************************
+		if(nbt.hasKey("inventory")){
+			inventory = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("inventory"));
+		}else{
+			inventory = null;
+		}
     }
 	
 	@Override
     public void writeToNBT(NBTTagCompound nbt){
-		// Remove retarded workaround for inventory and own derpiness
-		if(inventory != null){
-	        sdmg = inventory.getItemDamage();
-	        sid = inventory.itemID;
-	        ssize = inventory.stackSize;
-		}else{
-			sid = -1;
-		}
-		//***********************************
-		
 		super.writeToNBT(nbt);
+		NBTTagCompound inventoryNBT = new NBTTagCompound();
+		if(inventory != null){
+			inventory.writeToNBT(inventoryNBT);
+			nbt.setCompoundTag("inventory", inventoryNBT);
+		}
 		nbt.setBoolean("enabled", enabled);
-		nbt.setInteger("sdmg", sdmg);
-		nbt.setInteger("sid", sid);
-		nbt.setInteger("ssize", ssize);
 		nbt.setInteger("ticks", ticks);
     }
 	

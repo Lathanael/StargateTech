@@ -1,7 +1,6 @@
 package lordfokas.stargatetech.networks.power;
 
 import net.minecraft.nbt.NBTTagCompound;
-import lordfokas.stargatetech.networks.ion.StaticIonNetRouter;
 import lordfokas.stargatetech.networks.power.PowerNetTE.IPowerSink;
 
 public class BasePowerNetSinkTE extends BasePowerNetStorageTE implements IPowerSink {
@@ -16,7 +15,7 @@ public class BasePowerNetSinkTE extends BasePowerNetStorageTE implements IPowerS
 	public void refillPowerBuffer() {
 		if(powerAmount < powerBufferSize / 10){
 			if(powerSearchTicks == 0){
-				powerAmount += StaticIonNetRouter.route(powerBufferSize - powerAmount, position, true);
+				powerAmount += StaticPowerNetRouter.route(powerBufferSize - powerAmount, position, true);
 			}
 			if(powerAmount > powerBufferSize / 30){
 				powerSearchTicks = 0;

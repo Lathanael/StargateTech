@@ -49,8 +49,8 @@ public class ParticleIonizer extends BaseBlockContainer implements IIonNetSource
 	
 	private ParticleIonizerTE getTileEntity(World w, int x, int y, int z){ return (ParticleIonizerTE) w.getBlockTileEntity(x, y, z); }
 	@Override public int requestIons(World w, int x, int y, int z, int ions){ return getTileEntity(w, x, y, z).requestIons(ions); }
-	@Override public void giveBack(World w, int x, int y, int z, int ions){ getTileEntity(w, x, y, z).giveBack(ions); }
-	@Override public float getFill(World w, int x, int y, int z){ return getTileEntity(w, x, y, z).getFill(); }
+	@Override public void giveBack(World w, int x, int y, int z, int ions){ getTileEntity(w, x, y, z).returnIons(ions); }
+	@Override public float getFill(World w, int x, int y, int z){ return getTileEntity(w, x, y, z).getIonFill(); }
 	@Override public EIonComponentType getIonComponentType(){ return EIonComponentType.SOURCE; }
 	@Override public boolean canTubeConnectOnSide(IBlockAccess w, int x, int y, int z, int side){ return !(side == Helper.dirTop || side == Helper.dirBottom); }
 	@Override public EPowerComponentType getPowerComponentType(){ return EPowerComponentType.SINK; }

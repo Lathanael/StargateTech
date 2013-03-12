@@ -42,7 +42,7 @@ public class ParticleIonizerContainer extends BaseContainer{
 	public void addCraftingToCrafters(ICrafting iCrafting)
     {
         super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 0, ionizer.ionAmount);
+        iCrafting.sendProgressBarUpdate(this, 0, ionizer.getIonAmount());
         iCrafting.sendProgressBarUpdate(this, 1, ionizer.itemIons);
         iCrafting.sendProgressBarUpdate(this, 2, ionizer.ionsPerTick);
         iCrafting.sendProgressBarUpdate(this, 3, ionizer.iid);
@@ -53,7 +53,7 @@ public class ParticleIonizerContainer extends BaseContainer{
     public void updateProgressBar(int field, int value){
 		switch(field){
 			case 0:
-				ionizer.ionAmount = value;
+				ionizer.setIonAmount(value);
 				break;
 			case 1:	
 				ionizer.itemIons = value;

@@ -22,6 +22,7 @@ public final class ParticleIonizerRecipes {
 			id = i;
 			dmg = d;
 			ionsPerTick = t;
+			power = p;
 		}
 		
 		@Override

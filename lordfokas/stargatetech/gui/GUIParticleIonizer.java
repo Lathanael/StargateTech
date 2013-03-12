@@ -35,7 +35,7 @@ public class GUIParticleIonizer extends GuiContainer{
 		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 		
 		fontRenderer.drawString("Production: " + pic.ionizer.ionsPerTick + " IQ/t", 8, 38, 0x0000FF);
-		fontRenderer.drawString("Stored: " + pic.ionizer.ionAmount + " IQ", 8, 48, 0x0000FF);
+		fontRenderer.drawString("Stored: " + pic.ionizer.getIonAmount() + " IQ", 8, 48, 0x0000FF);
 		
 		if(pic.material == null){
 			fontRenderer.drawString("Empty", 28, 23, 0x0000FF);
