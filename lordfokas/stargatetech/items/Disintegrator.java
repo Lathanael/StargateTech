@@ -21,6 +21,7 @@ public class Disintegrator extends BaseItem {
 		super(id, TextureIndex.disintegrator);
 		this.setItemName("disintegrator");
 		this.setMaxDamage(256);
+		this.setMaxStackSize(1);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){

@@ -20,7 +20,8 @@ public class MechanusClavia extends BaseItem {
 	public MechanusClavia(int id) {
 		super(id, TextureIndex.mechanusClavia); // REM cg
 		this.setItemName("mechanusClavia");
-		this.setMaxDamage(256);
+		this.setMaxDamage(768);
+		setMaxStackSize(1);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){

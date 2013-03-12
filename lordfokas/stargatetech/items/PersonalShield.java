@@ -1,5 +1,7 @@
 package lordfokas.stargatetech.items;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -23,5 +25,12 @@ public class PersonalShield extends BaseItem {
 	@Override
 	public EnumRarity getRarity(ItemStack ignored){
 		return EnumRarity.epic;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool){
+		int energy = ((getMaxDamage() - stack.getItemDamage()) * 100) / getMaxDamage();
+		list.add("\u00A7cHug a creeper!");
+		list.add("Energy: " + energy + "%");
 	}
 }

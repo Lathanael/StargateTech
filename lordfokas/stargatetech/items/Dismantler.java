@@ -21,6 +21,7 @@ public class Dismantler extends BaseItem {
 		super(id, TextureIndex.dismantler); // REM cg
 		this.setItemName("dismantler");
 		this.setMaxDamage(256);
+		setMaxStackSize(1);
 	}
 	
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){
