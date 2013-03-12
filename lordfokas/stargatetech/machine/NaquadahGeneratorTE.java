@@ -26,7 +26,7 @@ public class NaquadahGeneratorTE extends BasePowerNetGeneratorTE implements ISid
 	private ItemStack inventory = null;
 	
 	public NaquadahGeneratorTE() {
-		super(5000);
+		super(100000);
 	}
 	
 	@Override

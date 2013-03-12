@@ -39,7 +39,7 @@ public class ParticleIonizerTE extends BasePowerSinkIonGeneratorTE implements IS
 	private int itemPowerNeeds = 1;
 	
 	public ParticleIonizerTE() {
-		super(10000, 150000);
+		super(15000, 100000);
 	}
 	
 	@Override

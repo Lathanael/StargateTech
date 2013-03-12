@@ -81,36 +81,37 @@ public final class Config {
 		//************************************************************************
 		// # BLOCKS #
 		// Machine:
-		shieldEmitter	= cfg.get(BLOCK, 	"shieldEmitter",	block++).getInt();
-		shield			= cfg.get(BLOCK, 	"shield",			block++).getInt();
-		particleIonizer = cfg.get(BLOCK, 	"particleIonizer",	block++).getInt();
-		ionTube 		= cfg.get(BLOCK, 	"ionTube",			block++).getInt();
-		powerConduit 	= cfg.get(BLOCK, 	"powerConduit",		block++).getInt();
-		naquadahGenerator = cfg.get(BLOCK,	"naquadahGenerator",block++).getInt();
-		stargate		= cfg.get(BLOCK,	"stargateBase",		block++).getInt();
-		dialingComputer = cfg.get(BLOCK,	"dialingComputer",	block++).getInt();
+		
+		shieldEmitter	= cfg.getBlock(BLOCK, 	"shieldEmitter",	block++).getInt();
+		shield			= cfg.getBlock(BLOCK, 	"shield",			block++).getInt();
+		particleIonizer = cfg.getBlock(BLOCK, 	"particleIonizer",	block++).getInt();
+		ionTube 		= cfg.getBlock(BLOCK, 	"ionTube",			block++).getInt();
+		powerConduit 	= cfg.getBlock(BLOCK, 	"powerConduit",		block++).getInt();
+		naquadahGenerator=cfg.getBlock(BLOCK,	"naquadahGenerator",block++).getInt();
+		stargate		= cfg.getBlock(BLOCK,	"stargateBase",		block++).getInt();
+		dialingComputer = cfg.getBlock(BLOCK,	"dialingComputer",	block++).getInt();
 		
 		// World:
-		naquadahOre 	= cfg.get(BLOCK, 	"naquadahOre",		block++).getInt();
-		naquadriaOre 	= cfg.get(BLOCK, 	"naquadriaOre",		block++).getInt();
-		placeholder		= cfg.get(BLOCK,	"placeholder",		block++).getInt();
+		naquadahOre 	= cfg.getBlock(BLOCK, 	"naquadahOre",		block++).getInt();
+		naquadriaOre 	= cfg.getBlock(BLOCK, 	"naquadriaOre",		block++).getInt();
+		placeholder		= cfg.getBlock(BLOCK,	"placeholder",		block++).getInt();
 		
 		
 		//***********************************************************************
 		// # ITEMS #
-		naquadahShard 	= cfg.get(ITEM,		"naquadahShard",	item++).getInt();
-		naquadriaShard 	= cfg.get(ITEM,		"naquadriaShard",	item++).getInt();
+		naquadahShard 	= cfg.getItem(ITEM,		"naquadahShard",	item++).getInt();
+		naquadriaShard 	= cfg.getItem(ITEM,		"naquadriaShard",	item++).getInt();
 		
-		naquadahShardCluster = cfg.get(ITEM, "naquadahShardCluster", item++).getInt();
-		naquadriaShardCluster= cfg.get(ITEM, "naquadriaShardCluster",item++).getInt();
+		naquadahShardCluster	= cfg.getItem(ITEM, "naquadahShardCluster",	item++).getInt();
+		naquadriaShardCluster	= cfg.getItem(ITEM, "naquadriaShardCluster",item++).getInt();
 		
-		naquadahIngot 	= cfg.get(ITEM,		"naquadahIngot",	item++).getInt();
-		naquadriaIngot 	= cfg.get(ITEM,		"naquadriaIngot",	item++).getInt();
-		disintegrator 	= cfg.get(ITEM,		"disintegrator",	item++).getInt();
-		dismantler 		= cfg.get(ITEM,		"dismantler",		item++).getInt();
-		mechanusClavia 	= cfg.get(ITEM,		"mechanusClavia",	item++).getInt();
-		personalShield 	= cfg.get(ITEM,		"personalShield",	item++).getInt();
-		addressMemoryCrystal = cfg.get(ITEM, "addressMemoryCrystal", item++).getInt();
+		naquadahIngot 	= cfg.getItem(ITEM,		"naquadahIngot",	item++).getInt();
+		naquadriaIngot 	= cfg.getItem(ITEM,		"naquadriaIngot",	item++).getInt();
+		disintegrator 	= cfg.getItem(ITEM,		"disintegrator",	item++).getInt();
+		dismantler 		= cfg.getItem(ITEM,		"dismantler",		item++).getInt();
+		mechanusClavia 	= cfg.getItem(ITEM,		"mechanusClavia",	item++).getInt();
+		personalShield 	= cfg.getItem(ITEM,		"personalShield",	item++).getInt();
+		addressMemoryCrystal = cfg.getItem(ITEM, "addressMemoryCrystal", item++).getInt();
 		
 		
 		//***********************************************************************
