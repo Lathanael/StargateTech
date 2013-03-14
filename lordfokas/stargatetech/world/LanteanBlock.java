@@ -1,5 +1,8 @@
 package lordfokas.stargatetech.world;
 
+import static net.minecraftforge.common.ForgeDirection.UP;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.TextureIndex;
@@ -22,4 +25,9 @@ public class LanteanBlock extends BaseBlock {
 		if(meta == 0) return TextureIndex.lanteanHexFloor;
 		return TextureIndex.lanteanQuadEmit;
 	}
+	
+	@Override
+	public boolean canCreatureSpawn(EnumCreatureType type, World world, int x, int y, int z){
+        return false;
+    }
 }
