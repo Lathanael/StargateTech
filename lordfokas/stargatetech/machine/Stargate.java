@@ -27,6 +27,10 @@ public class Stargate extends BaseBlockContainer implements IDismantleable {
 	public void onBlockPlacedBy(World w, int x, int y, int z, EntityLiving l){
 		int dir = Helper.yaw2dir(l.rotationYaw);
 		dir = Helper.oppositeDirection(dir);
+		placeStargateWithRotation(w, x, y, z, dir);
+	}
+	
+	public void placeStargateWithRotation(World w, int x, int y, int z, int dir){
 		checkPlace(w, x, y, z, dir);
 		Address addr = StargateNetwork.instance().getNewRandomAddress(w, x, y, z);
 		StargateTE stargate = (StargateTE) w.getBlockTileEntity(x, y, z);

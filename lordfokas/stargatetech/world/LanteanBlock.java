@@ -1,6 +1,8 @@
 package lordfokas.stargatetech.world;
 
 import lordfokas.stargatetech.common.BaseBlock;
+import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.TextureIndex;
 
 /**
  * This was a block which would have several metadata sub blocks (16, actually)
@@ -10,6 +12,14 @@ import lordfokas.stargatetech.common.BaseBlock;
  */
 public class LanteanBlock extends BaseBlock {
 	public LanteanBlock(int id) {
-		super(id, -1);
+		super(id, TextureIndex.lanteanQuadSide);
+		this.setBlockName("lanteanBlock");
+	}
+	
+	@Override
+	public int getBlockTextureFromSideAndMetadata(int side, int meta){
+		if(side != Helper.dirTop) return TextureIndex.lanteanQuadSide;
+		if(meta == 0) return TextureIndex.lanteanHexFloor;
+		return TextureIndex.lanteanQuadEmit;
 	}
 }

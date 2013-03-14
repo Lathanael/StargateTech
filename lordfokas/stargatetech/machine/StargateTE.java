@@ -25,4 +25,9 @@ public class StargateTE extends TileEntity {
 	public void setDirection(int d){
 		worldObj.setBlockMetadata(xCoord, yCoord, zCoord, d);
 	}
+	
+	@Override
+	public boolean canUpdate(){
+		return false;
+	}
 }

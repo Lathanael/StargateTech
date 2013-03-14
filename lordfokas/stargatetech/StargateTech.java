@@ -21,10 +21,10 @@ import lordfokas.stargatetech.plugins.PluginCC;
 import lordfokas.stargatetech.plugins.PluginForestry;
 import lordfokas.stargatetech.plugins.PluginIC2;
 import lordfokas.stargatetech.plugins.PluginRC;
-import lordfokas.stargatetech.plugins.PluginTC3;
 import lordfokas.stargatetech.plugins.PluginTE;
 import lordfokas.stargatetech.util.Config;
 import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.world.LanteanBlock;
 import lordfokas.stargatetech.world.WorldGenerator;
 import lordfokas.stargatetech.world.NaquadahOre;
 import lordfokas.stargatetech.world.NaquadriaOre;
@@ -59,6 +59,7 @@ public class StargateTech {
 	public static Stargate stargate;
 	public static Placeholder placeholder;
 	public static DialingComputer dialingComputer;
+	public static LanteanBlock lanteanBlock;
 	
 	// Items
 	public static BaseItem naquadahShard;
@@ -79,7 +80,6 @@ public class StargateTech {
 	public PluginForestry forestry;
 	public PluginIC2 industrialcraft2;
 	public PluginRC railcraft;
-	public PluginTC3 thaumcraft3;
 	public PluginTE thermalexpansion;
 	
 	@Instance("StargateTech")
@@ -104,6 +104,7 @@ public class StargateTech {
 		stargate		= new Stargate(Config.stargate);
 		placeholder		= new Placeholder(Config.placeholder);
 		dialingComputer = new DialingComputer(Config.dialingComputer);
+		lanteanBlock	= new LanteanBlock(Config.lanteanBlock);
 		
 		// Items
 		naquadahShard 	= (BaseItem) new BaseItem(Config.naquadahShard, TextureIndex.naquadahShard).setItemName("naquadahShard");
@@ -126,7 +127,6 @@ public class StargateTech {
 		forestry			= new PluginForestry();
 		industrialcraft2	= new PluginIC2();
 		railcraft			= new PluginRC();
-		thaumcraft3			= new PluginTC3();
 		thermalexpansion	= new PluginTE();
 		proxy.init();
 	}
@@ -138,7 +138,6 @@ public class StargateTech {
 		forestry.init();
 		industrialcraft2.init();
 		railcraft.init();
-		thaumcraft3.init();
 		thermalexpansion.init();
 	}
 }

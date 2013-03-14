@@ -3,6 +3,7 @@ package lordfokas.stargatetech.machine;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseBlock;
@@ -47,6 +48,12 @@ public class IonTube extends BaseBlock implements IIonNetComponent, IDismantleab
 			max[2] = 1.0F;
 		}
 		this.setBlockBounds(min[0], min[1], min[2], max[0], max[1], max[2]);
+    }
+	
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World w, int x, int y, int z){
+		this.setBlockBoundsBasedOnState(w, x, y, z);
+        return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
     }
 	
 	@Override

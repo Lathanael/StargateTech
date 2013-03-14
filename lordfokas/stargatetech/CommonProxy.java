@@ -44,6 +44,7 @@ public class CommonProxy {
 		registerBlock(StargateTech.naquadahGenerator, "Naquadah Generator");
 		registerBlock(StargateTech.stargate, "Stargate");
 		registerBlock(StargateTech.dialingComputer, "Dialing Computer");
+		registerBlock(StargateTech.lanteanBlock, "Lantean Block");
 	}
 	
 	private void addItems(){

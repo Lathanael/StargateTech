@@ -19,6 +19,11 @@ public final class TextureIndex {
 	public final static int blockMiddle = 0x20;
 	public final static int blockBottom = 0x30;
 	
+	// Lantean Block
+	public final static int lanteanHexFloor = 0x44;
+	public final static int lanteanQuadEmit	= 0x46;
+	public final static int lanteanQuadSide	= 0x36;
+	
 	// Ores
 	public final static int oreBase = 0x1F;
 	public final static int naquadahGlow = 0x0E;

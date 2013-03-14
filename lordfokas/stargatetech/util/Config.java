@@ -22,6 +22,7 @@ public final class Config {
 	public static int stargate;
 	public static int placeholder;
 	public static int dialingComputer;
+	public static int lanteanBlock;
 	
 	//****************************************************************************
 	// ITEMS
@@ -52,7 +53,6 @@ public final class Config {
 	public static boolean pluginForestry;
 	public static boolean pluginIC2;
 	public static boolean pluginRC;
-	public static boolean pluginTC3;
 	public static boolean pluginTE;
 	
 	//****************************************************************************
@@ -95,6 +95,7 @@ public final class Config {
 		naquadahOre 	= cfg.getBlock(BLOCK, 	"naquadahOre",		block++).getInt();
 		naquadriaOre 	= cfg.getBlock(BLOCK, 	"naquadriaOre",		block++).getInt();
 		placeholder		= cfg.getBlock(BLOCK,	"placeholder",		block++).getInt();
+		lanteanBlock	= cfg.getBlock(BLOCK,	"lanteanBlock",		block++).getInt();
 		
 		
 		//***********************************************************************
@@ -142,7 +143,6 @@ public final class Config {
 		pluginForestry = cfg.get(PLUGINS, "enableForestry", true).getBoolean(true);
 		pluginIC2 = cfg.get(PLUGINS, "enableIndustrialCraft2", true).getBoolean(true);
 		pluginRC = cfg.get(PLUGINS, "enableRailcraft", true).getBoolean(true);
-		pluginTC3 = cfg.get(PLUGINS, "enableThaumcraft3", true).getBoolean(true);
 		pluginTE = cfg.get(PLUGINS, "enableThermalExpansion", true).getBoolean(true);
 	}
 }

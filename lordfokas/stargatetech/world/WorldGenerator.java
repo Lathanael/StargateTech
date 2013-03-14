@@ -22,7 +22,7 @@ public class WorldGenerator implements IWorldGenerator {
 	public void generate(Random r, int cX, int cZ, World w, IChunkProvider cGen, IChunkProvider cProv) {
 		if(w.provider.dimensionId != 0) return;
 		generateNaquadah(r, cX, cZ, w);
-		generateLanteanBase(r, cX, cZ, w);
+		generateLanteanOutpost(r, cX, cZ, w);
 	}
 	
 	// Generate Naquadah veins in ~10% of chunks.
@@ -48,11 +48,21 @@ public class WorldGenerator implements IWorldGenerator {
 		}
 	}
 	
-	// Spawn Lantean bases on the world.
-	// Not implemented yet because there are a lot of dependencies to implement.
-	private void generateLanteanBase(Random r, int cX, int cZ, World w){}
+	// Spawn abandoned outposts with high value loot.
+	private void generateLanteanOutpost(Random r, int cX, int cZ, World w){
+		if(cX % 4 == 0 && cZ % 4 == 0){
+			int x = cX*16 + r.nextInt(16);
+			int y = 60;
+			int z = cZ*16 + r.nextInt(16);
+			while(!w.canBlockSeeTheSky(x, y, z)){
+				y++;
+			}
+			y--;
+			WorldGeneratorOutpost.generate(r, w, x, y, z);
+		}
+	}
 	
-	// Spawn small ruins with loot.
+	// Spawn small ruins with lower value loot.
 	private void generateRuins(Random r, int cX, int cZ, World w){
 		int x = cX*16 + r.nextInt(16);
 		int y = 60;
