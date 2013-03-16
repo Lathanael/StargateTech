@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import lordfokas.stargatetech.common.BaseItem;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 /**
  * As long as the player has this on his inventory, he'll be immune to most damage.
@@ -16,8 +16,8 @@ import lordfokas.stargatetech.util.TextureIndex;
 public class PersonalShield extends BaseItem {
 
 	public PersonalShield(int id) {
-		super(id, TextureIndex.personalShield);
-		this.setItemName("personalShield");
+		super(id, UnlocalizedNames.ITEM_PSHIELD);
+		this.setUnlocalizedName("personalShield");
 		this.setMaxDamage(1000000);
 		this.setMaxStackSize(1);
 	}

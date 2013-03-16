@@ -2,22 +2,25 @@ package lordfokas.stargatetech.machine;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockContainer;
 import lordfokas.stargatetech.util.GUIHandler;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.IconRegistry;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 public class DialingComputer extends BaseBlockContainer {
 
 	public DialingComputer(int id) {
-		super(id, TextureIndex.dialingComputer);
-		setBlockName("dialingComputer");
+		super(id, UnlocalizedNames.BLOCK_DIALING);
 	}
 	
 	@Override
-	public int getBlockTextureFromSide(int side){
-		return side == 5 ? TextureIndex.dialingComputer : TextureIndex.blockSingle;
+	public Icon getTextureFromSide(int side){
+		if(side == Helper.dirSouth) return this.field_94336_cN;
+		return IconRegistry.machine;
 	}
 	
 	@Override

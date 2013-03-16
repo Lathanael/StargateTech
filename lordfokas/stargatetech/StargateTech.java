@@ -23,7 +23,7 @@ import lordfokas.stargatetech.plugins.PluginIC2;
 import lordfokas.stargatetech.plugins.PluginRC;
 import lordfokas.stargatetech.plugins.PluginTE;
 import lordfokas.stargatetech.util.Config;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 import lordfokas.stargatetech.world.LanteanBlock;
 import lordfokas.stargatetech.world.WorldGenerator;
 import lordfokas.stargatetech.world.NaquadahOre;
@@ -40,7 +40,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.7")
+@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.7.2")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class StargateTech {
 	// General Stuff
@@ -64,8 +64,8 @@ public class StargateTech {
 	// Items
 	public static BaseItem naquadahShard;
 	public static BaseItem naquadriaShard;
-	public static BaseItem naquadahShardCluster;
-	public static BaseItem naquadriaShardCluster;
+	public static BaseItem naquadahCluster;
+	public static BaseItem naquadriaCluster;
 	public static BaseItem naquadahIngot;
 	public static BaseItem naquadriaIngot;
 	public static Disintegrator disintegrator;
@@ -107,12 +107,12 @@ public class StargateTech {
 		lanteanBlock	= new LanteanBlock(Config.lanteanBlock);
 		
 		// Items
-		naquadahShard 	= (BaseItem) new BaseItem(Config.naquadahShard, TextureIndex.naquadahShard).setItemName("naquadahShard");
-		naquadriaShard 	= (BaseItem) new BaseItem(Config.naquadriaShard, TextureIndex.naquadriaShard).setItemName("naquadriaShard");
-		naquadahShardCluster 	= (BaseItem) new BaseItem(Config.naquadahShardCluster, TextureIndex.naquadahShardCluster).setItemName("naquadahShardCluster");
-		naquadriaShardCluster 	= (BaseItem) new BaseItem(Config.naquadriaShardCluster, TextureIndex.naquadriaShardCluster).setItemName("naquadriaShardCluster");
-		naquadahIngot 	= (BaseItem) new BaseItem(Config.naquadahIngot, TextureIndex.naquadahIngot).setItemName("naquadahIngot");
-		naquadriaIngot 	= (BaseItem) new BaseItem(Config.naquadriaIngot, TextureIndex.naquadriaIngot).setItemName("naquadriaIngot");
+		naquadahShard 	= (BaseItem) new BaseItem(Config.naquadahShard, UnlocalizedNames.ITEM_NQH_SHARD);
+		naquadriaShard 	= (BaseItem) new BaseItem(Config.naquadriaShard, UnlocalizedNames.ITEM_NQI_SHARD);
+		naquadahCluster 	= (BaseItem) new BaseItem(Config.naquadahCluster, UnlocalizedNames.ITEM_NQH_CLUSTER);
+		naquadriaCluster 	= (BaseItem) new BaseItem(Config.naquadriaCluster, UnlocalizedNames.ITEM_NQI_CLUSTER);
+		naquadahIngot 	= (BaseItem) new BaseItem(Config.naquadahIngot, UnlocalizedNames.ITEM_NQH_INGOT);
+		naquadriaIngot 	= (BaseItem) new BaseItem(Config.naquadriaIngot, UnlocalizedNames.ITEM_NQI_INGOT);
 		disintegrator 	= new Disintegrator(Config.disintegrator);
 		dismantler 		= new Dismantler(Config.dismantler);
 		mechanusClavia 	= new MechanusClavia(Config.mechanusClavia);

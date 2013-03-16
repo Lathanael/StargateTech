@@ -18,8 +18,8 @@ public class NaquadriaExplosive extends NaquadahExplosive {
 	 * @param textureIndex Index in the texture sheet
 	 * @param p Explosion Radius
 	 */
-	public NaquadriaExplosive(int id, int textureIndex, float p) {
-		super(id, textureIndex, p);
+	public NaquadriaExplosive(int id, String name, float p) {
+		super(id, name, p);
 	}
 	
 	@Override // Blow up on your face. Naquadria is meant to be disintegrated [only!].

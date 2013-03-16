@@ -5,6 +5,7 @@ import java.util.Random;
 
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.machine.Shield;
+import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.WorldGenerationHelper;
 import lordfokas.stargatetech.util.WorldGenerationHelper.WorldGenBlock;
 
@@ -79,12 +80,12 @@ public final class WorldGeneratorOutpost {
 			wgen.generate(ring5, w, x, y+9, z, shield, meta);
 			
 			// Open space for the Stargate
-			w.setBlock(x-2, y, z-7, 0);
-			w.setBlock(x-1, y, z-7, 0);
-			w.setBlock( x , y, z-7, 0);
-			w.setBlock(x+1, y, z-7, 0);
-			w.setBlock(x+2, y, z-7, 0);
-			w.setBlockAndMetadata(x, y, z-7, StargateTech.stargate.blockID, 2);
+			w.setBlockAndMetadataWithNotify(x-2, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
+			w.setBlockAndMetadataWithNotify(x-1, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
+			w.setBlockAndMetadataWithNotify( x , y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
+			w.setBlockAndMetadataWithNotify(x+1, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
+			w.setBlockAndMetadataWithNotify(x+2, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
+			w.setBlockAndMetadataWithNotify(x, y, z-7, StargateTech.stargate.blockID, 2, Helper.SETBLOCK_NO_UPDATE);
 			StargateTech.stargate.placeStargateWithRotation(w, x, y, z-7, 2);
 		}
 	}

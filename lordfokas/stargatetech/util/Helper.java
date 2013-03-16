@@ -1,6 +1,7 @@
 package lordfokas.stargatetech.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 
@@ -39,6 +40,9 @@ public final class Helper {
 	
 	public final static double deg2rad = 180/Math.PI;
 	
+	public final static int SETBLOCK_NO_UPDATE = 0;
+	public final static int SETBLOCK_UPDATE = 2;
+	
 	private Helper(){}
 	
 	public static Block getBlockInstance(IBlockAccess w, int x, int y, int z){
@@ -71,5 +75,9 @@ public final class Helper {
 			case 4: return dirXPos;
 			default: return 0;
 		}
+	}
+	
+	public static void bindTexture(String texture){
+		Minecraft.getMinecraft().renderEngine.func_98187_b(texture);
 	}
 }

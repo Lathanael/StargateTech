@@ -124,9 +124,8 @@ public class StargateNetwork {
 	}
 	
 	private String getFileNameFromWorld(){
-		String dir = Minecraft.getMinecraftDir().getPath();
-		String name = worldName;
-		return dir.concat("/saves/").concat(name).concat("/stargates.dat");
+		String dir = "./saves/";
+		return dir.concat(worldName).concat("/stargates.dat");
 	}
 	
 	private void doLoad(){

@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 /**
  * Dismantles any block that implements IDismantleable.
@@ -18,8 +18,8 @@ import lordfokas.stargatetech.util.TextureIndex;
  */
 public class Dismantler extends BaseItem {
 	public Dismantler(int id) {
-		super(id, TextureIndex.dismantler); // REM cg
-		this.setItemName("dismantler");
+		super(id, UnlocalizedNames.ITEM_DISMANTLER);
+		this.setUnlocalizedName("dismantler");
 		this.setMaxDamage(256);
 		setMaxStackSize(1);
 	}

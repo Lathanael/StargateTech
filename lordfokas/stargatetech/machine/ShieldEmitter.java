@@ -5,6 +5,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
@@ -14,23 +15,23 @@ import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetComponent;
 import lordfokas.stargatetech.rendering.RenderShieldEmitter;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.IconRegistry;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponent, IDismantleable{
 	private int maxShieldRange;
 	
 	public ShieldEmitter(int id, int maxRange) {
-		super(id, TextureIndex.shieldEmitterYFace);
-		this.setBlockName("shieldEmitter");
+		super(id, UnlocalizedNames.BLOCK_SHIELDEMT);
 		this.setStepSound(soundMetalFootstep);
 		maxShieldRange = maxRange;
 	}
 	
 	@Override
-	public int getBlockTextureFromSide(int side){
-		if(side < 2) return TextureIndex.shieldEmitterYFace;
-		else if(side == 3) return TextureIndex.shieldEmitterSingle;
-		else return TextureIndex.blockSingle;
+	public Icon getTextureFromSide(int side){
+		if(side < 2) return IconRegistry.shieldEmitterTop;
+		else if(side == 3) return this.field_94336_cN;
+		else return IconRegistry.machine;
 	}
 	
 	public int getMaxShieldRange(){
@@ -38,11 +39,11 @@ public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponen
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living){
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack){
 		int dir = -1;
 		if(living instanceof EntityPlayer){
 			dir = Helper.yaw2dir(living.rotationYaw);
-			world.setBlockMetadata(x, y, z, dir);
+			world.setBlockMetadataWithNotify(x, y, z, dir, Helper.SETBLOCK_NO_UPDATE);
 		}
 	}
 	
@@ -70,7 +71,7 @@ public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponen
 	public boolean dismantle(World w, int x, int y, int z){
 		if(w.isRemote) return false;
 		w.spawnEntityInWorld(new EntityItem(w, x, y, z, new ItemStack(this)));
-		w.setBlock(x, y, z, 0);
+		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_NO_UPDATE);
 		return false;
 	}
 }

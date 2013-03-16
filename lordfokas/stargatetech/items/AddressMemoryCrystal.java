@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.Symbol;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 /**
  * Stores a Stargate Address
@@ -17,8 +17,8 @@ import lordfokas.stargatetech.util.TextureIndex;
  */
 public class AddressMemoryCrystal extends BaseItem {
 	public AddressMemoryCrystal(int id){
-		super(id, TextureIndex.addressMemoryCrystal);
-		setItemName("addressMemoryCrystal");
+		super(id, UnlocalizedNames.ITEM_MEM_CRYSTAL);
+		setUnlocalizedName("addressMemoryCrystal");
 		setMaxStackSize(1);
 		setMaxDamage(0);
 	}

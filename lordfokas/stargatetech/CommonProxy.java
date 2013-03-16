@@ -50,8 +50,8 @@ public class CommonProxy {
 	private void addItems(){
 		registerItem(StargateTech.naquadahShard, "Naquadah Shard");
 		registerItem(StargateTech.naquadriaShard, "Naquadria Shard");
-		registerItem(StargateTech.naquadahShardCluster, "Naquadah Shard Cluster");
-		registerItem(StargateTech.naquadriaShardCluster, "Naquadria Shard Cluster");
+		registerItem(StargateTech.naquadahCluster, "Naquadah Shard Cluster");
+		registerItem(StargateTech.naquadriaCluster, "Naquadria Shard Cluster");
 		registerItem(StargateTech.naquadahIngot, "Naquadah Ingot");
 		registerItem(StargateTech.naquadriaIngot, "Naquadria Ingot");
 		registerItem(StargateTech.disintegrator, "Disintegrator");
@@ -64,8 +64,8 @@ public class CommonProxy {
 	private void addRecipes(){
 		ItemStack nqhShard = new ItemStack(StargateTech.naquadahShard);
 		ItemStack nqiShard = new ItemStack(StargateTech.naquadriaShard);
-		ItemStack nqhCluster = new ItemStack(StargateTech.naquadahShardCluster);
-		ItemStack nqiCluster = new ItemStack(StargateTech.naquadriaShardCluster);
+		ItemStack nqhCluster = new ItemStack(StargateTech.naquadahCluster);
+		ItemStack nqiCluster = new ItemStack(StargateTech.naquadriaCluster);
 		ItemStack nqhIngot = new ItemStack(StargateTech.naquadahIngot);
 		ItemStack nqiIngot = new ItemStack(StargateTech.naquadriaIngot);
 		GameRegistry.addShapelessRecipe(nqhCluster, new Object[]{nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard});

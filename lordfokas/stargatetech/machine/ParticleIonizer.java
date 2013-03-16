@@ -3,6 +3,7 @@ package lordfokas.stargatetech.machine;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
@@ -14,31 +15,25 @@ import lordfokas.stargatetech.rendering.RenderParticleIonizer;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.GUIHandler;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.IconRegistry;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 public class ParticleIonizer extends BaseBlockContainer implements IIonNetSource, IPowerNetComponent, IDismantleable{
 
 	public ParticleIonizer(int id) {
-		super(id, TextureIndex.particleIonizerYFace);
-		this.setBlockName("particleIonizer");
+		super(id, UnlocalizedNames.BLOCK_IONIZER);
 	}
 	
 	@Override
-	public int getBlockTextureFromSide(int side){
-		if(side < 2) return TextureIndex.particleIonizerYFace;
-		else return TextureIndex.particleIonizerSide;
+	public Icon getTextureFromSide(int side){
+		if(side < 2) return this.field_94336_cN;
+		else return IconRegistry.particleIonizerSide;
 	}
 	
 	@Override
     public int getRenderType(){
     	return RenderParticleIonizer.instance().getRenderId();
     }
-	
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int side, int metadata){
-		if(isOverride) return override[side];
-		else return getBlockTextureFromSide(side);
-	}
 	
 	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int i0, float f1, float f2, float f3){
@@ -65,7 +60,7 @@ public class ParticleIonizer extends BaseBlockContainer implements IIonNetSource
 	public boolean dismantle(World w, int x, int y, int z){
 		if(w.isRemote) return false;
 		w.spawnEntityInWorld(new EntityItem(w, x, y, z, new ItemStack(this)));
-		w.setBlock(x, y, z, 0);
+		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_NO_UPDATE);
 		return false;
 	}
 }

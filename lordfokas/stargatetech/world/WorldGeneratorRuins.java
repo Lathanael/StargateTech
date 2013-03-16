@@ -5,6 +5,7 @@ import java.util.Random;
 
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.machine.Shield;
+import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.WorldGenerationHelper;
 
 import net.minecraft.block.Block;
@@ -38,7 +39,7 @@ public final class WorldGeneratorRuins {
 	}
 	
 	private static void generateLootChest(Random r, World w, int x, int y, int z){
-		w.setBlock(x, y, z, Block.chest.blockID);
+		w.setBlockAndMetadataWithNotify(x, y, z, Block.chest.blockID, 0, Helper.SETBLOCK_NO_UPDATE);
 		IInventory chest = (IInventory) w.getBlockTileEntity(x, y, z);
 		ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
 		int value = 0;
@@ -92,7 +93,7 @@ public final class WorldGeneratorRuins {
 	private static void generateGrassRuin(Random r, World w, int x, int y, int z){
 		if(r.nextInt(RUIN_RARITY_GRASS) != 0) return;
 		int block = Block.stoneBrick.blockID;
-		w.setBlock(x, y-2, z, block);
+		w.setBlockAndMetadataWithNotify(x, y-2, z, block, 0, Helper.SETBLOCK_NO_UPDATE);
 		WorldGenerationHelper.instance.worldgenHorizontalRect(w, x-1, y-1, z-1, 3, 3, block, 0);
 		WorldGenerationHelper.instance.worldgenHorizontalRect(w, x-2, y+0, z-2, 5, 5, block, 0);
 		WorldGenerationHelper.instance.worldgenHorizontalRectCorner(w, x-2, y+1, z-2, 5, 5, 0, 0, block, 3);
@@ -106,7 +107,7 @@ public final class WorldGeneratorRuins {
 	private static void generateDesertRuin(Random r, World w, int x, int y, int z){
 		if(r.nextInt(RUIN_RARITY_DESERT) != 0) return;
 		int block = Block.sandStone.blockID;
-		w.setBlock(x, y-2, z, block);
+		w.setBlockAndMetadataWithNotify(x, y-2, z, block, 0, Helper.SETBLOCK_NO_UPDATE);
 		WorldGenerationHelper.instance.worldgenHorizontalRect(w, x-1, y-1, z-1, 3, 3, block, 0);
 		WorldGenerationHelper.instance.worldgenHorizontalRect(w, x-2, y+0, z-2, 5, 5, block, 0);
 		WorldGenerationHelper.instance.worldgenHorizontalRectCorner(w, x-2, y+1, z-2, 5, 5, 0, 0, block, 1);
@@ -128,7 +129,7 @@ public final class WorldGeneratorRuins {
 		int shield = StargateTech.shield.blockID;
 		int meta = ~Shield.BLOCK_PLAYER;
 		int stone = Block.stoneBrick.blockID;
-		w.setBlock(x, y-2, z, shield);
+		w.setBlockAndMetadataWithNotify(x, y-2, z, shield, 0, Helper.SETBLOCK_NO_UPDATE);
 		WorldGenerationHelper.instance.worldgenHorizontalRect(w, x-1, y-1, z-1, 3, 3, stone, 0);
 		WorldGenerationHelper.instance.worldgenHorizontalRect(w, x-2, y+0, z-2, 5, 5, stone, 0);
 		WorldGenerationHelper.instance.worldgenHorizontalRectCorner(w, x-2, y+1, z-2, 5, 5, 0, 0, stone, 3);

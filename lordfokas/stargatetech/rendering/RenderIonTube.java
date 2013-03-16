@@ -2,12 +2,13 @@ package lordfokas.stargatetech.rendering;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
 import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetComponent;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.IconRegistry;
 
 public class RenderIonTube extends BaseBlockRenderer{
 	private static RenderIonTube INSTANCE = new RenderIonTube();
@@ -82,16 +83,17 @@ public class RenderIonTube extends BaseBlockRenderer{
 			}
 		}
 		if(joints > 2){
+			Icon joint = IconRegistry.ionTubeJoint;
 			coremin -= 0.0625F;
 			coremax += 0.0625F;
 			block.setBlockBounds(coremin, coremin, coremin, coremax, coremax, coremax);
 			renderer.setRenderBoundsFromBlock(block);
-			renderer.renderNorthFace(block, x, y, z, TextureIndex.ionTubeJoint);
-			renderer.renderSouthFace(block, x, y, z, TextureIndex.ionTubeJoint);
-			renderer.renderWestFace(block, x, y, z, TextureIndex.ionTubeJoint);
-			renderer.renderEastFace(block, x, y, z, TextureIndex.ionTubeJoint);
-			renderer.renderTopFace(block, x, y, z, TextureIndex.ionTubeJoint);
-			renderer.renderBottomFace(block, x, y, z, TextureIndex.ionTubeJoint);
+			renderer.renderNorthFace(block, x, y, z, joint);
+			renderer.renderSouthFace(block, x, y, z, joint);
+			renderer.renderWestFace(block, x, y, z, joint);
+			renderer.renderEastFace(block, x, y, z, joint);
+			renderer.renderTopFace(block, x, y, z, joint);
+			renderer.renderBottomFace(block, x, y, z, joint);
 		}else{
 			block.setBlockBounds(coremin, coremin, coremin, coremax, coremax, coremax);
 			renderer.setRenderBoundsFromBlock(block);

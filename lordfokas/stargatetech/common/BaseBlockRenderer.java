@@ -3,6 +3,7 @@ package lordfokas.stargatetech.common;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 
@@ -32,14 +33,14 @@ public abstract class BaseBlockRenderer implements ISimpleBlockRenderingHandler{
 	}
 	
 	protected static void renderAsItem(Block block, RenderBlocks renderer){
-		int[] tmap = new int[6];
+		Icon[] tmap = new Icon[6];
 		for(int i = 0; i < 6; i++){
 			tmap[i] = block.getBlockTextureFromSide(i);
 		}
 		renderAsItem(block, renderer, tmap);
 	}
 	
-	protected static void renderAsItem(Block block, RenderBlocks renderer, int[] tmap){
+	protected static void renderAsItem(Block block, RenderBlocks renderer, Icon[] tmap){
 		Tessellator tessellator = Tessellator.instance;
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F); // Set angled view
 		

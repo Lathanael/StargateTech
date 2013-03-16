@@ -1,5 +1,7 @@
 package lordfokas.stargatetech.util;
 
+import net.minecraft.util.Icon;
+
 /**
  * Used by custom block renderers to override block textures before rendering
  * and then restore the original textures afterwards.
@@ -8,6 +10,6 @@ package lordfokas.stargatetech.util;
  * @author LordFokas
  */
 public interface IOverrideableTexture {
-	public void overrideTextures(int[] tmap);
+	public void overrideTextures(Icon[] tmap);
 	public void restoreTextures();
 }

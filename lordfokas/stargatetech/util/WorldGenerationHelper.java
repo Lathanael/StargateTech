@@ -29,7 +29,7 @@ public final class WorldGenerationHelper {
 	
 	public void generate(ArrayList<WorldGenBlock> blocks, World w, int x, int y, int z, int id, int meta){
 		for(WorldGenBlock block : blocks){
-			w.setBlockAndMetadata(block.x + x, block.y + y, block.z + z, id, meta);
+			w.setBlockAndMetadataWithNotify(block.x + x, block.y + y, block.z + z, id, meta, Helper.SETBLOCK_NO_UPDATE);
 		}
 	}
 	
@@ -90,7 +90,7 @@ public final class WorldGenerationHelper {
 	public void worldgenHorizontalRect(World w, int x, int y, int z, int depth, int width, int block, int meta){
 		for(int xi = 0; xi < depth; xi++){
 			for(int zi = 0; zi < width; zi++){
-				w.setBlockAndMetadata(x+xi, y, z+zi, block, meta);
+				w.setBlockAndMetadataWithNotify(x+xi, y, z+zi, block, meta, Helper.SETBLOCK_NO_UPDATE);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public final class WorldGenerationHelper {
 		for(int xi = 0; xi < depth; xi++){
 			for(int zi = 0; zi < width; zi++){
 				if(xi == 0 || xi == depth-1 || zi == 0 || zi == width -1){
-					w.setBlockAndMetadata(x+xi, y, z+zi, block, meta);
+					w.setBlockAndMetadataWithNotify(x+xi, y, z+zi, block, meta, Helper.SETBLOCK_NO_UPDATE);
 				}
 			}
 		}
@@ -109,9 +109,9 @@ public final class WorldGenerationHelper {
 		for(int xi = 0; xi < depth; xi++){
 			for(int zi = 0; zi < width; zi++){
 				if((xi == 0 || xi == depth-1) && (zi == 0 || zi == width -1)){
-					w.setBlockAndMetadata(x+xi, y, z+zi, cid, cmeta);
+					w.setBlockAndMetadataWithNotify(x+xi, y, z+zi, cid, cmeta, Helper.SETBLOCK_NO_UPDATE);
 				}else{
-					w.setBlockAndMetadata(x+xi, y, z+zi, fid, fmeta);
+					w.setBlockAndMetadataWithNotify(x+xi, y, z+zi, fid, fmeta, Helper.SETBLOCK_NO_UPDATE);
 				}
 			}
 		}
@@ -120,7 +120,7 @@ public final class WorldGenerationHelper {
 	public void worldgenVerticalRectZ(World w, int x, int y, int z, int xSpan, int ySpan, int block, int meta){
 		for(int xi = 0; xi < xSpan; xi++){
 			for(int yi = 0; yi < ySpan; yi++){
-				w.setBlockAndMetadata(x+xi, y+yi, z, block, meta);
+				w.setBlockAndMetadataWithNotify(x+xi, y+yi, z, block, meta, Helper.SETBLOCK_NO_UPDATE);
 			}
 		}
 	}
@@ -128,7 +128,7 @@ public final class WorldGenerationHelper {
 	public void worldgenVerticalRectX(World w, int x, int y, int z, int ySpan, int zSpan, int block, int meta){
 		for(int zi = 0; zi < zSpan; zi++){
 			for(int yi = 0; yi < ySpan; yi++){
-				w.setBlockAndMetadata(x, y+yi, z+zi, block, meta);
+				w.setBlockAndMetadataWithNotify(x, y+yi, z+zi, block, meta, Helper.SETBLOCK_NO_UPDATE);
 			}
 		}
 	}

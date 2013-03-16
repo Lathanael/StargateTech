@@ -9,6 +9,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.machine.ParticleIonizerContainer;
+import lordfokas.stargatetech.util.Helper;
 
 public class GUIParticleIonizer extends GuiContainer{
 
@@ -20,9 +21,8 @@ public class GUIParticleIonizer extends GuiContainer{
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
-		int texture = mc.renderEngine.getTexture(ClientProxy.GUI_IONIZER);
+		Helper.bindTexture(ClientProxy.GUI_IONIZER);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(texture);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
@@ -47,8 +47,7 @@ public class GUIParticleIonizer extends GuiContainer{
             itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, pic.material, 8, 18);
 	        itemRenderer.zLevel = 0.0F;
 	        this.zLevel = 0.0F;
-	        String bname = pic.material.getItem().getItemNameIS(pic.material) + ".name";
-	        fontRenderer.drawString(LanguageRegistry.instance().getStringLocalization(bname, "en_US"), 28, 23, 0x0000FF);
+	        fontRenderer.drawString(pic.material.getDisplayName(), 28, 23, 0x0000FF);
 		}
 	}
 }

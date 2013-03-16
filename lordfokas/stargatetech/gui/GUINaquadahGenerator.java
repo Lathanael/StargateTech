@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.machine.NaquadahGeneratorContainer;
+import lordfokas.stargatetech.util.Helper;
 
 public class GUINaquadahGenerator extends GuiContainer{
 
@@ -19,9 +20,8 @@ public class GUINaquadahGenerator extends GuiContainer{
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
-		int texture = mc.renderEngine.getTexture(ClientProxy.GUI_GENERATOR);
+		Helper.bindTexture(ClientProxy.GUI_GENERATOR);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(texture);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);

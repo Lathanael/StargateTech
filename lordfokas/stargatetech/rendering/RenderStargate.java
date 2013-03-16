@@ -37,8 +37,11 @@ public class RenderStargate extends TileEntitySpecialRenderer {
 				GL11.glTranslated(x+0.5, y+0.5, z);
 				GL11.glRotatef(270, 0, 1, 0);
 				break;
+			default:
+				GL11.glPopMatrix();
+				return;
 		}
-		bindTextureByName("/lordfokas/stargatetech/textures/stargate.png");
+		bindTextureByName("/mods/StargateTech/textures/stargate.png");
 		model.render(stargate, 1.0F);
 		GL11.glPopMatrix();
 	}

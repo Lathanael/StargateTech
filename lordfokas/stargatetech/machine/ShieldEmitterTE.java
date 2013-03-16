@@ -176,7 +176,7 @@ public class ShieldEmitterTE extends BaseIonNetSinkTE{
 			}
 			if(spawnCycles != 0 && world.getBlockId(x + (spawnCycles+1) * xInc, y, z + (spawnCycles+1) * zInc) == StargateTech.shieldEmitter.blockID){
 				for(int i = 1; i<=spawnCycles; i++){
-					world.setBlockAndMetadata(x + (xInc * i), y, z + (zInc * i), StargateTech.shield.blockID, shieldMode);
+					world.setBlockAndMetadataWithNotify(x + (xInc * i), y, z + (zInc * i), StargateTech.shield.blockID, shieldMode, Helper.SETBLOCK_NO_UPDATE);
 				}
 			}
 		}
@@ -187,7 +187,7 @@ public class ShieldEmitterTE extends BaseIonNetSinkTE{
 		for(int i = 1; i <= range; i++){
 			cs = cs.fromDirection(dir);
 			if(cs.w.getBlockId(cs.x, cs.y, cs.z) == StargateTech.shield.blockID){
-				cs.w.setBlock(cs.x, cs.y, cs.z, 0);
+				cs.w.setBlockAndMetadataWithNotify(cs.x, cs.y, cs.z, 0, 0, Helper.SETBLOCK_NO_UPDATE);
 			}
 			if(cs.w.getBlockId(cs.x, cs.y, cs.z) == StargateTech.shieldEmitter.blockID)
 				break;

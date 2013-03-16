@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.common.IDisintegrable;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 /**
  * Disintegrates any blocks that implement IDisintegrable.
@@ -18,8 +18,8 @@ import lordfokas.stargatetech.util.TextureIndex;
  */
 public class Disintegrator extends BaseItem {
 	public Disintegrator(int id) {
-		super(id, TextureIndex.disintegrator);
-		this.setItemName("disintegrator");
+		super(id, UnlocalizedNames.ITEM_DISINTEGRATOR);
+		this.setUnlocalizedName("disintegrator");
 		this.setMaxDamage(256);
 		this.setMaxStackSize(1);
 	}

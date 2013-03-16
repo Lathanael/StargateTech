@@ -11,12 +11,11 @@ import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetComponent;
 import lordfokas.stargatetech.rendering.RenderPowerConduit;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 public class PowerConduit extends BaseBlock implements IPowerNetComponent, IDismantleable{
 	public PowerConduit(int id) {
-		super(id, TextureIndex.powerConduit);
-		this.setBlockName("powerConduit");
+		super(id, UnlocalizedNames.BLOCK_CONDUIT);
 	}
 	
 	@Override
@@ -53,7 +52,7 @@ public class PowerConduit extends BaseBlock implements IPowerNetComponent, IDism
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World w, int x, int y, int z){
 		this.setBlockBoundsBasedOnState(w, x, y, z);
-        return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
+        return AxisAlignedBB.getAABBPool().getAABB((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
     }
 	
 	@Override
@@ -90,7 +89,7 @@ public class PowerConduit extends BaseBlock implements IPowerNetComponent, IDism
 	public boolean dismantle(World w, int x, int y, int z){
 		if(w.isRemote) return false;
 		w.spawnEntityInWorld(new EntityItem(w, x, y, z, new ItemStack(this)));
-		w.setBlock(x, y, z, 0);
+		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_NO_UPDATE);
 		return false;
 	}
 }

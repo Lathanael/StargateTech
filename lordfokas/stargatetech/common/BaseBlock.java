@@ -2,49 +2,63 @@ package lordfokas.stargatetech.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
 import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.util.Config;
 import lordfokas.stargatetech.util.IOverrideableTexture;
+import lordfokas.stargatetech.util.IconRegistry;
 
 /**
  * A base for all the blocks used on this mod.
  * @author LordFokas
  */
 public class BaseBlock extends Block implements IOverrideableTexture {
-	protected int[] override = new int[6];
+	protected Icon[] override = new Icon[6];
 	protected boolean isOverride = false;
+	protected String texturename;
 	
-	public BaseBlock(int id, int textureIndex) {
-		this(id, textureIndex, Material.rock, true);
+	public BaseBlock(int id, String name) {
+		this(id, name, Material.rock, true);
 	}
 	
-	public BaseBlock(int id, int textureIndex, boolean hard) {
-		this(id, textureIndex, Material.rock, hard);
+	public BaseBlock(int id, String name, boolean hard) {
+		this(id, name, Material.rock, hard);
 	}
 	
-	public BaseBlock(int id, int textureIndex, Material material, boolean hard) {
-		super(id, textureIndex, material);
+	public BaseBlock(int id, String name, Material material, boolean hard) {
+		super(id, material);
 		if(hard){
 			this.setBlockUnbreakable();
 			this.setResistance(20000000F);
 		}
+		texturename = name;
+		this.setUnlocalizedName(name);
 		if(id != Config.shield && id != Config.placeholder) this.setCreativeTab(StargateTech.tab);
 	}
 	
 	@Override
-	public String getTextureFile(){
-		return ClientProxy.BLOCK_TEXTURES;
-	}
-	
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int side, int metadata){
+	public Icon getBlockTextureFromSideAndMetadata(int side, int metadata){
 		if(isOverride) return override[side];
-		else return getBlockTextureFromSide(side);
+		else return getTextureFromSide(side);
+	}
+	
+	public Icon getTextureFromSide(int side){
+		return getTexture();
+	}
+	
+	public Icon getTexture(){
+		return this.field_94336_cN;
 	}
 	
 	@Override
-	public void overrideTextures(int[] tmap){
+	public void func_94332_a(IconRegister register){
+		this.field_94336_cN = register.func_94245_a("StargateTech:" + texturename);
+	}
+	
+	@Override
+	public void overrideTextures(Icon[] tmap){
 		isOverride = true;
 		override = tmap;
 	}

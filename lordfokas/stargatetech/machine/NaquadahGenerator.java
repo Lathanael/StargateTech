@@ -1,5 +1,6 @@
 package lordfokas.stargatetech.machine;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,13 +11,14 @@ import lordfokas.stargatetech.common.BaseBlockContainer;
 import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetSource;
 import lordfokas.stargatetech.util.GUIHandler;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.IconRegistry;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 public class NaquadahGenerator extends BaseBlockContainer implements IPowerNetSource, IDismantleable{
 
 	public NaquadahGenerator(int id) {
-		super(id, TextureIndex.naquadahGenerator);
-		setBlockName("naquadahGenerator");
+		super(id, UnlocalizedNames.BLOCK_NQH_GEN);
 	}
 	
 	@Override // Power conduits can only connect on the sides, not on the top or bottom.
@@ -42,7 +44,7 @@ public class NaquadahGenerator extends BaseBlockContainer implements IPowerNetSo
 	public boolean dismantle(World w, int x, int y, int z){
 		if(w.isRemote) return false;
 		w.spawnEntityInWorld(new EntityItem(w, x, y, z, new ItemStack(this)));
-		w.setBlock(x, y, z, 0);
+		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_NO_UPDATE);
 		return false;
 	}
 }

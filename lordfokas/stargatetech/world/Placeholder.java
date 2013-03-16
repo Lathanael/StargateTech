@@ -1,11 +1,13 @@
 package lordfokas.stargatetech.world;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import lordfokas.stargatetech.common.BaseBlock;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.IconRegistry;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 /**
  * Invisible block, that takes space and colides with entities.
@@ -14,8 +16,7 @@ import lordfokas.stargatetech.util.TextureIndex;
  */
 public class Placeholder extends BaseBlock {
 	public Placeholder(int id) {
-		super(id, TextureIndex.voidTexture);
-		setBlockName("placeholder");
+		super(id, UnlocalizedNames.BLOCK_INVISIBLE);
 		setLightOpacity(0);
 	}
 	
@@ -35,5 +36,11 @@ public class Placeholder extends BaseBlock {
 	@Override // No more placing torches on placeholders!
 	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side){
 		return false;
+	}
+	
+	@Override
+	public void func_94332_a(IconRegister register){
+		this.field_94336_cN = register.func_94245_a("StargateTech:void");
+		IconRegistry.instance.loadAllBlocks(register);
 	}
 }

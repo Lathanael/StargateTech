@@ -25,12 +25,8 @@ public final class EventListener {
 		// Add Damage Sources to the blocked list.
 		blocked.add(DamageSource.anvil);
 		blocked.add(DamageSource.cactus);
-		blocked.add(DamageSource.explosion);
-		blocked.add(DamageSource.explosion2);
 		blocked.add(DamageSource.fall);
 		blocked.add(DamageSource.fallingBlock);
-		// What was this before?
-		// blocked.add(DamageSource.field_76375_l);
 		blocked.add(DamageSource.inFire);
 		blocked.add(DamageSource.lava);
 		blocked.add(DamageSource.magic);

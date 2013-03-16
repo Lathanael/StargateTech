@@ -28,8 +28,8 @@ public final class Config {
 	// ITEMS
 	public static int naquadahShard;
 	public static int naquadriaShard;
-	public static int naquadahShardCluster;
-	public static int naquadriaShardCluster;
+	public static int naquadahCluster;
+	public static int naquadriaCluster;
 	public static int naquadahIngot;
 	public static int naquadriaIngot;
 	public static int disintegrator;
@@ -103,8 +103,8 @@ public final class Config {
 		naquadahShard 	= cfg.getItem(ITEM,		"naquadahShard",	item++).getInt();
 		naquadriaShard 	= cfg.getItem(ITEM,		"naquadriaShard",	item++).getInt();
 		
-		naquadahShardCluster	= cfg.getItem(ITEM, "naquadahShardCluster",	item++).getInt();
-		naquadriaShardCluster	= cfg.getItem(ITEM, "naquadriaShardCluster",item++).getInt();
+		naquadahCluster	= cfg.getItem(ITEM, "naquadahShardCluster",	item++).getInt();
+		naquadriaCluster	= cfg.getItem(ITEM, "naquadriaShardCluster",item++).getInt();
 		
 		naquadahIngot 	= cfg.getItem(ITEM,		"naquadahIngot",	item++).getInt();
 		naquadriaIngot 	= cfg.getItem(ITEM,		"naquadriaIngot",	item++).getInt();

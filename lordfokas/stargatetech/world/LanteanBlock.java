@@ -2,10 +2,12 @@ package lordfokas.stargatetech.world;
 
 import static net.minecraftforge.common.ForgeDirection.UP;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.IconRegistry;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 /**
  * This was a block which would have several metadata sub blocks (16, actually)
@@ -15,15 +17,15 @@ import lordfokas.stargatetech.util.TextureIndex;
  */
 public class LanteanBlock extends BaseBlock {
 	public LanteanBlock(int id) {
-		super(id, TextureIndex.lanteanQuadSide);
-		this.setBlockName("lanteanBlock");
+		super(id, UnlocalizedNames.BLOCK_LANTEAN);
+		this.texturename = "lantean-00-simple";
 	}
 	
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int side, int meta){
-		if(side != Helper.dirTop) return TextureIndex.lanteanQuadSide;
-		if(meta == 0) return TextureIndex.lanteanHexFloor;
-		return TextureIndex.lanteanQuadEmit;
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta){
+		if(side != Helper.dirTop) return IconRegistry.lantean00simple;
+		if(meta == 0) return IconRegistry.lantean01hexFloor;
+		return IconRegistry.lantean02verticalEmitter;
 	}
 	
 	@Override

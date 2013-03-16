@@ -15,7 +15,8 @@ import net.minecraft.world.World;
 import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.rendering.RenderIonTube;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,13 +32,12 @@ public class Shield extends BaseBlock {
 	public static final int BLOCK_FRIENDLY	= 0x2; // 0b0010
 	
 	public Shield(int id) {
-		super(id, TextureIndex.shield);
-		this.setBlockName("shield");
+		super(id, UnlocalizedNames.BLOCK_SHIELD);
 		this.setLightValue(1.0F);
 	}
 	
 	@Override
-	public void addCollidingBlockToList(World w, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity){
+	public void addCollisionBoxesToList(World w, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity){
 		boolean collide = false;
 		int meta = w.getBlockMetadata(x, y, z);
 		
@@ -59,12 +59,15 @@ public class Shield extends BaseBlock {
 		
 		// Collide with the entity according to the check above
 		if(collide == true){
-			super.addCollidingBlockToList(w, x, y, z, aabb, list, entity);
+			super.addCollisionBoxesToList(w, x, y, z, aabb, list, entity);
 		}
     }
 	
 	// Shields can't be destroyed by players, even in creative mode.
-	@Override public void onBlockDestroyedByPlayer(World w, int x, int y, int z, int meta){ w.setBlock(x, y, z, this.blockID); }
+	@Override public void onBlockDestroyedByPlayer(World w, int x, int y, int z, int meta){
+		w.setBlockAndMetadataWithNotify(x, y, z, this.blockID, meta, Helper.SETBLOCK_NO_UPDATE);
+	}
+	
 	// Disallow the player from getting a shield block, even in creative.
 	@Override public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z){ return null; }
 	// No dropping shields either.

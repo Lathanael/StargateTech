@@ -2,13 +2,16 @@ package lordfokas.stargatetech.rendering;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+import lordfokas.stargatetech.common.BaseBlockContainer;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
 import lordfokas.stargatetech.machine.IonTube;
 import lordfokas.stargatetech.machine.ParticleIonizer;
 import lordfokas.stargatetech.machine.PowerConduit;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.IconRegistry;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 public class RenderParticleIonizer extends BaseBlockRenderer{
 	private static RenderParticleIonizer INSTANCE = new RenderParticleIonizer();
@@ -21,38 +24,41 @@ public class RenderParticleIonizer extends BaseBlockRenderer{
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer){
 		if(!(block instanceof ParticleIonizer)) return false;
 		ParticleIonizer particleIonizer = (ParticleIonizer) block;
-		int v = TextureIndex.voidTexture;
-		int s = TextureIndex.networkSlot;
-		int[] tmap = { s, s, s, s, s, s };
-		int[] glow = { v, v, v, v, v, v };
-		tmap[0] = tmap[1] = TextureIndex.particleIonizerYFace;
+		Icon v = IconRegistry.empty;
+		Icon s = IconRegistry.machineSlot;
+		Icon[] tmap = { s, s, s, s, s, s };
+		Icon[] glow = { v, v, v, v, v, v };
+		Icon red	= IconRegistry.slot0red;
+		Icon blue	= IconRegistry.slot1blue;
+		Icon yellow	= IconRegistry.slot2yellow;
+		tmap[0] = tmap[1] = ((BaseBlockContainer)block).getTexture();
 		if(Helper.getBlockInstance(world, x+1, y, z) instanceof IonTube){
-			glow[Helper.dirXPos] = TextureIndex.ionTubeBlueLight;
+			glow[Helper.dirXPos] = blue;
 		}else if(Helper.getBlockInstance(world, x+1, y, z) instanceof PowerConduit){
-			glow[Helper.dirXPos] = TextureIndex.powerConduitYellowLight;
+			glow[Helper.dirXPos] = yellow;
 		}else{
-			glow[Helper.dirXPos] = TextureIndex.slotRedLight;
+			glow[Helper.dirXPos] = red;
 		}
 		if(Helper.getBlockInstance(world, x-1, y, z) instanceof IonTube){
-			glow[Helper.dirXNeg] = TextureIndex.ionTubeBlueLight;
+			glow[Helper.dirXNeg] = blue;
 		}else if(Helper.getBlockInstance(world, x-1, y, z) instanceof PowerConduit){
-			glow[Helper.dirXNeg] = TextureIndex.powerConduitYellowLight;
+			glow[Helper.dirXNeg] = yellow;
 		}else{
-			glow[Helper.dirXNeg] = TextureIndex.slotRedLight;
+			glow[Helper.dirXNeg] = red;
 		}
 		if(Helper.getBlockInstance(world, x, y, z+1) instanceof IonTube){
-			glow[Helper.dirZPos] = TextureIndex.ionTubeBlueLight;
+			glow[Helper.dirZPos] = blue;
 		}else if(Helper.getBlockInstance(world, x, y, z+1) instanceof PowerConduit){
-			glow[Helper.dirZPos] = TextureIndex.powerConduitYellowLight;
+			glow[Helper.dirZPos] = yellow;
 		}else{
-			glow[Helper.dirZPos] = TextureIndex.slotRedLight;
+			glow[Helper.dirZPos] = red;
 		}
 		if(Helper.getBlockInstance(world, x, y, z-1) instanceof IonTube){
-			glow[Helper.dirZNeg] = TextureIndex.ionTubeBlueLight;
+			glow[Helper.dirZNeg] = blue;
 		}else if(Helper.getBlockInstance(world, x, y, z-1) instanceof PowerConduit){
-			glow[Helper.dirZNeg] = TextureIndex.powerConduitYellowLight;
+			glow[Helper.dirZNeg] = yellow;
 		}else{
-			glow[Helper.dirZNeg] = TextureIndex.slotRedLight;
+			glow[Helper.dirZNeg] = red;
 		}
 		particleIonizer.overrideTextures(tmap);
 		renderer.renderStandardBlock(particleIonizer, x, y, z);

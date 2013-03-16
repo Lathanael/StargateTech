@@ -78,4 +78,16 @@ public class DialingComputerTE extends TileEntity implements IInventory {
 	@Override public void openChest(){}
 	@Override public void closeChest(){}
 	@Override public void onInventoryChanged(){}
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

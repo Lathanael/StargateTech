@@ -2,10 +2,11 @@ package lordfokas.stargatetech.rendering;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.IconRegistry;
 
 /**
  * Renders Naquadah and Naquadria ore blocks.
@@ -21,15 +22,16 @@ public class RenderOre extends BaseBlockRenderer {
 	
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks r){
-		int base = TextureIndex.oreBase;
-		int ore = (block.blockID == StargateTech.naquadahOre.blockID) ? TextureIndex.naquadahGlow : TextureIndex.naquadriaGlow;
+		Icon base = IconRegistry.oreBase;
+		Icon ore = (block.blockID == StargateTech.naquadahOre.blockID)?
+				IconRegistry.naquadahOreGlow : IconRegistry.naquadriaOreGlow;
 		r.overrideBlockTexture = base;
 		r.renderStandardBlock(block, x, y, z);
 		r.overrideBlockTexture = ore;
 		block.setLightValue(15);
 		r.renderStandardBlock(block, x, y, z);
 		block.setLightValue(0);
-		r.overrideBlockTexture = -1;
+		r.overrideBlockTexture = null;
 		return false;
 	}
 }

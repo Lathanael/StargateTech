@@ -10,7 +10,7 @@ import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.common.IDisintegrable;
 import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.util.Helper;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 /**
  * Acts as both a Dismantler and a Disintegrator.
@@ -18,8 +18,8 @@ import lordfokas.stargatetech.util.TextureIndex;
  */
 public class MechanusClavia extends BaseItem {
 	public MechanusClavia(int id) {
-		super(id, TextureIndex.mechanusClavia); // REM cg
-		this.setItemName("mechanusClavia");
+		super(id, UnlocalizedNames.ITEM_MECHANUS);
+		this.setUnlocalizedName("mechanusClavia");
 		this.setMaxDamage(768);
 		setMaxStackSize(1);
 	}

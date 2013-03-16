@@ -9,12 +9,13 @@ import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.IDisintegrable;
 import lordfokas.stargatetech.rendering.RenderOre;
-import lordfokas.stargatetech.util.TextureIndex;
+import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.UnlocalizedNames;
 
 public class NaquadahOre extends NaquadahExplosive implements IDisintegrable{
 	public NaquadahOre(int id) {
-		super(id, TextureIndex.oreNaquadah, 2.5F);
-		this.setBlockName("naquadahOre");
+		super(id, UnlocalizedNames.BLOCK_NQH_ORE, 2.5F);
+		this.setUnlocalizedName("naquadahOre");
 	}
 	
 	@Override
@@ -30,7 +31,7 @@ public class NaquadahOre extends NaquadahExplosive implements IDisintegrable{
 	@Override // Drop 3 shards when disintegrated
 	public boolean disintegrate(World w, int x, int y, int z){
 		if(w.isRemote) return true;
-		w.setBlock(x, y, z, 0);
+		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_NO_UPDATE);
 		w.spawnEntityInWorld(new EntityItem(w, (double)x, (double)y, (double)z, new ItemStack(StargateTech.naquadahShard, 3)));
 		return true;
 	}
