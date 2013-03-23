@@ -106,7 +106,7 @@ public class StargateTE extends BaseTileEntity {
 	
 	@Override
 	public AxisAlignedBB getRenderBoundingBox(){
-		return AxisAlignedBB.getAABBPool().getAABB(xCoord - 3, xCoord + 4, yCoord, yCoord+7, zCoord - 3, zCoord + 4);
+		return AxisAlignedBB.getAABBPool().getAABB(xCoord - 3, yCoord, zCoord - 3, xCoord + 4, yCoord + 7, zCoord + 4);
 	}
 	
 	@Override
