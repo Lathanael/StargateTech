@@ -1,6 +1,5 @@
 package lordfokas.stargatetech.networks.stargate;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,14 +8,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import lordfokas.stargatetech.machine.StargateTE;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.world.WorldEvent;
 
 /**
  * Manages -ALL- the Stargate Addresses. It is a potential bug hive: As stargates don't yet dial,
@@ -166,14 +160,14 @@ public class StargateNetwork {
 		}
 	}
 	
-	private String getFileNameFromWorld(){
-		String dir = "./saves/";
-		return dir.concat(worldName).concat("/stargates.dat");
+	private String getStargateAddressFileName(){
+		String dir = DimensionManager.getCurrentSaveRootDirectory().getAbsolutePath();
+		return dir.concat("/stargates.dat");
 	}
 	
 	private void doLoad(){
 		if(loaded) return;
-		String filepath = getFileNameFromWorld();
+		String filepath = getStargateAddressFileName();
 		boolean problem = false;
 		try{
 			System.out.println("Loading Stargate address list...");
@@ -230,7 +224,7 @@ public class StargateNetwork {
 		boolean problem = false;
 		try{
 			System.out.println("Saving Stargate address list...");
-			file = new RandomAccessFile(getFileNameFromWorld(), "rw");
+			file = new RandomAccessFile(getStargateAddressFileName(), "rw");
 			file.writeInt(addresses.size());
 			int count = 0;
 			for(AddressHandler ah : addresses){
