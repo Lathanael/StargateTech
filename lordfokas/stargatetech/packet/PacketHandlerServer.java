@@ -1,7 +1,11 @@
 package lordfokas.stargatetech.packet;
 
+import lordfokas.stargatetech.machine.DialingComputerTE;
+import lordfokas.stargatetech.util.ByteUtil;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.Player;
 
 /**
@@ -13,10 +17,31 @@ public class PacketHandlerServer extends PacketHandler {
 	private PacketHandlerServer(){};
 
 	@Override
-	public void onPacketData(INetworkManager manager,
-			Packet250CustomPayload packet, Player player) {
-		// TODO Auto-generated method stub
-		
+	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player p) {
+		if(p instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer) p;
+			byte[] data = packet.data;
+			switch(data[0]){
+				case PACKET_DIALING_COMPUTER_BUTTON:
+					handleDialingComputerButton(data, player);
+					break;
+			}
+		}else{
+			System.out.println("[StargateTech] Packet Handler couldn't handle packet because player isn't EntityPlayerMP!!");
+		}
 	}
-
+	
+	public void handleDialingComputerButton(byte[] data, EntityPlayer player){
+		int x = ByteUtil.readInt(data, 1);
+		int y = ByteUtil.readInt(data, 5);
+		int z = ByteUtil.readInt(data, 9);
+		byte type = data[13];
+		byte button = data[14];
+		TileEntity te = player.worldObj.getBlockTileEntity(x, y, z);
+		if(te != null && te instanceof DialingComputerTE){
+			((DialingComputerTE)te).onButtonClick(type, button);
+		}else{
+			System.out.println("[StargateTech] Not a Dialing Computer!");
+		}
+	}
 }

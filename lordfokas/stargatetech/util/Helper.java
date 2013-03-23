@@ -1,9 +1,25 @@
 package lordfokas.stargatetech.util;
 
+import java.util.Iterator;
+
+import lordfokas.stargatetech.networks.stargate.StargateTeleporter;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.packet.Packet41EntityEffect;
+import net.minecraft.network.packet.Packet9Respawn;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.WorldType;
+import net.minecraftforge.common.DimensionManager;
 
 /**
  * Your everyday helper, with bits of common and useful code.

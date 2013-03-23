@@ -9,11 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import lordfokas.stargatetech.common.BaseTileEntity;
 import lordfokas.stargatetech.items.AddressMemoryCrystal;
 import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.Symbol;
 
-public class DialingComputerTE extends TileEntity implements IInventory {
+public class DialingComputerTE extends BaseTileEntity implements IInventory {
 	public static final String ID = "DialingComputerTE";
 	private ItemStack inventory = null;
 	
@@ -24,45 +25,119 @@ public class DialingComputerTE extends TileEntity implements IInventory {
 	
 	@Override public boolean canUpdate(){ return false; }
 	
-	// called from the GUI. Will use packets later.
-	public void load(){
-		
+	public void onButtonClick(byte type, byte button){
+		if(type == 0){
+			if(!used[button - 1] && count < 9){
+				used[button - 1] = true;
+				addr[count] = Symbol.symbols[button];
+				count++;
+				canDial = count > 6;
+			}
+		}else{
+			switch(button){
+			case 0:
+				dial();
+				break;
+			case 1:
+				reset();
+				break;
+			case 2:
+				save();
+				break;
+			case 3:
+				load();
+				break;
+			}
+		}
+		updateClients();
 	}
 	
-	// called from the GUI. Will use packets later.
-	// also, it doesn't feel like working. Not sure what's wrong.
+	public void dial(){
+		Address address = new Address(addr);
+		if(address.isValid()){
+			TileEntity te = worldObj.getBlockTileEntity(xCoord, yCoord-2, zCoord-10);
+			if(te != null && te instanceof StargateTE){
+				StargateTE stargate = (StargateTE) te;
+				stargate.dial(address);
+			}
+		}
+	}
+
+	public void reset(){
+		used = new boolean[39];
+		addr = new Symbol[9];
+		count = 0;
+		canDial = false;
+	}
+	
 	public void save(){
 		if(inventory != null && inventory.getItem() instanceof AddressMemoryCrystal){
-			ArrayList<Symbol> tmp = new ArrayList<Symbol>(9);
-			for(Symbol sym : addr){
-				if(sym != null && sym != Symbol.NONE)
-					tmp.add(sym);
+			Address address = new Address(addr);
+			if(address.isValid()){
+				AddressMemoryCrystal.setAddress(inventory, address);
 			}
-			int l = tmp.size();
-			Symbol[] shortAddress = new Symbol[l];
-			for(int i = 0; i < l; i++){
-				shortAddress[i] = tmp.get(i);
-			}
-			
-			Address attempt = new Address(shortAddress);
-			AddressMemoryCrystal.setAddress(inventory, attempt);
-			
+		}
+	}
+	
+	public void load(){
+		if(inventory != null && inventory.getItem() instanceof AddressMemoryCrystal){
 			Address address = AddressMemoryCrystal.getAddr(inventory);
-			if(address != null) System.out.println("SAVED ADDR: " + address.getName());
-			else System.out.println("FAILED TO SAVE: " + attempt.getName());
+			if(address != null && address.isValid()){
+				addr = address.getSymbols();
+				count = 0;
+				used = new boolean[39];
+				for(Symbol s : addr){
+					if(s != null && s.getID() != 0){
+						used[s.getID() - 1] = true;
+						count++;
+					}
+				}
+				canDial = true;
+			}
 		}
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
-		// Nothing yet
+		if(nbt.hasKey("inventory")){
+			inventory = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("inventory"));
+		}else{
+			inventory = null;
+		}
+		for(int i = 0; i < 9; i++){
+    		short sym = nbt.getShort("sym" + i);
+    		addr[i] = (sym == -1 ? null : Symbol.symbols[sym]);
+    	}
+    	for(int i = 0; i < 39; i++){
+    		used[i] = nbt.getBoolean("used" + i);
+    	}
+    	canDial = nbt.getBoolean("canDial");
+    	count = nbt.getInteger("count");
 	}
 
     @Override
     public void writeToNBT(NBTTagCompound nbt){
     	super.writeToNBT(nbt);
-    	// Nothing yet
+    	NBTTagCompound inventoryNBT = new NBTTagCompound();
+		if(inventory != null){
+			inventory.writeToNBT(inventoryNBT);
+			nbt.setCompoundTag("inventory", inventoryNBT);
+		}
+    	for(int i = 0; i < 9; i++){
+    		short sym;
+    		if(addr[i] == null){
+    			sym = -1;
+    		}else{
+    			sym = addr[i].getID();
+    		}
+    		nbt.setShort("sym" + i, sym);
+    	}
+    	for(int i = 0; i < 39; i++){
+    		nbt.setBoolean("used" + i, used[i]);
+    	}
+    	nbt.setBoolean("canDial", canDial);
+    	nbt.setInteger("count", count);
     }
 	
 	// ***************************************************************************************

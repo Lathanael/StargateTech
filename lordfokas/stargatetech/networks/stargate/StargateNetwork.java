@@ -8,10 +8,14 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Random;
 
+import lordfokas.stargatetech.machine.StargateTE;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.WorldEvent;
 
 /**
@@ -45,6 +49,45 @@ public class StargateNetwork {
 	
 	public static StargateNetwork instance(){
 		return instance;
+	}
+	
+	public static void dial(Address src, Address tgt){
+		AddressHandler source = getHandler(src);
+		AddressHandler target = getHandler(tgt);
+		if(source != null && target != null){
+			if(source.getD() != target.getD()){
+				World srcWorld = DimensionManager.getWorld(source.getD());
+				World tgtWorld = DimensionManager.getWorld(target.getD());
+				if(srcWorld != null && tgtWorld != null){
+					TileEntity srcte = srcWorld.getBlockTileEntity(source.getX(), source.getY(), source.getZ());
+					TileEntity tgtte = tgtWorld.getBlockTileEntity(target.getX(), target.getY(), target.getZ());
+					if(srcte != null && srcte instanceof StargateTE && tgtte != null && tgtte instanceof StargateTE){
+						StargateTE srcGate = (StargateTE) srcte;
+						StargateTE tgtGate = (StargateTE) tgtte;
+						int time = 38 * 20;
+						srcGate.openWormhole(time, true, target);
+						tgtGate.openWormhole(time, false, null);
+					}else{
+						System.out.println("Couldn't dial because some gates weren't there!");
+					}
+				}else{
+					System.out.println("Couldn't dial because some worlds were null!");
+				}
+			}else{
+				System.out.println("Can't teleport in the same dimension!");
+			}
+		}else{
+			System.out.println("Couldn't dial because some addresses were null!");
+		}
+	}
+	
+	private static AddressHandler getHandler(Address address){
+		for(AddressHandler handler : instance().addresses){
+			if(handler.getAddress().equals(address)){
+				return handler;
+			}
+		}
+		return null;
 	}
 	
 	public static void load(World w){

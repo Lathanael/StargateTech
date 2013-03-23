@@ -36,6 +36,11 @@ public class AddressHandler{
 		z = file.readInt();
 	}
 	
+	public int getD(){ return dim; }
+	public int getX(){ return x; }
+	public int getY(){ return y; }
+	public int getZ(){ return z; }
+	
 	public void save(RandomAccessFile file) throws IOException{
 		for(Symbol sym : address.getSymbols()){
 			file.writeShort(sym.getID());

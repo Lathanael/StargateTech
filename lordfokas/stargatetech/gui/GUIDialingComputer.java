@@ -4,6 +4,7 @@ import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.machine.DialingComputerContainer;
 import lordfokas.stargatetech.machine.DialingComputerTE;
 import lordfokas.stargatetech.networks.stargate.Symbol;
+import lordfokas.stargatetech.packet.PacketHandlerClient;
 import lordfokas.stargatetech.util.Helper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.StatCollector;
@@ -88,38 +89,22 @@ public class GUIDialingComputer extends GuiContainer{
 		if(btn == 0){
 			Pair p = getSymbolButton(x, y);
 			if(p != null){
-				if(!computer.used[p.i - 1] && computer.count < 9){
-					computer.used[p.i - 1] = true;
-					computer.addr[computer.count] = Symbol.symbols[p.i];
-					computer.count++;
-					computer.canDial = computer.count > 6;
-				}
+				PacketHandlerClient.sendDialingComputerButtonHit(computer.xCoord, computer.yCoord, computer.zCoord, (byte)0, (byte)p.i);
 			}else{
 				if(x >= 78 && x <= 147 && y >= 59 && y <= 70){
-					clickDial();
+					// Dial
+					PacketHandlerClient.sendDialingComputerButtonHit(computer.xCoord, computer.yCoord, computer.zCoord, (byte)1, (byte)0);
 				}else if(x >= 78 && x <= 147 && y >= 73 && y <= 84){
-					clickReset();
+					// Reset
+					PacketHandlerClient.sendDialingComputerButtonHit(computer.xCoord, computer.yCoord, computer.zCoord, (byte)1, (byte)1);
 				}else if(x >= 85 && x <= 103 && y >= 32 && y <= 48){
-					computer.save();
+					// Save
+					PacketHandlerClient.sendDialingComputerButtonHit(computer.xCoord, computer.yCoord, computer.zCoord, (byte)1, (byte)2);
 				}else if(x >= 123 && x <= 141 && y >= 32 && y <= 48){
-					computer.load();
+					// Load
+					PacketHandlerClient.sendDialingComputerButtonHit(computer.xCoord, computer.yCoord, computer.zCoord, (byte)1, (byte)3);
 				}
 			}
-		}
-	}
-	
-	private void clickDial(){
-		if(computer.canDial){
-			
-		}
-	}
-	
-	private void clickReset(){
-		computer.addr = new Symbol[9];
-		computer.count = 0;
-		computer.canDial = false;
-		for(int i = 0; i < 39; i++){
-			computer.used[i] = false;
 		}
 	}
 	

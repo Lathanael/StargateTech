@@ -37,6 +37,8 @@ public final class WorldGeneratorOutpost {
 				int block = w.getBlockId(x, y, z);
 				if(block == Block.waterStill.blockID && w.getBiomeGenForCoords(x, z).biomeName == "Ocean"){
 					generateDome(r, w, x, y, z);
+				}else if(block == Block.grass.blockID){
+					generateCuboid(r, w, x, y, z);
 				}
 			}
 		}catch(Exception e){
@@ -80,13 +82,25 @@ public final class WorldGeneratorOutpost {
 			wgen.generate(ring5, w, x, y+9, z, shield, meta);
 			
 			// Open space for the Stargate
-			w.setBlockAndMetadataWithNotify(x-2, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-1, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
-			w.setBlockAndMetadataWithNotify( x , y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+1, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+2, y, z-7, 0, 0, Helper.SETBLOCK_NO_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y, z-7, StargateTech.stargate.blockID, 2, Helper.SETBLOCK_NO_UPDATE);
+			w.setBlockAndMetadataWithNotify(x-2, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlockAndMetadataWithNotify(x-1, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlockAndMetadataWithNotify( x , y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlockAndMetadataWithNotify(x+1, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlockAndMetadataWithNotify(x+2, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlockAndMetadataWithNotify(x, y, z-7, StargateTech.stargate.blockID, 2, Helper.SETBLOCK_UPDATE);
 			StargateTech.stargate.placeStargateWithRotation(w, x, y, z-7, 2);
 		}
+	}
+	
+	private static void generateCuboid(Random r, World w, int x, int y, int z){
+		WorldGenerationHelper wgen = WorldGenerationHelper.instance;
+		
+		// generate underground.
+	}
+	
+	private static void generateFlying(Random r, World w, int x, int y, int z){
+		WorldGenerationHelper wgen = WorldGenerationHelper.instance;
+		
+		// generate at Y 200+
 	}
 }

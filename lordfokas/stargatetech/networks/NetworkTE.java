@@ -1,9 +1,9 @@
 package lordfokas.stargatetech.networks;
 
+import lordfokas.stargatetech.common.BaseTileEntity;
 import lordfokas.stargatetech.util.CoordinateSet;
-import net.minecraft.tileentity.TileEntity;
 
-public abstract class NetworkTE extends TileEntity implements INetworkTE{
+public abstract class NetworkTE extends BaseTileEntity implements INetworkTE{
 	protected CoordinateSet position;
 	
 	@Override

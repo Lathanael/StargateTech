@@ -67,6 +67,7 @@ public final class Symbol {
 	}
 	
 	public boolean equals(Object s){
+		if(s == null && this.id == 0) return true;
 		if(!(s instanceof Symbol)) return false;
 		Symbol symbol = (Symbol) s;
 		return symbol.getID() == this.id;

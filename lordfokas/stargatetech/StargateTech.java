@@ -40,7 +40,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.7.2")
+@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.8.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class StargateTech {
 	// General Stuff

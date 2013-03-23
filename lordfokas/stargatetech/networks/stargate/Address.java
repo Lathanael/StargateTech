@@ -32,14 +32,23 @@ public class Address {
 			used[i] = false;
 		}
 		valid = true;
+		int count = 0;
 		for(Symbol sym : symbols){
-			short id = sym.getID();
-			if(used[id]) valid = false;
-			used[id] = true;
+			if(sym != null){
+				count++;
+				short id = sym.getID();
+				if(used[id]) valid = false;
+				used[id] = true;
+			}
 		}
+		valid = (count >= 7 && count <= 9);
 		if(valid){
+			int p = 0;
 			for(int i = 0; i < symbols.length; i++){
-				symbol[i] = symbols[i];
+				if(symbols[i] != null){
+					symbol[p] = symbols[i];
+					p++;
+				}
 			}
 		}
 	}
@@ -63,7 +72,13 @@ public class Address {
 		if(!(o instanceof Address)) return false;
 		Address address = (Address) o;
 		for(int i = 0; i < 9; i++){
-			if(!this.symbol[i].equals(address.symbol[i])) return false;
+			if(this.symbol[i] == null || address.symbol[i] == null){
+				boolean localVoid = (this.symbol[i] == null || this.symbol[i].getID() == 0);
+				boolean extVoid = (address.symbol[i] == null || address.symbol[i].getID() == 0);
+				if(localVoid != extVoid) return false;
+			}else{
+				if(!this.symbol[i].equals(address.symbol[i])) return false;
+			}
 		}
 		return true;
 	}

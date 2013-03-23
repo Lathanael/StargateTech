@@ -1,5 +1,7 @@
 package lordfokas.stargatetech.rendering;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import lordfokas.stargatetech.machine.StargateTE;
@@ -35,5 +37,43 @@ public class ModelStargate extends ModelBase {
 			chevron.render(scale / 16);
 		}
 		base.render(scale / 16);
+		if(stargate.hasWormhole()){
+			renderEventHorizon();
+		}
+		short irisState = stargate.getIrisState();
+		if(irisState != 0){
+			renderIris(irisState);
+		}
+	}
+	
+	private void renderEventHorizon(){
+		GL11.glPushMatrix();
+		// Even though there are 2 polygons, face culling is disabled.
+		// This is so that players going through the first one, still
+		// see the second before being teleported.
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		GL11.glTranslatef(0.4F, -0.25F, 0);
+		renderEventHorizonFace();
+		GL11.glTranslatef(0.2F, 0, 0);
+		renderEventHorizonFace();
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glPopMatrix();
+	}
+	
+	private void renderEventHorizonFace(){
+		GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
+		GL11.glTexCoord2f(112F / 192F, 0F);
+		GL11.glVertex3f(0, 6, -3F);
+		GL11.glTexCoord2f(112F / 192F, 80F / 96F);
+		GL11.glVertex3f(0, 0, -3F);
+		GL11.glTexCoord2f(1F, 0F);
+		GL11.glVertex3f(0, 6, 3F);
+		GL11.glTexCoord2f(1F, 80F / 96F);
+		GL11.glVertex3f(0, 0, 3F);
+		GL11.glEnd();
+	}
+	
+	private void renderIris(short irisState){
+		// no iris rendering yet.
 	}
 }
