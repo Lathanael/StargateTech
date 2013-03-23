@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.common.BaseBlockContainer;
 import lordfokas.stargatetech.common.IDismantleable;

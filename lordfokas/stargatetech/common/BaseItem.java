@@ -2,7 +2,6 @@ package lordfokas.stargatetech.common;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
-import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.StargateTech;
 
 /**

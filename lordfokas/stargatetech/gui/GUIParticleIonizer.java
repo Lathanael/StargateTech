@@ -7,9 +7,9 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.machine.ParticleIonizerContainer;
 import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.IconRegistry;
 
 public class GUIParticleIonizer extends GuiContainer{
 
@@ -21,7 +21,7 @@ public class GUIParticleIonizer extends GuiContainer{
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
-		Helper.bindTexture(ClientProxy.GUI_IONIZER);
+		Helper.bindTexture(IconRegistry.Files.GUI_IONIZER);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

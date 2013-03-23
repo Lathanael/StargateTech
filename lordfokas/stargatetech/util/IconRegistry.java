@@ -6,6 +6,13 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 
 public final class IconRegistry {
+	public static class Files{
+		public static final String GUI_IONIZER		= "/mods/StargateTech/textures/ionizer.png";
+		public static final String GUI_GENERATOR	= "/mods/StargateTech/textures/generator.png";
+		public static final String GUI_DIALER		= "/mods/StargateTech/textures/dialer.png";
+		public static final String GATE_SYMBOLS		= "/mods/StargateTech/textures/symbols.png";
+	}
+	
 	public static Icon ionTubeJoint, lantean00simple, lantean01hexFloor, lantean02verticalEmitter;
 	public static Icon machine, machineLink0, machineLink1, machineLink2;
 	public static Icon machineSlot, machineSlotLink0, machineSlotLink1, machineSlotLink2;

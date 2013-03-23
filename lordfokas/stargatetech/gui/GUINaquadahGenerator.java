@@ -6,9 +6,9 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.machine.NaquadahGeneratorContainer;
 import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.IconRegistry;
 
 public class GUINaquadahGenerator extends GuiContainer{
 
@@ -20,7 +20,7 @@ public class GUINaquadahGenerator extends GuiContainer{
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
-		Helper.bindTexture(ClientProxy.GUI_GENERATOR);
+		Helper.bindTexture(IconRegistry.Files.GUI_GENERATOR);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

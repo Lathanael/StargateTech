@@ -12,7 +12,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.rendering.RenderIonTube;
 import lordfokas.stargatetech.util.Helper;

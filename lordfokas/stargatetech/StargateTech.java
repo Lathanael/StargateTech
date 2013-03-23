@@ -1,7 +1,7 @@
 package lordfokas.stargatetech;
 
-import net.minecraftforge.common.Configuration;
 import lordfokas.stargatetech.common.BaseItem;
+import lordfokas.stargatetech.common.ParticleIonizerRecipes;
 import lordfokas.stargatetech.common.StargateTab;
 import lordfokas.stargatetech.items.AddressMemoryCrystal;
 import lordfokas.stargatetech.items.Disintegrator;
@@ -9,13 +9,20 @@ import lordfokas.stargatetech.items.Dismantler;
 import lordfokas.stargatetech.items.MechanusClavia;
 import lordfokas.stargatetech.items.PersonalShield;
 import lordfokas.stargatetech.machine.DialingComputer;
+import lordfokas.stargatetech.machine.DialingComputerTE;
 import lordfokas.stargatetech.machine.IonTube;
 import lordfokas.stargatetech.machine.NaquadahGenerator;
+import lordfokas.stargatetech.machine.NaquadahGeneratorTE;
 import lordfokas.stargatetech.machine.ParticleIonizer;
+import lordfokas.stargatetech.machine.ParticleIonizerTE;
 import lordfokas.stargatetech.machine.PowerConduit;
 import lordfokas.stargatetech.machine.Shield;
 import lordfokas.stargatetech.machine.ShieldEmitter;
+import lordfokas.stargatetech.machine.ShieldEmitterTE;
 import lordfokas.stargatetech.machine.Stargate;
+import lordfokas.stargatetech.machine.StargateTE;
+import lordfokas.stargatetech.packet.PacketHandler;
+import lordfokas.stargatetech.packet.PacketHandlerServer;
 import lordfokas.stargatetech.plugins.PluginBC3;
 import lordfokas.stargatetech.plugins.PluginCC;
 import lordfokas.stargatetech.plugins.PluginForestry;
@@ -23,12 +30,19 @@ import lordfokas.stargatetech.plugins.PluginIC2;
 import lordfokas.stargatetech.plugins.PluginRC;
 import lordfokas.stargatetech.plugins.PluginTE;
 import lordfokas.stargatetech.util.Config;
+import lordfokas.stargatetech.util.EventListener;
+import lordfokas.stargatetech.util.GUIHandler;
 import lordfokas.stargatetech.util.UnlocalizedNames;
 import lordfokas.stargatetech.world.LanteanBlock;
-import lordfokas.stargatetech.world.WorldGenerator;
 import lordfokas.stargatetech.world.NaquadahOre;
 import lordfokas.stargatetech.world.NaquadriaOre;
 import lordfokas.stargatetech.world.Placeholder;
+import lordfokas.stargatetech.world.WorldGenerator;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -39,6 +53,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.8.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
@@ -85,8 +103,8 @@ public class StargateTech {
 	@Instance("StargateTech")
 	public static StargateTech instance;
 	
-	@SidedProxy(clientSide="lordfokas.stargatetech.ClientProxy", serverSide="lordfokas.stargatetech.CommonProxy")
-	public static CommonProxy proxy;
+	@SidedProxy(clientSide="lordfokas.stargatetech.EnvironmentIntegrated", serverSide="lordfokas.stargatetech.EnvironmentDedicated")
+	public static IEnvironmentProxy environment;
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
@@ -128,7 +146,16 @@ public class StargateTech {
 		industrialcraft2	= new PluginIC2();
 		railcraft			= new PluginRC();
 		thermalexpansion	= new PluginTE();
-		proxy.init();
+		addBlocks();
+		addItems();
+		addRecipes();
+		addTileEntities();
+		refineContentProperties();
+		GameRegistry.registerWorldGenerator(worldGen);
+		NetworkRegistry.instance().registerGuiHandler(instance, GUIHandler.instance);
+		NetworkRegistry.instance().registerChannel(PacketHandlerServer.instance, PacketHandler.CHANNEL_STARGATE, Side.SERVER);
+		EventListener.register();
+		environment.runClientSide();
 	}
 	
 	@PostInit
@@ -139,5 +166,69 @@ public class StargateTech {
 		industrialcraft2.init();
 		railcraft.init();
 		thermalexpansion.init();
+	}
+	
+	private void addBlocks(){
+		registerBlock(shieldEmitter, "Lantean Shield Emitter");
+		registerBlock(shield, "Lantean Shield");
+		registerBlock(particleIonizer, "Particle Ionizer");
+		registerBlock(ionTube, "Ion Tube");
+		registerBlock(naquadahOre, "Naquadah Ore");
+		registerBlock(naquadriaOre, "Naquadria Ore");
+		registerBlock(powerConduit, "Power Conduit");
+		registerBlock(naquadahGenerator, "Naquadah Generator");
+		registerBlock(stargate, "Stargate");
+		registerBlock(dialingComputer, "Dialing Computer");
+		registerBlock(lanteanBlock, "Lantean Block");
+	}
+	
+	private void addItems(){
+		registerItem(naquadahShard, "Naquadah Shard");
+		registerItem(naquadriaShard, "Naquadria Shard");
+		registerItem(naquadahCluster, "Naquadah Shard Cluster");
+		registerItem(naquadriaCluster, "Naquadria Shard Cluster");
+		registerItem(naquadahIngot, "Naquadah Ingot");
+		registerItem(naquadriaIngot, "Naquadria Ingot");
+		registerItem(disintegrator, "Disintegrator");
+		registerItem(dismantler, "Dismantler");
+		registerItem(mechanusClavia, "Mechanus Clavia");
+		registerItem(personalShield, "Personal Shield");
+		registerItem(addressMemoryCrystal, "Address Memory Crystal");
+	}
+	
+	private void addRecipes(){
+		ItemStack nqhShard = new ItemStack(naquadahShard);
+		ItemStack nqiShard = new ItemStack(naquadriaShard);
+		ItemStack nqhCluster = new ItemStack(naquadahCluster);
+		ItemStack nqiCluster = new ItemStack(naquadriaCluster);
+		ItemStack nqhIngot = new ItemStack(naquadahIngot);
+		ItemStack nqiIngot = new ItemStack(naquadriaIngot);
+		GameRegistry.addShapelessRecipe(nqhCluster, new Object[]{nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard});
+		GameRegistry.addShapelessRecipe(nqiCluster, new Object[]{nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard});
+		GameRegistry.addSmelting(nqhCluster.itemID, nqhIngot, 0);
+		GameRegistry.addSmelting(nqiCluster.itemID, nqiIngot, 0);
+		ParticleIonizerRecipes.add(nqhIngot, 10);
+		ParticleIonizerRecipes.add(nqiIngot, 40);
+	}
+	
+	private void addTileEntities(){
+		GameRegistry.registerTileEntity(ShieldEmitterTE.class, ShieldEmitterTE.ID);
+		GameRegistry.registerTileEntity(ParticleIonizerTE.class, ParticleIonizerTE.ID);
+		GameRegistry.registerTileEntity(NaquadahGeneratorTE.class, NaquadahGeneratorTE.ID);
+		GameRegistry.registerTileEntity(StargateTE.class, StargateTE.ID);
+		GameRegistry.registerTileEntity(DialingComputerTE.class, DialingComputerTE.ID);
+	}
+	
+	private void refineContentProperties(){
+		MinecraftForge.setBlockHarvestLevel(naquadahOre, "pickaxe", 2);
+	}
+	
+	private void registerBlock(Block block, String name){
+		GameRegistry.registerBlock(block);
+		LanguageRegistry.addName(block, name);
+	}
+	
+	private void registerItem(Item item, String name){
+		LanguageRegistry.addName(item, name);
 	}
 }

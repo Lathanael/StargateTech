@@ -1,7 +1,6 @@
 package lordfokas.stargatetech.plugins;
 
 import cpw.mods.fml.common.Loader;
-import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.StargateTech;
 
 /**
@@ -37,7 +36,7 @@ public abstract class Plugin{
 			System.out.println("[StargateTech] Mod " + mod + " was detected: initializing plugin.");
 			try{
 				initCommon();
-				if(StargateTech.proxy instanceof ClientProxy){
+				if(!StargateTech.environment.isDedicated()){
 					initClient();
 				}
 				isLoaded = true;

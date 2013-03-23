@@ -1,11 +1,11 @@
 package lordfokas.stargatetech.gui;
 
-import lordfokas.stargatetech.ClientProxy;
 import lordfokas.stargatetech.machine.DialingComputerContainer;
 import lordfokas.stargatetech.machine.DialingComputerTE;
 import lordfokas.stargatetech.networks.stargate.Symbol;
 import lordfokas.stargatetech.packet.PacketHandlerClient;
 import lordfokas.stargatetech.util.Helper;
+import lordfokas.stargatetech.util.IconRegistry;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -38,7 +38,7 @@ public class GUIDialingComputer extends GuiContainer{
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
 		onBackground = true;
-		Helper.bindTexture(ClientProxy.GUI_DIALER);
+		Helper.bindTexture(IconRegistry.Files.GUI_DIALER);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
@@ -49,7 +49,7 @@ public class GUIDialingComputer extends GuiContainer{
 		}
 		drawSymbolButtons();
 		drawSymbols();
-		Helper.bindTexture(ClientProxy.GUI_DIALER);
+		Helper.bindTexture(IconRegistry.Files.GUI_DIALER);
 		if(hover == -2){
 			drawQuad(85, 32, 238F / 256F, 1.0F, 40F / 256F, 56F / 256F, 18, 16);
 		}else if(hover == -3){
@@ -162,7 +162,7 @@ public class GUIDialingComputer extends GuiContainer{
 	}
 	
 	private void drawSymbols(){
-		Helper.bindTexture(ClientProxy.GATE_SYMBOLS);
+		Helper.bindTexture(IconRegistry.Files.GATE_SYMBOLS);
 		for(Pair p : symbol){
 			int x = (p.i - 1) % 3;
 			int y = (p.i - 1) / 3;
@@ -171,7 +171,7 @@ public class GUIDialingComputer extends GuiContainer{
 	}
 	
 	private void drawHover(){
-		Helper.bindTexture(ClientProxy.GUI_DIALER);
+		Helper.bindTexture(IconRegistry.Files.GUI_DIALER);
 		if(hover > -1){
 			Pair p = symbol[hover];
 			drawQuad(p.x - 8, p.y - 14, 0, 32 / 256F, 242F / 256F, 1, 32, 14);
