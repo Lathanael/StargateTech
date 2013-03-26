@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
@@ -33,11 +34,31 @@ public class NaquadahGenerator extends BaseBlockContainer implements IPowerNetSo
 		return true;
 	}
 	
-	private NaquadahGeneratorTE getTileEntity(World w, int x, int y, int z){ return (NaquadahGeneratorTE) w.getBlockTileEntity(x, y, z); }
+	private NaquadahGeneratorTE getTileEntity(World w, int x, int y, int z){
+		TileEntity te = w.getBlockTileEntity(x, y, z);
+		if(te instanceof NaquadahGeneratorTE){
+			return (NaquadahGeneratorTE) te;
+		}else{
+			return null;
+		}
+	}
+	
+	@Override public int requestPower(World w, int x, int y, int z, int p){
+		NaquadahGeneratorTE generator = getTileEntity(w, x, y, z);
+		return generator == null ? 0 : generator.requestPower(p);
+	}
+	
+	@Override public void giveBack(World w, int x, int y, int z, int p){
+		NaquadahGeneratorTE generator = getTileEntity(w, x, y, z);
+		if(generator != null) generator.returnPower(p);
+	}
+	
+	@Override public float getFill(World w, int x, int y, int z){
+		NaquadahGeneratorTE generator = getTileEntity(w, x, y, z);
+		return generator == null ? -1F : generator.getPowerFill();
+	}
+	
 	@Override public EPowerComponentType getPowerComponentType(){ return EPowerComponentType.SOURCE; }
-	@Override public int requestPower(World w, int x, int y, int z, int p){ return getTileEntity(w, x, y, z).requestPower(p); }
-	@Override public void giveBack(World w, int x, int y, int z, int p){ getTileEntity(w, x, y, z).returnPower(p); }
-	@Override public float getFill(World w, int x, int y, int z){ return getTileEntity(w, x, y, z).getPowerFill(); }
 	@Override public NaquadahGeneratorTE createNewTileEntity(World w){ return new NaquadahGeneratorTE(); }
 	
 	@Override

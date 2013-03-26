@@ -3,6 +3,7 @@ package lordfokas.stargatetech.machine;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -42,10 +43,30 @@ public class ParticleIonizer extends BaseBlockContainer implements IIonNetSource
 		return true;
 	}
 	
-	private ParticleIonizerTE getTileEntity(World w, int x, int y, int z){ return (ParticleIonizerTE) w.getBlockTileEntity(x, y, z); }
-	@Override public int requestIons(World w, int x, int y, int z, int ions){ return getTileEntity(w, x, y, z).requestIons(ions); }
-	@Override public void giveBack(World w, int x, int y, int z, int ions){ getTileEntity(w, x, y, z).returnIons(ions); }
-	@Override public float getFill(World w, int x, int y, int z){ return getTileEntity(w, x, y, z).getIonFill(); }
+	private ParticleIonizerTE getTileEntity(World w, int x, int y, int z){
+		TileEntity te = w.getBlockTileEntity(x, y, z);
+		if(te instanceof ParticleIonizerTE){
+			return (ParticleIonizerTE) te;
+		}else{
+			return null;
+		}
+	}
+	
+	@Override public int requestIons(World w, int x, int y, int z, int ions){
+		ParticleIonizerTE ionizer = getTileEntity(w, x, y, z);
+		return ionizer == null ? 0 : ionizer.requestIons(ions);
+	}
+	
+	@Override public void giveBack(World w, int x, int y, int z, int ions){
+		ParticleIonizerTE ionizer = getTileEntity(w, x, y, z);
+		if(ionizer != null) ionizer.returnIons(ions);
+	}
+	
+	@Override public float getFill(World w, int x, int y, int z){
+		ParticleIonizerTE ionizer = getTileEntity(w, x, y, z);
+		return ionizer == null ? -1F : ionizer.getIonFill();
+	}
+	
 	@Override public EIonComponentType getIonComponentType(){ return EIonComponentType.SOURCE; }
 	@Override public boolean canTubeConnectOnSide(IBlockAccess w, int x, int y, int z, int side){ return !(side == Helper.dirTop || side == Helper.dirBottom); }
 	@Override public EPowerComponentType getPowerComponentType(){ return EPowerComponentType.SINK; }
