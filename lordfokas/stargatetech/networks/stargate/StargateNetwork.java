@@ -42,7 +42,10 @@ public class StargateNetwork {
 		specialAddresses.add(SpecialAddresses.Camelot);
 	}
 	
-	public static StargateNetwork instance(){
+	public static StargateNetwork instance(World world){
+		if(instance == null){
+			load(world);
+		}
 		return instance;
 	}
 	
@@ -77,7 +80,7 @@ public class StargateNetwork {
 	}
 	
 	private static AddressHandler getHandler(Address address){
-		for(AddressHandler handler : instance().addresses){
+		for(AddressHandler handler : instance.addresses){
 			if(handler.getAddress().equals(address)){
 				return handler;
 			}
