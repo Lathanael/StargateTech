@@ -33,9 +33,11 @@ public class Stargate extends BaseBlockContainer implements IDismantleable {
 	
 	public void placeStargateWithRotation(World w, int x, int y, int z, int dir){
 		checkPlace(w, x, y, z, dir);
-		Address addr = StargateNetwork.instance().getNewRandomAddress(w, x, y, z);
-		StargateTE stargate = (StargateTE) w.getBlockTileEntity(x, y, z);
-		stargate.myAddress = addr;
+		if(!w.isRemote){
+			Address addr = StargateNetwork.instance().getNewRandomAddress(w, x, y, z);
+			StargateTE stargate = (StargateTE) w.getBlockTileEntity(x, y, z);
+			stargate.myAddress = addr;
+		}
 	}
 	
 	@Override
@@ -93,8 +95,7 @@ public class Stargate extends BaseBlockContainer implements IDismantleable {
 	@Override
 	public void breakBlock(World w, int x, int y, int z, int id, int meta){
 		setPlaceholders(w, x, y, z, meta, false);
-		Address addr = ((StargateTE) w.getBlockTileEntity(x, y, z)).myAddress;
-		StargateNetwork.instance().remove(w, addr);
+		if(!w.isRemote) StargateNetwork.instance().remove(w, x, y, z);
 	}
 	
 	// TODO: Fix this

@@ -3,7 +3,7 @@
   "modid": "StargateTech",
   "name": "Stargate Tech",
   "description": "Adding Naquadah-based high-tech devices, including Nanites, Replicators, Zero-Point Modules and Puddle Jumpers! Explore Lantean bases, harvest Naquadah and Naquadria, fight the Replicators!",
-  "version": "Alpha 0.8.2",
+  "version": "Alpha 0.8.3",
   "mcversion": "1.5.0",
   "logoFile": "/stargate.png",
   "url": "",

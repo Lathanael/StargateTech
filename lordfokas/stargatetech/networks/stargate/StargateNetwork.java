@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import lordfokas.stargatetech.machine.StargateTE;
 import net.minecraft.tileentity.TileEntity;
@@ -13,8 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
 /**
- * Manages -ALL- the Stargate Addresses. It is a potential bug hive: As stargates don't yet dial,
- * there's no way to know if this will actually do it's job or not.
+ * Manages -ALL- the Stargate Addresses.
+ * Stargates dial, but it's still a bit buggy.
  * @author LordFokas
  */
 public class StargateNetwork {
@@ -27,7 +28,7 @@ public class StargateNetwork {
 	
 	private static StargateNetwork instance = null;
 	private ArrayList<Address> specialAddresses = new ArrayList<Address>();
-	private ArrayList<AddressHandler> addresses = new ArrayList<AddressHandler>();
+	private CopyOnWriteArrayList<AddressHandler> addresses = new CopyOnWriteArrayList<AddressHandler>();
 	private boolean loaded = false;
 	private boolean canSave = false;
 	private String worldName = "";
@@ -150,13 +151,11 @@ public class StargateNetwork {
 		return null;
 	}
 	
-	public void remove(World w, Address addr){
-		if(addr == null) System.out.println("ERROR!!!");
-		if(w.isRemote || addr == null) return;
-		int id = addresses.indexOf(new AddressHandler(addr, false));
-		if(id != -1){
-			addresses.remove(id);
-			doSave();
+	public void remove(World w, int x, int y, int z){
+		for(AddressHandler handler : addresses){
+			if(handler.is(w, x, y, z)){
+				addresses.remove(handler);
+			}
 		}
 	}
 	
@@ -174,7 +173,6 @@ public class StargateNetwork {
 			file = new RandomAccessFile(filepath, "r");
 			if(file.length() != 0){
 				int count = file.readInt();
-				addresses.ensureCapacity(count);
 				if(count > 0){
 					for(int i = 0; i < count; i++){
 						addresses.add(new AddressHandler(file));
