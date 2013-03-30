@@ -4,6 +4,7 @@ import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.common.ParticleIonizerRecipes;
 import lordfokas.stargatetech.common.StargateTab;
 import lordfokas.stargatetech.items.AddressMemoryCrystal;
+import lordfokas.stargatetech.items.AddressReaderCrystal;
 import lordfokas.stargatetech.items.Disintegrator;
 import lordfokas.stargatetech.items.Dismantler;
 import lordfokas.stargatetech.items.MechanusClavia;
@@ -58,7 +59,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.8.4")
+@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.8.5")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class StargateTech {
 	// General Stuff
@@ -91,6 +92,8 @@ public class StargateTech {
 	public static MechanusClavia mechanusClavia;
 	public static PersonalShield personalShield;
 	public static AddressMemoryCrystal addressMemoryCrystal;
+	public static AddressReaderCrystal addressReaderCrystal;
+	public static BaseItem addressReader;
 	
 	// Mod Integration Plugins
 	public PluginBC3 buildcraft3;
@@ -136,6 +139,8 @@ public class StargateTech {
 		mechanusClavia 	= new MechanusClavia(Config.mechanusClavia);
 		personalShield	= new PersonalShield(Config.personalShield);
 		addressMemoryCrystal	= new AddressMemoryCrystal(Config.addressMemoryCrystal);
+		addressReaderCrystal	= new AddressReaderCrystal(Config.addressReaderCrystal);
+		addressReader = new BaseItem(Config.addressReader, "addressreader");
 	}
 	
 	@Init
@@ -194,6 +199,8 @@ public class StargateTech {
 		registerItem(mechanusClavia, "Mechanus Clavia");
 		registerItem(personalShield, "Personal Shield");
 		registerItem(addressMemoryCrystal, "Address Memory Crystal");
+		registerItem(addressReaderCrystal, "Address Reader Crystal");
+		registerItem(addressReader, "Address Reader");
 	}
 	
 	private void addRecipes(){
@@ -207,6 +214,7 @@ public class StargateTech {
 		GameRegistry.addShapelessRecipe(nqiCluster, new Object[]{nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard});
 		GameRegistry.addSmelting(nqhCluster.itemID, nqhIngot, 0);
 		GameRegistry.addSmelting(nqiCluster.itemID, nqiIngot, 0);
+		GameRegistry.addShapelessRecipe(new ItemStack(addressReaderCrystal, 1), new Object[]{new ItemStack(addressMemoryCrystal, 1), new ItemStack(addressReader, 1)});
 		ParticleIonizerRecipes.add(nqhIngot, 10);
 		ParticleIonizerRecipes.add(nqiIngot, 40);
 	}

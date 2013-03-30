@@ -37,6 +37,8 @@ public final class Config {
 	public static int mechanusClavia;
 	public static int personalShield;
 	public static int addressMemoryCrystal;
+	public static int addressReaderCrystal;
+	public static int addressReader;
 	
 	//****************************************************************************
 	// CLIENT
@@ -113,6 +115,8 @@ public final class Config {
 		mechanusClavia 	= cfg.getItem(ITEM,		"mechanusClavia",	item++).getInt();
 		personalShield 	= cfg.getItem(ITEM,		"personalShield",	item++).getInt();
 		addressMemoryCrystal = cfg.getItem(ITEM, "addressMemoryCrystal", item++).getInt();
+		addressReaderCrystal = cfg.getItem(ITEM, "addressReaderCrystal", item++).getInt();
+		addressReader = cfg.getItem(ITEM, "addressReader", item++).getInt();
 		
 		
 		//***********************************************************************

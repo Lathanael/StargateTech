@@ -25,13 +25,15 @@ public class NaquadahGeneratorContainer extends BaseContainer{
 		if (slot != null && slot.getHasStack()) {
 			stackInSlot = slot.getStack();
 			stack = stackInSlot.copy();
-			if(sid == 36){
-				if(!mergeItemStack(stackInSlot, 0, 36, true))
-					return null;
-			}else{
-				if(!mergeItemStack(stackInSlot, 36, 37, true))
-					return null;
+			if(sid == 36){ // Clicked TE Slot
+				if(!mergeItemStack(stackInSlot, 0, 36, true)) return null;
+			}else{ // Clicked Player Inv Slot
+				if(!mergeItemStack(stackInSlot, 36, 37, true)) return null;
 			}
+			if(stackInSlot.stackSize == 0) slot.putStack(null);
+	        else slot.onSlotChanged();
+	        if (stackInSlot.stackSize == stack.stackSize) return null;
+	        slot.onPickupFromSlot(player, stackInSlot);
 		}
 		return stack;
 	}
