@@ -1,8 +1,8 @@
 package lordfokas.stargatetech;
 
-//import lathanael.stargatetech.entity.EntityStargatePainting;
-//import lathanael.stargatetech.item.StargatePainting;
-//import lathanael.stargatetech.util.StargateLogger;
+import lathanael.stargatetech.entity.EntityStargatePainting;
+import lathanael.stargatetech.item.StargatePainting;
+import lathanael.stargatetech.util.StargateLogger;
 import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.common.ParticleIonizerRecipes;
 import lordfokas.stargatetech.common.StargateTab;
@@ -97,7 +97,7 @@ public class StargateTech {
 	public static AddressMemoryCrystal addressMemoryCrystal;
 	public static AddressReaderCrystal addressReaderCrystal;
 	public static BaseItem addressReader;
-	//public static StargatePainting stargatePainting;
+	public static StargatePainting stargatePainting;
 	
 	// Mod Integration Plugins
 	public PluginBC3 buildcraft3;
@@ -115,7 +115,7 @@ public class StargateTech {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		//StargateLogger.init();
+		StargateLogger.init();
 		Config.loadAll(new Configuration(event.getSuggestedConfigurationFile()));
 		
 		// Blocks
@@ -146,7 +146,7 @@ public class StargateTech {
 		addressMemoryCrystal	= new AddressMemoryCrystal(Config.addressMemoryCrystal);
 		addressReaderCrystal	= new AddressReaderCrystal(Config.addressReaderCrystal);
 		addressReader = new BaseItem(Config.addressReader, "addressreader");
-		//stargatePainting = new StargatePainting(Config.stargatePainting, EntityStargatePainting.class, "Stargate Painting");
+		stargatePainting = new StargatePainting(Config.stargatePainting, EntityStargatePainting.class, "Stargate Painting");
 	}
 	
 	@Init
