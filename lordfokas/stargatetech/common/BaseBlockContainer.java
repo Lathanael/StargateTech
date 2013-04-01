@@ -1,67 +1,37 @@
 package lordfokas.stargatetech.common;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
-import lordfokas.stargatetech.StargateTech;
-import lordfokas.stargatetech.util.IOverrideableTexture;
-import lordfokas.stargatetech.util.IconRegistry;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 /**
  * A base for all the tile entity container blocks used by this mod.
  * @author LordFokas
  */
-public abstract class BaseBlockContainer extends BlockContainer implements IOverrideableTexture {
-	protected Icon[] override = new Icon[6];
-	protected boolean isOverride = false;
-	protected String texturename;
-	
+public abstract class BaseBlockContainer extends BaseBlock implements ITileEntityProvider {
 	public BaseBlockContainer(int id, String name) {
-		this(id, name, Material.rock, true);
+		super(id, name);
 	}
 	
 	public BaseBlockContainer(int id, String name, boolean hard) {
-		this(id, name, Material.rock, hard);
+		super(id, name, hard);
 	}
 	
 	public BaseBlockContainer(int id, String name, Material material, boolean hard) {
-		super(id, material);
-		texturename = name;
-		this.setUnlocalizedName(name);
-		if(hard){
-			this.setBlockUnbreakable();
-			this.setResistance(20000000F);
-		}
-		this.setCreativeTab(StargateTech.tab);
+		super(id, name, material, hard);
 	}
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int metadata){
-		if(isOverride) return override[side];
-		else return getTextureFromSide(side);
-	}
-	
-	public Icon getTextureFromSide(int side){
-		return getTexture();
-	}
-	
-	public Icon getTexture(){
-		return this.blockIcon;
+	public void breakBlock(World w, int x, int y, int z, int id, int meta){
+		super.breakBlock(w, x, y, z, id, meta);
+		w.removeBlockTileEntity(x, y, z);
 	}
 	
 	@Override
-	public void registerIcons(IconRegister register){
-		this.blockIcon = register.registerIcon("StargateTech:" + texturename);
+	public boolean onBlockEventReceived(World w, int x, int y, int z, int block, int event){
+		super.onBlockEventReceived(w, x, y, z, block, event);
+		TileEntity te = w.getBlockTileEntity(x, y, z);
+		return te == null ? false : te.receiveClientEvent(block, event);
 	}
-	
-	@Override
-	public void overrideTextures(Icon[] tmap){
-		isOverride = true;
-		override = tmap;
-	}
-	
-	@Override
-	public void restoreTextures()
-		{ isOverride = false; }
 }
