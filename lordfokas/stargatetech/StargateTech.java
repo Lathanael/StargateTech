@@ -33,6 +33,7 @@ import lordfokas.stargatetech.plugins.PluginTE;
 import lordfokas.stargatetech.util.Config;
 import lordfokas.stargatetech.util.EventListener;
 import lordfokas.stargatetech.util.GUIHandler;
+import lordfokas.stargatetech.util.StargateLogger;
 import lordfokas.stargatetech.util.UnlocalizedNames;
 import lordfokas.stargatetech.world.LanteanBlock;
 import lordfokas.stargatetech.world.NaquadahOre;
@@ -111,6 +112,7 @@ public class StargateTech {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
+		StargateLogger.init();
 		Config.loadAll(new Configuration(event.getSuggestedConfigurationFile()));
 		
 		// Blocks
@@ -141,7 +143,6 @@ public class StargateTech {
 		addressMemoryCrystal	= new AddressMemoryCrystal(Config.addressMemoryCrystal);
 		addressReaderCrystal	= new AddressReaderCrystal(Config.addressReaderCrystal);
 		addressReader = new BaseItem(Config.addressReader, "addressreader");
-		//stargatePainting = new StargatePainting(Config.stargatePainting, EntityStargatePainting.class, "Stargate Painting");
 	}
 	
 	@Init

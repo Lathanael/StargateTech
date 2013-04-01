@@ -2,6 +2,7 @@ package lordfokas.stargatetech.plugins;
 
 import cpw.mods.fml.common.Loader;
 import lordfokas.stargatetech.StargateTech;
+import lordfokas.stargatetech.util.StargateLogger;
 
 /**
  * A base for Mod integration plugins.
@@ -33,7 +34,7 @@ public abstract class Plugin{
 	
 	public final void init(){
 		if(enabled){
-			System.out.println("[StargateTech] Mod " + mod + " was detected: initializing plugin.");
+			StargateLogger.info("Mod \"" + mod + "\" was detected: initializing plugin.");
 			try{
 				initCommon();
 				if(!StargateTech.environment.isDedicated()){
@@ -43,6 +44,8 @@ public abstract class Plugin{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}else{
+			StargateLogger.info("Skipping plugin for Mod \"" + mod + "\"");
 		}
 	}
 	
