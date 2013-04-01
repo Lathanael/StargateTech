@@ -2,7 +2,6 @@ package lordfokas.stargatetech;
 
 import lathanael.stargatetech.entity.EntityStargatePainting;
 import lathanael.stargatetech.item.StargatePainting;
-import lathanael.stargatetech.util.StargateLogger;
 import lordfokas.stargatetech.common.BaseItem;
 import lordfokas.stargatetech.common.ParticleIonizerRecipes;
 import lordfokas.stargatetech.common.StargateTab;
@@ -36,6 +35,7 @@ import lordfokas.stargatetech.plugins.PluginTE;
 import lordfokas.stargatetech.util.Config;
 import lordfokas.stargatetech.util.EventListener;
 import lordfokas.stargatetech.util.GUIHandler;
+import lordfokas.stargatetech.util.StargateLogger;
 import lordfokas.stargatetech.util.UnlocalizedNames;
 import lordfokas.stargatetech.world.LanteanBlock;
 import lordfokas.stargatetech.world.NaquadahOre;
