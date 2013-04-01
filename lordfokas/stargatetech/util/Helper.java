@@ -94,6 +94,6 @@ public final class Helper {
 	}
 	
 	public static void bindTexture(String texture){
-		Minecraft.getMinecraft().renderEngine.func_98187_b(texture);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 	}
 }

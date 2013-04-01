@@ -93,7 +93,7 @@ public class StargateTE extends BaseTileEntity {
 	}
 	
 	public void setDirection(int d){
-		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, d, Helper.SETBLOCK_UPDATE);
+		worldObj.setBlock(xCoord, yCoord, zCoord, d, Helper.SETBLOCK_UPDATE);
 	}
 	
 	public boolean hasWormhole(){
@@ -110,7 +110,7 @@ public class StargateTE extends BaseTileEntity {
 	}
 	
 	@Override
-	public double func_82115_m(){
+	public double getMaxRenderDistanceSquared() {
 		return 65536D;
 	}
 	

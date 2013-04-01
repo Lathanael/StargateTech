@@ -81,7 +81,7 @@ public class Stargate extends BaseBlockContainer implements IDismantleable {
 		}
 		if(placed == false){
 			if(!w.isRemote){
-				w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
+				w.setBlock(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
 				w.spawnEntityInWorld(new EntityItem(w, x+0.5, y+0.25, z+0.5, new ItemStack(this)));
 			}
 		}else{
@@ -104,58 +104,58 @@ public class Stargate extends BaseBlockContainer implements IDismantleable {
 		boolean dirX = (dir == Helper.dirXNeg || dir == Helper.dirXPos);
 		if(dirX){
 			// base
-			w.setBlockAndMetadataWithNotify(x, y, z-2, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y, z-1, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y, z+1, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y, z+2, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y, z-2, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y, z-1, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y, z+1, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y, z+2, bid, 0, Helper.SETBLOCK_UPDATE);
 			// sides
-			w.setBlockAndMetadataWithNotify(x, y+1, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+1, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+2, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+2, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+3, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+3, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+4, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+4, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+5, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+5, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+5, z-2, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+5, z+2, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+1, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+1, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+2, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+2, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+3, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+3, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+4, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+4, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+5, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+5, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+5, z-2, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+5, z+2, bid, 0, Helper.SETBLOCK_UPDATE);
 			// top
-			w.setBlockAndMetadataWithNotify(x, y+6, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+6, z-2, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+6, z-1, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+6,  z , bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+6, z+1, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+6, z+2, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y+6, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+6, z-3, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+6, z-2, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+6, z-1, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+6,  z , bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+6, z+1, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+6, z+2, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y+6, z+3, bid, 0, Helper.SETBLOCK_UPDATE);
 		}else{
 			// base
-			w.setBlockAndMetadataWithNotify(x-2, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-1, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+1, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+2, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-2, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-1, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+1, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+2, y, z, bid, 0, Helper.SETBLOCK_UPDATE);
 			// sides
-			w.setBlockAndMetadataWithNotify(x-3, y+1, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+3, y+1, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-3, y+2, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+3, y+2, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-3, y+3, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+3, y+3, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-3, y+4, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+3, y+4, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-3, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+3, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-2, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+2, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-3, y+1, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+3, y+1, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-3, y+2, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+3, y+2, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-3, y+3, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+3, y+3, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-3, y+4, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+3, y+4, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-3, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+3, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-2, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+2, y+5, z, bid, 0, Helper.SETBLOCK_UPDATE);
 			// top
-			w.setBlockAndMetadataWithNotify(x-3, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-2, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-1, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify( x , y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+1, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+2, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+3, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-3, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-2, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-1, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock( x , y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+1, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+2, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+3, y+6, z, bid, 0, Helper.SETBLOCK_UPDATE);
 		}
 	}
 	
@@ -166,7 +166,7 @@ public class Stargate extends BaseBlockContainer implements IDismantleable {
 	public boolean dismantle(World w, int x, int y, int z){
 		if(w.isRemote) return false;
 		w.spawnEntityInWorld(new EntityItem(w, x, y, z, new ItemStack(this)));
-		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
+		w.setBlock(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
 		return false;
 	}
 }

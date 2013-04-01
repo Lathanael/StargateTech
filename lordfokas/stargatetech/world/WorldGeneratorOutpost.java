@@ -82,12 +82,12 @@ public final class WorldGeneratorOutpost {
 			wgen.generate(ring5, w, x, y+9, z, shield, meta);
 			
 			// Open space for the Stargate
-			w.setBlockAndMetadataWithNotify(x-2, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x-1, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify( x , y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+1, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x+2, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
-			w.setBlockAndMetadataWithNotify(x, y, z-7, StargateTech.stargate.blockID, 2, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-2, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x-1, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock( x , y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+1, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x+2, y, z-7, 0, 0, Helper.SETBLOCK_UPDATE);
+			w.setBlock(x, y, z-7, StargateTech.stargate.blockID, 2, Helper.SETBLOCK_UPDATE);
 			StargateTech.stargate.placeStargateWithRotation(w, x, y, z-7, 2);
 		}
 	}

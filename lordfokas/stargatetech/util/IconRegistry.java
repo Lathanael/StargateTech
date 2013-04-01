@@ -51,6 +51,6 @@ public final class IconRegistry {
 	}
 	
 	private Icon loadBlock(IconRegister register, String name){
-		return register.func_94245_a("StargateTech:" + name);
+		return register.registerIcon("StargateTech:" + name);
 	}
 }

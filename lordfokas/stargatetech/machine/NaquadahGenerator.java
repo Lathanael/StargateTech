@@ -65,7 +65,7 @@ public class NaquadahGenerator extends BaseBlockContainer implements IPowerNetSo
 	public boolean dismantle(World w, int x, int y, int z){
 		if(w.isRemote) return false;
 		w.spawnEntityInWorld(new EntityItem(w, x, y, z, new ItemStack(this)));
-		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
+		w.setBlock(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
 		return false;
 	}
 }

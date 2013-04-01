@@ -1,16 +1,22 @@
 package lordfokas.stargatetech.util;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 
+//import lathanael.stargatetech.entity.EntityStargatePainting;
+//import lathanael.stargatetech.util.BlockUtils;
+//import lathanael.stargatetech.util.StargateLogger;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.networks.stargate.StargateNetwork;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
@@ -77,4 +83,23 @@ public final class EventListener {
 	public void onWorldUnload(WorldEvent.Unload event){
 		StargateNetwork.unload(event.world);
 	}
+	
+//	/**
+//	 * Painting Listener. Changes the painting if it is placed on a StargateTech block.
+//	 * 
+//	 * @param event The Forge {@link net.minecraftforge.event.entity.EntityJoinWorldEvent EntityJoinWorldEvent}
+//	 */
+//	@ForgeSubscribe
+//	public void onEntityJoinWorldEvent(final EntityJoinWorldEvent event) {
+//		StargateLogger.log(Level.INFO, "Checking entity...");
+//		if (event.entity instanceof EntityPainting && !(event.entity instanceof EntityStargatePainting)) {
+//			StargateLogger.log(Level.INFO, "Is painting, checking block...");
+//			if (BlockUtils.onValidStargateBlock((EntityPainting) event.entity)) {
+//				StargateLogger.log(Level.INFO, "Replacing painting");
+//				if (event.isCancelable()) event.setCanceled(true);
+//				event.entity.worldObj.spawnEntityInWorld(new EntityStargatePainting((EntityPainting) event.entity));
+//				// TODO: Get player who placed the painting and remove 1 painting from his invetory when not in creative
+//			}
+//		}
+//	}
 }
