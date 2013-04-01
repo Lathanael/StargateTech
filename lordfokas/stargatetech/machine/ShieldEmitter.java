@@ -30,7 +30,7 @@ public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponen
 	@Override
 	public Icon getTextureFromSide(int side){
 		if(side < 2) return IconRegistry.shieldEmitterTop;
-		else if(side == 3) return this.field_94336_cN;
+		else if(side == 3) return this.blockIcon;
 		else return IconRegistry.machine;
 	}
 	
@@ -43,7 +43,7 @@ public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponen
 		int dir = -1;
 		if(living instanceof EntityPlayer){
 			dir = Helper.yaw2dir(living.rotationYaw);
-			world.setBlockMetadataWithNotify(x, y, z, dir, Helper.SETBLOCK_UPDATE);
+			world.setBlock(x, y, z, dir, Helper.SETBLOCK_UPDATE);
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponen
 	public boolean dismantle(World w, int x, int y, int z){
 		if(w.isRemote) return false;
 		w.spawnEntityInWorld(new EntityItem(w, x, y, z, new ItemStack(this)));
-		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
+		w.setBlock(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
 		return false;
 	}
 }

@@ -19,7 +19,7 @@ public class BaseItem extends Item {
 	}
 	
 	@Override
-	public void func_94581_a(IconRegister register){
-		iconIndex = register.func_94245_a("StargateTech:" + texture);
+	public void updateIcons(IconRegister register){
+		iconIndex = register.registerIcon("StargateTech:" + texture);
 	}
 }

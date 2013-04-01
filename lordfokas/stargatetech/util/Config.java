@@ -39,6 +39,7 @@ public final class Config {
 	public static int addressMemoryCrystal;
 	public static int addressReaderCrystal;
 	public static int addressReader;
+	//public static int stargatePainting;
 	
 	//****************************************************************************
 	// CLIENT
@@ -117,6 +118,7 @@ public final class Config {
 		addressMemoryCrystal = cfg.getItem(ITEM, "addressMemoryCrystal", item++).getInt();
 		addressReaderCrystal = cfg.getItem(ITEM, "addressReaderCrystal", item++).getInt();
 		addressReader = cfg.getItem(ITEM, "addressReader", item++).getInt();
+		//stargatePainting = cfg.getItem(ITEM, "stargatePainting", item++).getInt();
 		
 		
 		//***********************************************************************

@@ -48,12 +48,12 @@ public class BaseBlock extends Block implements IOverrideableTexture {
 	}
 	
 	public Icon getTexture(){
-		return this.field_94336_cN;
+		return this.blockIcon;
 	}
 	
 	@Override
-	public void func_94332_a(IconRegister register){
-		this.field_94336_cN = register.func_94245_a("StargateTech:" + texturename);
+	public void registerIcons(IconRegister register){
+		this.blockIcon = register.registerIcon("StargateTech:" + texturename);
 	}
 	
 	@Override

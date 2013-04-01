@@ -64,7 +64,7 @@ public class Shield extends BaseBlock {
 	
 	// Shields can't be destroyed by players, even in creative mode.
 	@Override public void onBlockDestroyedByPlayer(World w, int x, int y, int z, int meta){
-		w.setBlockAndMetadataWithNotify(x, y, z, this.blockID, meta, Helper.SETBLOCK_UPDATE);
+		w.setBlock(x, y, z, this.blockID, meta, Helper.SETBLOCK_UPDATE);
 	}
 	
 	// Disallow the player from getting a shield block, even in creative.

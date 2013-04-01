@@ -39,8 +39,8 @@ public class Placeholder extends BaseBlock {
 	}
 	
 	@Override
-	public void func_94332_a(IconRegister register){
-		this.field_94336_cN = register.func_94245_a("StargateTech:void");
+	public void registerIcons(IconRegister register){
+		this.blockIcon = register.registerIcon("StargateTech:void");
 		IconRegistry.instance.loadAllBlocks(register);
 	}
 }

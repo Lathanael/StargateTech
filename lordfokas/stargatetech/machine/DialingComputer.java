@@ -19,7 +19,7 @@ public class DialingComputer extends BaseBlockContainer {
 	
 	@Override
 	public Icon getTextureFromSide(int side){
-		if(side == Helper.dirSouth) return this.field_94336_cN;
+		if(side == Helper.dirSouth) return this.blockIcon;
 		return IconRegistry.machine;
 	}
 	

@@ -31,7 +31,7 @@ public class NaquadahOre extends NaquadahExplosive implements IDisintegrable{
 	@Override // Drop 3 shards when disintegrated
 	public boolean disintegrate(World w, int x, int y, int z){
 		if(w.isRemote) return true;
-		w.setBlockAndMetadataWithNotify(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
+		w.setBlock(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
 		w.spawnEntityInWorld(new EntityItem(w, (double)x, (double)y, (double)z, new ItemStack(StargateTech.naquadahShard, 3)));
 		return true;
 	}
