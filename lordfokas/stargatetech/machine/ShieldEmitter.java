@@ -43,7 +43,7 @@ public class ShieldEmitter extends BaseBlockContainer implements IIonNetComponen
 		int dir = -1;
 		if(living instanceof EntityPlayer){
 			dir = Helper.yaw2dir(living.rotationYaw);
-			world.setBlock(x, y, z, dir, Helper.SETBLOCK_UPDATE);
+			world.setBlockMetadataWithNotify(x, y, z, dir, Helper.SETBLOCK_UPDATE);
 		}
 	}
 	

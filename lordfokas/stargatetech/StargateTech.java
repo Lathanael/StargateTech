@@ -207,7 +207,6 @@ public class StargateTech {
 		registerItem(addressMemoryCrystal, "Address Memory Crystal");
 		registerItem(addressReaderCrystal, "Address Reader Crystal");
 		registerItem(addressReader, "Address Reader");
-		//registerItem(stargatePainting, "Stargate Painting");
 	}
 	
 	private void addRecipes(){
