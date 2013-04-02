@@ -23,6 +23,7 @@ public final class Config {
 	public static int placeholder;
 	public static int dialingComputer;
 	public static int lanteanBlock;
+	public static int busCable;
 	
 	//****************************************************************************
 	// ITEMS
@@ -92,6 +93,7 @@ public final class Config {
 		naquadahGenerator=cfg.getBlock(BLOCK,	"naquadahGenerator",block++).getInt();
 		stargate		= cfg.getBlock(BLOCK,	"stargateBase",		block++).getInt();
 		dialingComputer = cfg.getBlock(BLOCK,	"dialingComputer",	block++).getInt();
+		busCable		= cfg.getBlock(BLOCK,	"busCable",			block++).getInt();
 		
 		// World:
 		naquadahOre 	= cfg.getBlock(BLOCK, 	"naquadahOre",		block++).getInt();
