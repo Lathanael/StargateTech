@@ -1,6 +1,6 @@
 package lordfokas.stargatetech.networks.bus;
 
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
 
 /**
  * Specification for the Abstract Bus
@@ -13,12 +13,12 @@ public final class BusBlock {
 	public interface IBusComponent{
 		public boolean isPropagator();
 		public boolean isConnector();
-		public boolean canBusPlugOnSide(World w, int x, int y, int z, int side);
+		public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side);
 	}
 	
 	public interface IBusConnector extends IBusComponent{
-		public boolean canHandlePacketType(World w, int x, int y, int z, Class <? extends BusPacket> packetType);
-		public void handlePacket(World w, int x, int y, int z, BusPacket packet);
+		public boolean canHandlePacketType(IBlockAccess w, int x, int y, int z, byte packetType);
+		public void handlePacket(IBlockAccess w, int x, int y, int z, BusPacket packet);
 		public int getBusConnectorID();
 	}
 }

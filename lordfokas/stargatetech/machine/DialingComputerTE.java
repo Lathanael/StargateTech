@@ -11,8 +11,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import lordfokas.stargatetech.common.BaseTileEntity;
 import lordfokas.stargatetech.items.AddressMemoryCrystal;
+import lordfokas.stargatetech.networks.bus.Bus;
+import lordfokas.stargatetech.networks.bus.packets.PacketDialStargate;
 import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.Symbol;
+import lordfokas.stargatetech.util.CoordinateSet;
 
 public class DialingComputerTE extends BaseTileEntity implements IInventory {
 	public static final String ID = "DialingComputerTE";
@@ -55,11 +58,7 @@ public class DialingComputerTE extends BaseTileEntity implements IInventory {
 	public void dial(){
 		Address address = new Address(addr);
 		if(address.isValid()){
-			TileEntity te = worldObj.getBlockTileEntity(xCoord, yCoord-2, zCoord-10);
-			if(te != null && te instanceof StargateTE){
-				StargateTE stargate = (StargateTE) te;
-				stargate.dial(address);
-			}
+			Bus.propagatePacket(new PacketDialStargate(address), (byte)0x00, new CoordinateSet(worldObj, xCoord, yCoord, zCoord));
 		}
 	}
 

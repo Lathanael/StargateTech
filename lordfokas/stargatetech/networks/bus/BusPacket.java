@@ -1,20 +1,15 @@
 package lordfokas.stargatetech.networks.bus;
 
 public abstract class BusPacket {
-	protected byte[] data;
-	protected int length;
+	public static final byte PKT_DIAL_STARGATE = 0x01;
 	
-	protected BusPacket(){}
+	private byte packetID;
 	
-	protected BusPacket(byte[] data){
-		this.data = data;
+	protected BusPacket(byte ID){
+		this.packetID = ID;
 	}
 	
-	public byte[] getData(){
-		return data;
-	}
-	
-	public int getLength(){
-		return length;
+	public byte getPacketID(){
+		return packetID;
 	}
 }
