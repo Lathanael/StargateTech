@@ -96,8 +96,8 @@ public final class EventListener {
 			StargateLogger.log(Level.INFO, "Is painting, checking block...");
 			if (BlockUtils.onValidStargateBlock((EntityPainting) event.entity)) {
 				StargateLogger.log(Level.INFO, "Replacing painting");
-				if (event.isCancelable()) event.setCanceled(true);
 				event.entity.worldObj.spawnEntityInWorld(new EntityStargatePainting((EntityPainting) event.entity));
+				if (event.isCancelable()) event.setCanceled(true);
 				// TODO: Get player who placed the painting and remove 1 painting from his invetory when not in creative
 			}
 		}
