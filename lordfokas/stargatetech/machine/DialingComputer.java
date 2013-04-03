@@ -32,7 +32,7 @@ public class DialingComputer extends BaseBlockContainer implements IBusComponent
 		int dir = -1;
 		if(living instanceof EntityPlayer){
 			dir = Helper.yaw2dir(living.rotationYaw);
-			world.setBlockMetadataWithNotify(x, y, z, dir, Helper.SETBLOCK_UPDATE);
+			world.setBlock(x, y, z, dir, Helper.SETBLOCK_UPDATE);
 		}
 	}
 	
