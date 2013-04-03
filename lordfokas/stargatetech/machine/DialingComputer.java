@@ -1,6 +1,8 @@
 package lordfokas.stargatetech.machine;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -20,9 +22,18 @@ public class DialingComputer extends BaseBlockContainer implements IBusComponent
 	}
 	
 	@Override
-	public Icon getTextureFromSide(int side){
-		if(side == Helper.dirSouth) return this.blockIcon;
-		return IconRegistry.machine;
+	public Icon getTextureFromSide(int side, int meta){
+		if(side == meta) return this.blockIcon;
+		else return IconRegistry.machine;
+	}
+	
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack){
+		int dir = -1;
+		if(living instanceof EntityPlayer){
+			dir = Helper.yaw2dir(living.rotationYaw);
+			world.setBlockMetadataWithNotify(x, y, z, dir, Helper.SETBLOCK_UPDATE);
+		}
 	}
 	
 	@Override
@@ -49,7 +60,6 @@ public class DialingComputer extends BaseBlockContainer implements IBusComponent
 
 	@Override
 	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side) {
-		return side == Helper.dirNorth;
+		return side > 1 && side != w.getBlockMetadata(x, y, z);
 	}
-
 }

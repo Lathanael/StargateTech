@@ -1,15 +1,19 @@
 package lordfokas.stargatetech.machine;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.networks.bus.BusBlock.IBusComponent;
 import lordfokas.stargatetech.rendering.RenderBusCable;
+import lordfokas.stargatetech.util.Helper;
 
 public class BusCable extends BaseBlock implements IBusComponent{
 	public BusCable(int id) {
-		super(id, "busCable");
+		super(id, "busCable", false);
+		texturename = "busCableZ";
 	}
 
 	@Override
@@ -45,5 +49,20 @@ public class BusCable extends BaseBlock implements IBusComponent{
 	@Override
 	public int getRenderType(){
 		return RenderBusCable.instance().getRenderId();
+	}
+	
+	private boolean isValidPosition(World w, int x, int y, int z){
+		Block bottom = Helper.getBlockInstance(w, x, y-1, z);
+		return bottom.isBlockSolidOnSide(w, x, y, z, ForgeDirection.UP);
+	}
+	
+	@Override
+	public boolean canBlockStay(World w, int x, int y, int z){
+		return isValidPosition(w, x, y, z);
+	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World w, int x, int y, int z){
+		return isValidPosition(w, x, y, z);
 	}
 }

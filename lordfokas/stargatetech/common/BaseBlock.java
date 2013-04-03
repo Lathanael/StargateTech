@@ -40,7 +40,11 @@ public class BaseBlock extends Block implements IOverrideableTexture {
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int side, int metadata){
 		if(isOverride) return override[side];
-		else return getTextureFromSide(side);
+		else return getTextureFromSide(side, metadata);
+	}
+	
+	public Icon getTextureFromSide(int side, int meta){
+		return getTextureFromSide(side);
 	}
 	
 	public Icon getTextureFromSide(int side){
