@@ -17,9 +17,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Your everyday helper, with bits of common and useful code.
@@ -69,12 +71,18 @@ public final class Helper {
 		return Block.blocksList[cs.w.getBlockId(cs.x, cs.y, cs.z)];
 	}
 	
+	public static boolean isSolid(World w, int x, int y, int z, int side){
+		ForgeDirection dir = ForgeDirection.getOrientation(side);
+		Block block = getBlockInstance(w, x, y, z);
+		return block == null ? false : block.isBlockSolidOnSide(w, x, y, z, dir);
+	}
+	
 	public static int oppositeDirection(int dir){
 		switch(dir){
 			case dirXPos: return dirXNeg;
 			case dirXNeg: return dirXPos;
-			case dirYPos: return dirZNeg;
-			case dirYNeg: return dirZPos;
+			case dirYPos: return dirYNeg;
+			case dirYNeg: return dirYPos;
 			case dirZPos: return dirZNeg;
 			case dirZNeg: return dirZPos;
 			default: return -1;

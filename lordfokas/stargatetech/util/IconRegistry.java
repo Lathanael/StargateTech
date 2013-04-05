@@ -13,7 +13,7 @@ public final class IconRegistry {
 		public static final String GATE_SYMBOLS		= "/mods/StargateTech/textures/symbols.png";
 	}
 	
-	public static Icon busCable, busCableJoint, busCableX, busCableZ;
+	public static Icon busCable, busCableJoint, busCableX, busCableY, busCableZ;
 	public static Icon ionTubeJoint, lantean00simple, lantean01hexFloor, lantean02verticalEmitter;
 	public static Icon machine, machineLink0, machineLink1, machineLink2;
 	public static Icon machineSlot, machineSlotLink0, machineSlotLink1, machineSlotLink2;
@@ -27,6 +27,7 @@ public final class IconRegistry {
 		busCable = loadBlock(register, "busCable");
 		busCableJoint = loadBlock(register, "busCableJoint");
 		busCableX = loadBlock(register, "busCableX");
+		busCableY = loadBlock(register, "busCableY");
 		busCableZ = loadBlock(register, "busCableZ");
 		ionTubeJoint = loadBlock(register, "ionTubeJoint");
 		lantean00simple = loadBlock(register, "lantean-00-simple");
