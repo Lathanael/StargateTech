@@ -63,12 +63,12 @@ public final class Helper {
 	
 	private Helper(){}
 	
-	public static Block getBlockInstance(IBlockAccess w, int x, int y, int z){
-		return Block.blocksList[w.getBlockId(x, y, z)];
+	public static Block getBlockInstance(CoordinateSet cs){
+		return getBlockInstance(cs.w, cs.x, cs.y, cs.z);
 	}
 	
-	public static Block getBlockInstance(CoordinateSet cs){
-		return Block.blocksList[cs.w.getBlockId(cs.x, cs.y, cs.z)];
+	public static Block getBlockInstance(IBlockAccess w, int x, int y, int z){
+		return Block.blocksList[w.getBlockId(x, y, z)];
 	}
 	
 	public static boolean isSolid(World w, int x, int y, int z, int side){

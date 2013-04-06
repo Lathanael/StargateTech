@@ -175,16 +175,6 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 	}
 
 	@Override
-	public boolean isPropagator() {
-		return false;
-	}
-
-	@Override
-	public boolean isConnector() {
-		return true;
-	}
-
-	@Override
 	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side) {
 		return true;
 	}

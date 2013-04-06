@@ -49,16 +49,6 @@ public class DialingComputer extends BaseBlockContainer implements IBusComponent
 	}
 
 	@Override
-	public boolean isPropagator() {
-		return false;
-	}
-
-	@Override
-	public boolean isConnector() {
-		return false;
-	}
-
-	@Override
 	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side) {
 		return side > 1 && side != w.getBlockMetadata(x, y, z);
 	}

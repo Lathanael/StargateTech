@@ -1,5 +1,7 @@
 package lordfokas.stargatetech.networks.bus;
 
+import java.util.List;
+
 import net.minecraft.world.IBlockAccess;
 
 /**
@@ -11,8 +13,6 @@ public final class BusBlock {
 	private BusBlock(){}
 	
 	public interface IBusComponent{
-		public boolean isPropagator();
-		public boolean isConnector();
 		public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side);
 	}
 	
@@ -20,5 +20,9 @@ public final class BusBlock {
 		public boolean canHandlePacketType(IBlockAccess w, int x, int y, int z, byte packetType);
 		public void handlePacket(IBlockAccess w, int x, int y, int z, BusPacket packet);
 		public int getBusConnectorID();
+	}
+	
+	public interface IBusPropagator extends IBusComponent{
+		public List<BusConnection> getConnectionsList(IBlockAccess w, int x, int y, int z);
 	}
 }
