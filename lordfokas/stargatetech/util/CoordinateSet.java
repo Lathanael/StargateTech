@@ -38,7 +38,9 @@ public class CoordinateSet implements Cloneable{
 	@Override public boolean equals(Object o){
 		if(!(o instanceof CoordinateSet)) return false;
 		CoordinateSet c = (CoordinateSet) o;
-		if(c.w.provider.dimensionId != w.provider.dimensionId) return false;
+		if(c.w == null || w == null){
+			if(c.w != null || w != null) return false;
+		}else if(c.w.provider.dimensionId != w.provider.dimensionId) return false;
 		if(c.x != x || c.y != y || c.z != z) return false;
 		return true;
 	}

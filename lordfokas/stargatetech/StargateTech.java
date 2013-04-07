@@ -9,6 +9,7 @@ import lordfokas.stargatetech.items.Disintegrator;
 import lordfokas.stargatetech.items.Dismantler;
 import lordfokas.stargatetech.items.MechanusClavia;
 import lordfokas.stargatetech.items.PersonalShield;
+import lordfokas.stargatetech.machine.BusCable;
 import lordfokas.stargatetech.machine.DialingComputer;
 import lordfokas.stargatetech.machine.DialingComputerTE;
 import lordfokas.stargatetech.machine.IonTube;
@@ -80,6 +81,7 @@ public class StargateTech {
 	public static Placeholder placeholder;
 	public static DialingComputer dialingComputer;
 	public static LanteanBlock lanteanBlock;
+	public static BusCable busCable;
 	
 	// Items
 	public static BaseItem naquadahShard;
@@ -128,6 +130,7 @@ public class StargateTech {
 		placeholder		= new Placeholder(Config.placeholder);
 		dialingComputer = new DialingComputer(Config.dialingComputer);
 		lanteanBlock	= new LanteanBlock(Config.lanteanBlock);
+		busCable 		= new BusCable(Config.busCable);
 		
 		// Items
 		naquadahShard 	= (BaseItem) new BaseItem(Config.naquadahShard, UnlocalizedNames.ITEM_NQH_SHARD);
@@ -187,6 +190,7 @@ public class StargateTech {
 		registerBlock(stargate, "Stargate");
 		registerBlock(dialingComputer, "Dialing Computer");
 		registerBlock(lanteanBlock, "Lantean Block");
+		registerBlock(busCable, "Bus Cable");
 	}
 	
 	private void addItems(){
