@@ -11,6 +11,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
+
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.networks.bus.BusBlock.IBusComponent;
 import lordfokas.stargatetech.networks.bus.BusBlock.IBusPropagator;
@@ -47,9 +49,7 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 		}else if(blockAccess instanceof ChunkCache){
 			try{
 				ChunkCache cc = (ChunkCache) blockAccess;
-				Field f = cc.getClass().getDeclaredField("worldObj");
-				f.setAccessible(true);
-				w = (World) f.get(cc);
+				w = ObfuscationReflectionHelper.getPrivateValue(ChunkCache.class, cc, "worldObj");
 			}catch(Exception e){
 				StargateLogger.severe("An Exception occured when trying to get a ChunkCache's World!");
 				e.printStackTrace();
