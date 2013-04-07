@@ -173,17 +173,17 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 		w.setBlock(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
 		return false;
 	}
-
+	
 	@Override
-	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side) {
+	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side, int cableFace){
 		return true;
 	}
-
+	
 	@Override
 	public boolean canHandlePacketType(IBlockAccess w, int x, int y, int z, byte packetType) {
 		return packetType == BusPacket.PKT_DIAL_STARGATE;
 	}
-
+	
 	@Override
 	public void handlePacket(IBlockAccess w, int x, int y, int z, BusPacket packet){
 		if(packet instanceof PacketDialStargate){
@@ -194,9 +194,9 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 			}
 		}
 	}
-
+	
 	@Override
-	public int getBusConnectorID(){
+	public byte getBusConnectorID(){
 		return 0;
 	}
 }

@@ -15,8 +15,8 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderBusCable extends BaseBlockRenderer {
 	private static RenderBusCable INSTANCE = new RenderBusCable();
-	private Icon base, joint, runX, runY, runZ;
-	private Icon[] vmap;
+	private Icon base, corner1, corner2, joint, lit, runX, runY, runZ;
+	private Icon[] vmap, cmap;
 	
 	public static RenderBusCable instance(){
 		return INSTANCE;
@@ -32,10 +32,14 @@ public class RenderBusCable extends BaseBlockRenderer {
 		int direction = world.getBlockMetadata(x, y, z);
 		BusCable cable = (BusCable) block;
 		base = IconRegistry.busCable;
+		corner1 = IconRegistry.busCableCorner1;
+		corner2 = IconRegistry.busCableCorner2;
 		runX = IconRegistry.busCableX;
 		runY = IconRegistry.busCableY;
 		runZ = IconRegistry.busCableZ;
 		joint = IconRegistry.busCableJoint;
+		lit = IconRegistry.busCableJointLit;
+		cmap = new Icon[]{corner1, corner1, corner2, corner1, corner2, corner1};
 		List<BusConnection> links = cable.getConnectionsList(world, x, y, z);
 		switch(direction){
 			case Helper.dirYNeg:
@@ -75,7 +79,9 @@ public class RenderBusCable extends BaseBlockRenderer {
 				hasZ = true;
 			}
 		}
-		if(hasYNeg || links.size() < 2){
+		if(hasYNeg){
+			map[1] = lit;
+		}else if(links.size() < 2){
 			map[1] = joint;
 		}else if(hasZ && !hasX){
 			map[1] = runZ;
@@ -133,6 +139,29 @@ public class RenderBusCable extends BaseBlockRenderer {
 				block.overrideTextures(vmap);
 				r.setRenderBoundsFromBlock(block);
 				r.renderStandardBlock(block, x, y, z);
+			}else if(conn.cornerOut){
+				int[] offset = new int[]{0, 0, 0};
+				switch(conn.sourceSide){
+					case Helper.dirZNeg:
+						block.setBlockBounds(0.3125F, 0F, 0.9375F, 0.6875F, 0.0625F, 1F);
+						offset[2] = -1;
+						break;
+					case Helper.dirZPos:
+						block.setBlockBounds(0.3125F, 0F, 0F, 0.6875F, 0.0625F, 0.0625F);
+						offset[2] = 1;
+						break;
+					case Helper.dirXNeg:
+						block.setBlockBounds(0.9375F, 0F, 0.3125F, 1F, 0.0625F, 0.6875F);
+						offset[0] = -1;
+						break;
+					case Helper.dirXPos:
+						block.setBlockBounds(0F, 0F, 0.3125F, 0.0625F, 0.0625F, 0.6875F);
+						offset[0] = 1;
+						break;
+				}
+				block.overrideTextures(cmap);
+				r.setRenderBoundsFromBlock(block);
+				r.renderStandardBlock(block, x + offset[0], y + offset[1], z + offset[2]);
 			}
 		}
 		block.restoreTextures();
@@ -153,7 +182,9 @@ public class RenderBusCable extends BaseBlockRenderer {
 				hasZ = true;
 			}
 		}
-		if(hasYPos || links.size() < 2){
+		if(hasYPos){
+			map[0] = lit;
+		}else if(links.size() < 2){
 			map[0] = joint;
 		}else if(hasZ && !hasX){
 			map[0] = runZ;
@@ -204,13 +235,36 @@ public class RenderBusCable extends BaseBlockRenderer {
 						vmap[5] = runZ;
 						break;
 					case Helper.dirXPos:
-						block.setBlockBounds(0.9375F, 0F, 0.3125F, 0.9375F, 1F, 0.6875F);
+						block.setBlockBounds(0.9375F, 0F, 0.3125F, 1F, 0.9375F, 0.6875F);
 						vmap[4] = runY;
 						break;
 				}
 				block.overrideTextures(vmap);
 				r.setRenderBoundsFromBlock(block);
 				r.renderStandardBlock(block, x, y, z);
+			}else if(conn.cornerOut){
+				int[] offset = new int[]{0, 0, 0};
+				switch(conn.sourceSide){
+					case Helper.dirZNeg:
+						block.setBlockBounds(0.3125F, 0.9375F, 0.9375F, 0.6875F, 1F, 1F);
+						offset[2] = -1;
+						break;
+					case Helper.dirZPos:
+						block.setBlockBounds(0.3125F, 0.9375F, 0F, 0.6875F, 1F, 0.0625F);
+						offset[2] = 1;
+						break;
+					case Helper.dirXNeg:
+						block.setBlockBounds(0.9375F, 0.9375F, 0.3125F, 1F, 1F, 0.6875F);
+						offset[0] = -1;
+						break;
+					case Helper.dirXPos:
+						block.setBlockBounds(0F, 0.9375F, 0.3125F, 0.0625F, 1F, 0.6875F);
+						offset[0] = 1;
+						break;
+				}
+				block.overrideTextures(cmap);
+				r.setRenderBoundsFromBlock(block);
+				r.renderStandardBlock(block, x + offset[0], y + offset[1], z + offset[2]);
 			}
 		}
 		block.restoreTextures();
@@ -231,7 +285,9 @@ public class RenderBusCable extends BaseBlockRenderer {
 				hasY = true;
 			}
 		}
-		if(hasZNeg || links.size() < 2){
+		if(hasZNeg){
+			map[3] = lit;
+		}else if(links.size() < 2){
 			map[3] = joint;
 		}else if(hasY && !hasX){
 			map[3] = runZ;
@@ -289,6 +345,29 @@ public class RenderBusCable extends BaseBlockRenderer {
 				block.overrideTextures(vmap);
 				r.setRenderBoundsFromBlock(block);
 				r.renderStandardBlock(block, x, y, z);
+			}else if(conn.cornerOut){
+				int[] offset = new int[]{0, 0, 0};
+				switch(conn.sourceSide){
+					case Helper.dirYNeg:
+						block.setBlockBounds(0.3125F, 0.9375F, 0F, 0.6875F, 1F, 0.0625F);
+						offset[1] = -1;
+						break;
+					case Helper.dirYPos:
+						block.setBlockBounds(0.3125F, 0F, 0F, 0.6875F, 0.0625F, 0.0625F);
+						offset[1] = 1;
+						break;
+					case Helper.dirXNeg:
+						block.setBlockBounds(0.9375F, 0.3125F, 0F, 1F, 0.6875F, 0.0625F);
+						offset[0] = -1;
+						break;
+					case Helper.dirXPos:
+						block.setBlockBounds(0F, 0.3125F, 0F, 0.0625F, 0.6875F, 0.0625F);
+						offset[0] = 1;
+						break;
+				}
+				block.overrideTextures(cmap);
+				r.setRenderBoundsFromBlock(block);
+				r.renderStandardBlock(block, x + offset[0], y + offset[1], z + offset[2]);
 			}
 		}
 		block.restoreTextures();
@@ -309,7 +388,9 @@ public class RenderBusCable extends BaseBlockRenderer {
 				hasY = true;
 			}
 		}
-		if(hasZPos || links.size() < 2){
+		if(hasZPos){
+			map[2] = lit;
+		}else if(links.size() < 2){
 			map[2] = joint;
 		}else if(hasY && !hasX){
 			map[2] = runY;
@@ -367,6 +448,29 @@ public class RenderBusCable extends BaseBlockRenderer {
 				block.overrideTextures(vmap);
 				r.setRenderBoundsFromBlock(block);
 				r.renderStandardBlock(block, x, y, z);
+			}else if(conn.cornerOut){
+				int[] offset = new int[]{0, 0, 0};
+				switch(conn.sourceSide){
+					case Helper.dirYNeg:
+						block.setBlockBounds(0.3125F, 0.9375F, 0.9375F, 0.6875F, 1F, 1F);
+						offset[1] = -1;
+						break;
+					case Helper.dirYPos:
+						block.setBlockBounds(0.3125F, 0F, 0.9375F, 0.6875F, 0.0625F, 1F);
+						offset[1] = 1;
+						break;
+					case Helper.dirXNeg:
+						block.setBlockBounds(0.9375F, 0.3125F, 0.9375F, 1F, 0.6875F, 1F);
+						offset[0] = -1;
+						break;
+					case Helper.dirXPos:
+						block.setBlockBounds(0F, 0.3125F, 0.9375F, 0.0625F, 0.6875F, 1F);
+						offset[0] = 1;
+						break;
+				}
+				block.overrideTextures(cmap);
+				r.setRenderBoundsFromBlock(block);
+				r.renderStandardBlock(block, x + offset[0], y + offset[1], z + offset[2]);
 			}
 		}
 		block.restoreTextures();
@@ -387,7 +491,9 @@ public class RenderBusCable extends BaseBlockRenderer {
 				hasY = true;
 			}
 		}
-		if(hasXNeg || links.size() < 2){
+		if(hasXNeg){
+			map[5] = lit;
+		}else if(links.size() < 2){
 			map[5] = joint;
 		}else if(hasY && !hasZ){
 			map[5] = runZ;
@@ -445,6 +551,29 @@ public class RenderBusCable extends BaseBlockRenderer {
 				block.overrideTextures(vmap);
 				r.setRenderBoundsFromBlock(block);
 				r.renderStandardBlock(block, x, y, z);
+			}else if(conn.cornerOut){
+				int[] offset = new int[]{0, 0, 0};
+				switch(conn.sourceSide){
+					case Helper.dirYNeg:
+						block.setBlockBounds(0F, 0.9375F, 0.3125F, 0.0625F, 1F, 0.6875F);
+						offset[1] = -1;
+						break;
+					case Helper.dirYPos:
+						block.setBlockBounds(0F, 0F, 0.3125F, 0.0625F, 0.0625F, 0.6875F);
+						offset[1] = 1;
+						break;
+					case Helper.dirZNeg:
+						block.setBlockBounds(0F, 0.3125F, 0.9375F, 0.0625F, 0.6875F, 1F);
+						offset[2] = -1;
+						break;
+					case Helper.dirZPos:
+						block.setBlockBounds(0F, 0.3125F, 0F, 0.0625F, 0.6875F, 0.0625F);
+						offset[2] = 1;
+						break;
+				}
+				block.overrideTextures(cmap);
+				r.setRenderBoundsFromBlock(block);
+				r.renderStandardBlock(block, x + offset[0], y + offset[1], z + offset[2]);
 			}
 		}
 		block.restoreTextures();
@@ -465,7 +594,9 @@ public class RenderBusCable extends BaseBlockRenderer {
 				hasY = true;
 			}
 		}
-		if(hasXPos || links.size() < 2){
+		if(hasXPos){
+			map[4] = lit;
+		}else if(links.size() < 2){
 			map[4] = joint;
 		}else if(hasY && !hasZ){
 			map[4] = runY;
@@ -523,6 +654,29 @@ public class RenderBusCable extends BaseBlockRenderer {
 				block.overrideTextures(vmap);
 				r.setRenderBoundsFromBlock(block);
 				r.renderStandardBlock(block, x, y, z);
+			}else if(conn.cornerOut){
+				int[] offset = new int[]{0, 0, 0};
+				switch(conn.sourceSide){
+					case Helper.dirYNeg:
+						block.setBlockBounds(0.9375F, 0.9375F, 0.3125F, 1F, 1F, 0.6875F);
+						offset[1] = -1;
+						break;
+					case Helper.dirYPos:
+						block.setBlockBounds(0.9375F, 0F, 0.3125F, 1F, 0.0625F, 0.6875F);
+						offset[1] = 1;
+						break;
+					case Helper.dirZNeg:
+						block.setBlockBounds(0.9375F, 0.3125F, 0.9375F, 1F, 0.6875F, 1F);
+						offset[2] = -1;
+						break;
+					case Helper.dirZPos:
+						block.setBlockBounds(0.9375F, 0.3125F, 0F, 1F, 0.6875F, 0.0625F);
+						offset[2] = 1;
+						break;
+				}
+				block.overrideTextures(cmap);
+				r.setRenderBoundsFromBlock(block);
+				r.renderStandardBlock(block, x + offset[0], y + offset[1], z + offset[2]);
 			}
 		}
 		block.restoreTextures();

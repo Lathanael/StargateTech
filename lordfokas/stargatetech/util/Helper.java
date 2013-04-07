@@ -45,6 +45,9 @@ public final class Helper {
 	public static final int dirXNeg = 4;
 	public static final int dirXPos = 5;
 	
+	// Orientation Override value
+	public static final int dirIgnore = 999;
+	
 	// Adjacent Block Cycler
 	public static final int[][]
 		adjacentBlockCoords = {

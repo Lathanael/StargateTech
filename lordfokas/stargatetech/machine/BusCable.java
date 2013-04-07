@@ -33,8 +33,9 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 	}
 
 	@Override
-	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side) {
-		return side != Helper.oppositeDirection(w.getBlockMetadata(x, y, z));
+	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side, int cableFace){
+		int meta = w.getBlockMetadata(x, y, z);
+		return side != Helper.oppositeDirection(meta) && (cableFace == Helper.dirIgnore || meta == cableFace);
 	}
 	
 	@Override
@@ -66,7 +67,7 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 		if(spt instanceof IBusComponent){
 			IBusComponent component = (IBusComponent) spt;
 			int targetSide = Helper.oppositeDirection(meta);
-			if(component.canBusPlugOnSide(w, support.x, support.y, support.z, targetSide)){
+			if(component.canBusPlugOnSide(w, support.x, support.y, support.z, targetSide, -1)){
 				links.add(new BusConnection(w, support.x, support.y, support.z, meta, targetSide));
 			}
 		}
@@ -90,6 +91,9 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 			CoordinateSet derivate = position.fromDirection(dir);
 			Block block = Helper.getBlockInstance(w, derivate.x, derivate.y, derivate.z);
 			boolean shouldConnect = true;
+			boolean onSide = true;
+			boolean goingLow = false;
+			
 			// If next block is air search below.
 			if(block == null || w.isAirBlock(derivate.x, derivate.y, derivate.z)){
 				derivate = derivate.fromDirection(meta);
@@ -98,9 +102,12 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 				shouldConnect = Helper.isSolid(w, holder.x, holder.y, holder.z, dir);
 				cornerIn = false;
 				cornerOut = true;
+				onSide = false;
+				goingLow = true;
 			// If next block is solid search above
 			}else if(!(block instanceof IBusComponent) && Helper.isSolid(w, derivate.x, derivate.y, derivate.z, Helper.oppositeDirection(dir))){
 				int antimeta = Helper.oppositeDirection(meta);
+				onSide = false;
 				derivate = position.fromDirection(antimeta);
 				block = Helper.getBlockInstance(w, derivate.x, derivate.y, derivate.z);
 				// If above is air, check diagonal.
@@ -111,7 +118,7 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 				// Or try to connect above.
 				}else if(block instanceof IBusComponent){
 					IBusComponent component = (IBusComponent) block;
-					if(component.canBusPlugOnSide(w, derivate.x, derivate.y, derivate.z, antimeta)){
+					if(component.canBusPlugOnSide(w, derivate.x, derivate.y, derivate.z, antimeta, dir)){
 						BusConnection conn = new BusConnection(derivate.w, derivate.x, derivate.y, derivate.z, dir, antimeta);
 						conn.cornerIn = true;
 						conn.cornerOut = false;
@@ -119,23 +126,48 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 						shouldConnect = false;
 					}
 				}
+			}else{
+				CoordinateSet sideSpt = support.fromDirection(dir);
+				Block sspt = Helper.getBlockInstance(w, sideSpt.x, sideSpt.y, sideSpt.z);
+				if(sspt == null) continue;
+				if(sspt.isBlockSolidOnSide(w, sideSpt.x, sideSpt.y, sideSpt.z, ForgeDirection.getOrientation(meta)) == false) continue;
 			}
-			if(block instanceof IBusComponent && shouldConnect){
-				IBusComponent component = (IBusComponent) block;
-				int targetSide = Helper.oppositeDirection(meta);
-				if(component.canBusPlugOnSide(w, derivate.x, derivate.y, derivate.z, targetSide)){
-					BusConnection conn = new BusConnection(derivate.w, derivate.x, derivate.y, derivate.z, dir, targetSide);
-					conn.cornerIn = cornerIn;
-					conn.cornerOut = cornerOut;
-					links.add(conn);
-				}else{
-					targetSide = Helper.oppositeDirection(dir);
-					if(component.canBusPlugOnSide(w, derivate.x, derivate.y, derivate.z, targetSide)){
+			int cableFace = -1;
+			if(cornerIn && cornerOut){
+				cableFace = meta;
+			}else if(cornerIn && !cornerOut){
+				cableFace = dir;
+			}else if(!cornerIn && cornerOut){
+				cableFace = Helper.oppositeDirection(dir);
+			}else{
+				cableFace = meta;
+			}
+			boolean connected = false;
+			for(int i = 0; i < 1; i++){
+				if(block instanceof IBusComponent && shouldConnect){
+					IBusComponent component = (IBusComponent) block;
+					int targetSide = Helper.oppositeDirection(meta);
+					if(onSide) cableFace = dir;
+					if(component.canBusPlugOnSide(w, derivate.x, derivate.y, derivate.z, targetSide, cableFace)){
 						BusConnection conn = new BusConnection(derivate.w, derivate.x, derivate.y, derivate.z, dir, targetSide);
 						conn.cornerIn = cornerIn;
 						conn.cornerOut = cornerOut;
 						links.add(conn);
+					}else{
+						targetSide = Helper.oppositeDirection(dir);
+						if(onSide) cableFace = meta;
+						if(component.canBusPlugOnSide(w, derivate.x, derivate.y, derivate.z, targetSide, cableFace)){
+							BusConnection conn = new BusConnection(derivate.w, derivate.x, derivate.y, derivate.z, dir, targetSide);
+							conn.cornerIn = cornerIn;
+							conn.cornerOut = cornerOut;
+							links.add(conn);
+						}
 					}
+				}
+				if(goingLow && !connected){
+					i--;
+					goingLow = false;
+					onSide = true;
 				}
 			}
 		}
@@ -226,5 +258,13 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 				(dir == SOUTH && world.isBlockSolidOnSide(x, y, z - 1, SOUTH)) ||
 				(dir == WEST  && world.isBlockSolidOnSide(x + 1, y, z, WEST )) ||
 				(dir == EAST  && world.isBlockSolidOnSide(x - 1, y, z, EAST ));
+	}
+	
+	public void onNeighborBlockChange(World world, int x, int y, int z, int ignored){
+		int meta = world.getBlockMetadata(x, y, z);
+		if(!canPlaceBlockOnSide(world, x, y, z, Helper.oppositeDirection(meta))){
+			this.dropBlockAsItem(world, x, y, z, 0, 0);
+	        world.setBlockToAir(x, y, z);
+		}
 	}
 }
