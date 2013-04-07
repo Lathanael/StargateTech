@@ -61,7 +61,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.8.5")
+@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.9.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class StargateTech {
 	// General Stuff
