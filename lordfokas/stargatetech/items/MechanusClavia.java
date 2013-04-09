@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import lordfokas.stargatetech.api.IDisintegrable;
+import lordfokas.stargatetech.api.IDismantleable;
 import lordfokas.stargatetech.common.BaseItem;
-import lordfokas.stargatetech.common.IDisintegrable;
-import lordfokas.stargatetech.common.IDismantleable;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.UnlocalizedNames;
 

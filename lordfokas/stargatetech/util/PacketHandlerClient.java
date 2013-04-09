@@ -1,8 +1,7 @@
-package lordfokas.stargatetech.packet;
+package lordfokas.stargatetech.util;
 
 import com.google.common.io.ByteArrayDataInput;
 
-import lordfokas.stargatetech.util.ByteUtil;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import cpw.mods.fml.common.network.PacketDispatcher;

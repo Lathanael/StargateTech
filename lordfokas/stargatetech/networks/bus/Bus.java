@@ -5,9 +5,11 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusComponent;
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusConnector;
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusPropagator;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusComponent;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusConnector;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusPropagator;
+import lordfokas.stargatetech.api.networks.BusConnection;
+import lordfokas.stargatetech.api.networks.IBusPacket;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.StargateLogger;
@@ -15,20 +17,23 @@ import lordfokas.stargatetech.util.StargateLogger;
 public final class Bus {
 	private Bus(){}
 	
-	public static void propagatePacket(BusPacket packet, byte targetBusID, CoordinateSet source){
-		if(source.w != null && source.w.isRemote == false){
+	public static void propagatePacket(IBusPacket packet, byte targetBusID, CoordinateSet source){
+		if(packet.getPacketID() == 0){
+			StargateLogger.warning("Bus Error: Trying to propagate a packet of class \"" + packet.getClass().getName() + "\" with an invalid PacketID (0).");
+			StargateLogger.warning("Packet propagation was canceled to avoid critical errors.");
+		}else if(source.w != null && source.w.isRemote == false){
 			boolean broadcast = (targetBusID == (byte) 0xFF);
 			propagate0(packet, broadcast, targetBusID, source);
 		}else{
 			if(source.w == null){
-				StargateLogger.warning("Bus Error: Trying to propagate a packet of class \"" + packet.getClass().getSimpleName() + "\" on a null world object!");
+				StargateLogger.warning("Bus Error: Trying to propagate a packet of class \"" + packet.getClass().getName() + "\" on a null world object!");
 			}else{
-				StargateLogger.warning("Bus Error: Trying to propagate a packet of class \"" + packet.getClass().getSimpleName() + "\" on the client side!");
+				StargateLogger.warning("Bus Error: Trying to propagate a packet of class \"" + packet.getClass().getName() + "\" on the client side!");
 			}
 		}
 	}
 	
-	private static void propagate0(BusPacket packet, boolean broadcast, byte targetBusID, CoordinateSet source){
+	private static void propagate0(IBusPacket packet, boolean broadcast, byte targetBusID, CoordinateSet source){
 		ArrayList<CoordinateSet> visited = new ArrayList<CoordinateSet>();
 		visited.add(source);
 		IBusComponent src = (IBusComponent) Helper.getBlockInstance(source);
@@ -51,7 +56,7 @@ public final class Bus {
 		}
 	}
 	
-	private static void propagate1(BusPacket packet, boolean broadcast, byte targetBusID, CoordinateSet source, ArrayList<CoordinateSet> visited){
+	private static void propagate1(IBusPacket packet, boolean broadcast, byte targetBusID, CoordinateSet source, ArrayList<CoordinateSet> visited){
 		IBusPropagator src = (IBusPropagator) Helper.getBlockInstance(source);
 		List<BusConnection> links = src.getConnectionsList(source.w, source.x, source.y, source.z);
 		if(links != null){
@@ -65,7 +70,7 @@ public final class Bus {
 							IBusConnector connector = (IBusConnector) tgt;
 							if(broadcast || connector.getBusConnectorID() == targetBusID || connector.getBusConnectorID() == 0){
 								if(connector.canHandlePacketType(conn.w, conn.x, conn.y, conn.z, packet.getPacketID())){
-									connector.handlePacket(conn.w, conn.x, conn.y, conn.z, packet);
+									connector.handlePacket(conn.w, conn.x, conn.y, conn.z, packet, targetBusID);
 								}
 							}
 						}

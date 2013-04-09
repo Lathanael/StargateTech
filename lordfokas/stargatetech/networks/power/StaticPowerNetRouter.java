@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 
-import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetComponent;
-import lordfokas.stargatetech.networks.power.PowerNetBlock.IPowerNetSource;
+import lordfokas.stargatetech.api.networks.PowerNetBlock.IPowerNetComponent;
+import lordfokas.stargatetech.api.networks.PowerNetBlock.IPowerNetSource;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 

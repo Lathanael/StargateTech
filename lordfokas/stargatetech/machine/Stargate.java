@@ -8,10 +8,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
+import lordfokas.stargatetech.api.IDismantleable;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusConnector;
+import lordfokas.stargatetech.api.networks.IBusPacket;
 import lordfokas.stargatetech.common.BaseBlockContainer;
-import lordfokas.stargatetech.common.IDismantleable;
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusConnector;
 import lordfokas.stargatetech.networks.bus.BusPacket;
+import lordfokas.stargatetech.networks.bus.BusPacketManager;
 import lordfokas.stargatetech.networks.bus.packets.PacketDialStargate;
 import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.StargateNetwork;
@@ -181,11 +183,11 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 	
 	@Override
 	public boolean canHandlePacketType(IBlockAccess w, int x, int y, int z, byte packetType) {
-		return packetType == BusPacket.PKT_DIAL_STARGATE;
+		return packetType == BusPacketManager.manager().PKT_DIAL_STARGATE;
 	}
 	
 	@Override
-	public void handlePacket(IBlockAccess w, int x, int y, int z, BusPacket packet){
+	public void handlePacket(IBlockAccess w, int x, int y, int z, IBusPacket packet, byte targetBusID){
 		if(packet instanceof PacketDialStargate){
 			TileEntity te = w.getBlockTileEntity(x, y, z);
 			if(te != null && te instanceof StargateTE){

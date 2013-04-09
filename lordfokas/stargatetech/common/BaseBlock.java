@@ -6,14 +6,13 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.util.Config;
-import lordfokas.stargatetech.util.IOverrideableTexture;
 import lordfokas.stargatetech.util.IconRegistry;
 
 /**
  * A base for all the blocks used on this mod.
  * @author LordFokas
  */
-public class BaseBlock extends Block implements IOverrideableTexture {
+public class BaseBlock extends Block{
 	protected Icon[] override = new Icon[6];
 	protected boolean isOverride = false;
 	protected String texturename;
@@ -60,13 +59,11 @@ public class BaseBlock extends Block implements IOverrideableTexture {
 		this.blockIcon = register.registerIcon("StargateTech:" + texturename);
 	}
 	
-	@Override
 	public void overrideTextures(Icon[] tmap){
 		isOverride = true;
 		override = tmap;
 	}
 	
-	@Override
 	public void restoreTextures()
 		{ isOverride = false; }
 	

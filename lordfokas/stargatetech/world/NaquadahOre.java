@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import lordfokas.stargatetech.StargateTech;
-import lordfokas.stargatetech.common.IDisintegrable;
+import lordfokas.stargatetech.api.IDisintegrable;
 import lordfokas.stargatetech.rendering.RenderOre;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.UnlocalizedNames;

@@ -1,8 +1,8 @@
 package lordfokas.stargatetech.networks.power;
 
 import net.minecraft.nbt.NBTTagCompound;
+import lordfokas.stargatetech.api.networks.PowerNetTE.IPowerStorage;
 import lordfokas.stargatetech.networks.NetworkTE;
-import lordfokas.stargatetech.networks.power.PowerNetTE.IPowerStorage;
 
 public class BasePowerNetStorageTE extends NetworkTE implements IPowerStorage{
 	protected int powerAmount = 0;

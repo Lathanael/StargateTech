@@ -1,6 +1,5 @@
-package lordfokas.stargatetech.networks.power;
+package lordfokas.stargatetech.api.networks;
 
-import lordfokas.stargatetech.networks.INetworkTE;
 
 /**
  * PowerNet TileEntity Specification

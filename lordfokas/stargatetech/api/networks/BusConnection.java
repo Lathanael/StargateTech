@@ -1,4 +1,4 @@
-package lordfokas.stargatetech.networks.bus;
+package lordfokas.stargatetech.api.networks;
 
 import net.minecraft.world.World;
 import lordfokas.stargatetech.util.CoordinateSet;
@@ -10,7 +10,12 @@ import lordfokas.stargatetech.util.CoordinateSet;
  * @author LordFokas
  */
 public class BusConnection extends CoordinateSet{
+	/**
+	 * Which sides are being used for this connection in the source and target blocks.
+	 */
 	public int sourceSide, targetSide;
+	
+	/** Used internally on BusCables. Isn't really useful for anyone. */
 	public boolean cornerIn = false, cornerOut = false;
 	
 	/**

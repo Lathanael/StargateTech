@@ -1,4 +1,4 @@
-package lordfokas.stargatetech.networks.bus;
+package lordfokas.stargatetech.api.networks;
 
 import java.util.List;
 
@@ -58,8 +58,9 @@ public final class BusBlock {
 		 * @param y Y Coordinate
 		 * @param z Z Coordinate
 		 * @param packet A BusPacket accepted in IBusConnector.canHandlePacketType()
+		 * @param targetBusID What BusID the packet was propagated to.
 		 */
-		public void handlePacket(IBlockAccess w, int x, int y, int z, BusPacket packet);
+		public void handlePacket(IBlockAccess w, int x, int y, int z, IBusPacket packet, byte targetBusID);
 		
 		/**
 		 * This IBusConnector's ID.

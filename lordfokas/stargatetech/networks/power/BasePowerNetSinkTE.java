@@ -1,7 +1,8 @@
 package lordfokas.stargatetech.networks.power;
 
 import net.minecraft.nbt.NBTTagCompound;
-import lordfokas.stargatetech.networks.power.PowerNetTE.IPowerSink;
+import lordfokas.stargatetech.api.networks.PowerNetTE;
+import lordfokas.stargatetech.api.networks.PowerNetTE.IPowerSink;
 
 public class BasePowerNetSinkTE extends BasePowerNetStorageTE implements IPowerSink {
 	/** Power request timer. Used along with the power buffer to prevent PowerNet-related lag. */

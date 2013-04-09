@@ -23,17 +23,20 @@ import lordfokas.stargatetech.machine.ShieldEmitter;
 import lordfokas.stargatetech.machine.ShieldEmitterTE;
 import lordfokas.stargatetech.machine.Stargate;
 import lordfokas.stargatetech.machine.StargateTE;
-import lordfokas.stargatetech.packet.PacketHandler;
-import lordfokas.stargatetech.packet.PacketHandlerServer;
+import lordfokas.stargatetech.networks.bus.BusPacketManager;
 import lordfokas.stargatetech.plugins.PluginBC3;
 import lordfokas.stargatetech.plugins.PluginCC;
 import lordfokas.stargatetech.plugins.PluginForestry;
 import lordfokas.stargatetech.plugins.PluginIC2;
 import lordfokas.stargatetech.plugins.PluginRC;
 import lordfokas.stargatetech.plugins.PluginTE;
+import lordfokas.stargatetech.util.APIImplementation;
 import lordfokas.stargatetech.util.Config;
 import lordfokas.stargatetech.util.EventListener;
 import lordfokas.stargatetech.util.GUIHandler;
+import lordfokas.stargatetech.util.ItemManager;
+import lordfokas.stargatetech.util.PacketHandler;
+import lordfokas.stargatetech.util.PacketHandlerServer;
 import lordfokas.stargatetech.util.StargateLogger;
 import lordfokas.stargatetech.util.UnlocalizedNames;
 import lordfokas.stargatetech.world.LanteanBlock;
@@ -61,7 +64,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.9.1")
+@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.9.2")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class StargateTech {
 	// General Stuff
@@ -115,6 +118,8 @@ public class StargateTech {
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		StargateLogger.init();
+		BusPacketManager.init();
+		APIImplementation.init();
 		Config.loadAll(new Configuration(event.getSuggestedConfigurationFile()));
 		
 		// Blocks
@@ -240,9 +245,11 @@ public class StargateTech {
 	private void registerBlock(Block block, String name){
 		GameRegistry.registerBlock(block);
 		LanguageRegistry.addName(block, name);
+		ItemManager.putBlock(block.getUnlocalizedName(), block);
 	}
 	
 	private void registerItem(Item item, String name){
 		LanguageRegistry.addName(item, name);
+		ItemManager.putItem(item.getUnlocalizedName(), item);
 	}
 }

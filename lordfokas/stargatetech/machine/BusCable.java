@@ -13,10 +13,10 @@ import java.util.List;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 
+import lordfokas.stargatetech.api.networks.BusConnection;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusComponent;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusPropagator;
 import lordfokas.stargatetech.common.BaseBlock;
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusComponent;
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusPropagator;
-import lordfokas.stargatetech.networks.bus.BusConnection;
 import lordfokas.stargatetech.rendering.RenderBusCable;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
@@ -46,15 +46,6 @@ public class BusCable extends BaseBlock implements IBusPropagator{
 		World w;
 		if(blockAccess instanceof World){
 			w = (World) blockAccess;
-		}else if(blockAccess instanceof ChunkCache){
-			try{
-				ChunkCache cc = (ChunkCache) blockAccess;
-				w = ObfuscationReflectionHelper.getPrivateValue(ChunkCache.class, cc, "worldObj");
-			}catch(Exception e){
-				StargateLogger.severe("An Exception occured when trying to get a ChunkCache's World!");
-				e.printStackTrace();
-				return links;
-			}
 		}else{
 			StargateLogger.severe("An unsupported IBlockAccess object was found!");
 			StargateLogger.severe("IBlockAccess class: " + blockAccess.getClass().getName());

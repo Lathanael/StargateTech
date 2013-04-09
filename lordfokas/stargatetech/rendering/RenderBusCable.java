@@ -2,13 +2,14 @@ package lordfokas.stargatetech.rendering;
 
 import java.util.List;
 
+import lordfokas.stargatetech.api.networks.BusConnection;
 import lordfokas.stargatetech.common.BaseBlock;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
 import lordfokas.stargatetech.machine.BusCable;
-import lordfokas.stargatetech.networks.bus.BusConnection;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.IconRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -28,8 +29,8 @@ public class RenderBusCable extends BaseBlockRenderer {
 	}
 	
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelID, RenderBlocks r){
-		int direction = world.getBlockMetadata(x, y, z);
+	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelID, RenderBlocks r){
+		int direction = blockAccess.getBlockMetadata(x, y, z);
 		BusCable cable = (BusCable) block;
 		base = IconRegistry.busCable;
 		corner1 = IconRegistry.busCableCorner1;
@@ -40,25 +41,25 @@ public class RenderBusCable extends BaseBlockRenderer {
 		joint = IconRegistry.busCableJoint;
 		lit = IconRegistry.busCableJointLit;
 		cmap = new Icon[]{corner1, corner1, corner2, corner1, corner2, corner1};
-		List<BusConnection> links = cable.getConnectionsList(world, x, y, z);
+		List<BusConnection> links = cable.getConnectionsList(Minecraft.getMinecraft().theWorld, x, y, z);
 		switch(direction){
 			case Helper.dirYNeg:
-				renderYNeg(world, x, y, z, cable, r, links);
+				renderYNeg(blockAccess, x, y, z, cable, r, links);
 				break;
 			case Helper.dirYPos:
-				renderYPos(world, x, y, z, cable, r, links);
+				renderYPos(blockAccess, x, y, z, cable, r, links);
 				break;
 			case Helper.dirZNeg:
-				renderZNeg(world, x, y, z, cable, r, links);
+				renderZNeg(blockAccess, x, y, z, cable, r, links);
 				break;
 			case Helper.dirZPos:
-				renderZPos(world, x, y, z, cable, r, links);
+				renderZPos(blockAccess, x, y, z, cable, r, links);
 				break;
 			case Helper.dirXNeg:
-				renderXNeg(world, x, y, z, cable, r, links);
+				renderXNeg(blockAccess, x, y, z, cable, r, links);
 				break;
 			case Helper.dirXPos:
-				renderXPos(world, x, y, z, cable, r, links);
+				renderXPos(blockAccess, x, y, z, cable, r, links);
 				break;
 		}
 		return false;

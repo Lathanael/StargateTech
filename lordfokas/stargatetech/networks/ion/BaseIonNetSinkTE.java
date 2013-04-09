@@ -1,7 +1,8 @@
 package lordfokas.stargatetech.networks.ion;
 
 import net.minecraft.nbt.NBTTagCompound;
-import lordfokas.stargatetech.networks.ion.IonNetTE.IIonSink;
+import lordfokas.stargatetech.api.networks.IonNetTE;
+import lordfokas.stargatetech.api.networks.IonNetTE.IIonSink;
 import lordfokas.stargatetech.util.CoordinateSet;
 
 public class BaseIonNetSinkTE extends BaseIonNetStorageTE implements IIonSink{

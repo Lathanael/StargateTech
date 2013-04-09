@@ -1,8 +1,8 @@
 package lordfokas.stargatetech.networks.ion;
 
 import net.minecraft.nbt.NBTTagCompound;
+import lordfokas.stargatetech.api.networks.IonNetTE.IIonStorage;
 import lordfokas.stargatetech.networks.NetworkTE;
-import lordfokas.stargatetech.networks.ion.IonNetTE.IIonStorage;
 
 public class BaseIonNetStorageTE extends NetworkTE implements IIonStorage{
 	/** Current amount of ions in this machine's buffer. */
