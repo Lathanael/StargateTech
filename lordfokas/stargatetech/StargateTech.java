@@ -54,10 +54,14 @@ import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.Mod.ServerStarting;
+import cpw.mods.fml.common.Mod.ServerStopping;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -181,6 +185,16 @@ public class StargateTech {
 		industrialcraft2.init();
 		railcraft.init();
 		thermalexpansion.init();
+	}
+	
+	@ServerStarting
+	public void onServerStart(FMLServerStartingEvent event){
+		// Load StargateNetwork
+	}
+	
+	@ServerStopping
+	public void onServerStop(FMLServerStoppingEvent event){
+		// Unload StargateNetwork
 	}
 	
 	private void addBlocks(){

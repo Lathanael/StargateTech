@@ -2,7 +2,9 @@ package lordfokas.stargatetech.util;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import lordfokas.stargatetech.StargateTech;
 import lordfokas.stargatetech.api.StargateTechAPI;
 import lordfokas.stargatetech.networks.bus.BusPacketManager;
 
@@ -40,5 +42,10 @@ public final class APIImplementation extends StargateTechAPI{
 	@Override
 	public int getNewBusPacketID(String name) {
 		return BusPacketManager.manager().getNewPacketID(name);
+	}
+
+	@Override
+	public CreativeTabs getCreativeTab() {
+		return StargateTech.tab;
 	}
 }

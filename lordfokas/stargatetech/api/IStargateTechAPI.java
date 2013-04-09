@@ -2,6 +2,7 @@ package lordfokas.stargatetech.api;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -21,7 +22,8 @@ public interface IStargateTechAPI{
 	/**
 	 * A version number reflecting changes in the stargatetech.api package.
 	 * Changes every time something changes in the package.
-	 * @return The API version number.
+	 * 
+	 * @return The API version string.
 	 */
 	public String getVersion();
 	
@@ -30,7 +32,7 @@ public interface IStargateTechAPI{
 	 * an Integer Array, so that API users can check if the current version
 	 * supports a certain feature without the need to parse a String.
 	 * 
-	 * @return
+	 * @return An int[4] containing the API version number.
 	 */
 	public int[] getParsedVersion();
 	
@@ -45,7 +47,7 @@ public interface IStargateTechAPI{
 	public ItemStack getItemStack(String itemName);
 	
 	/**
-	 * @return a list of all valid item names you can use on getItemStack()
+	 * @return A list of all valid item names you can use on getItemStack()
 	 */
 	public List<String> getValidItemNames();
 	
@@ -57,4 +59,9 @@ public interface IStargateTechAPI{
 	 * @return An id for the packet ranging 1 - 255, or 0 in case of error.
 	 */
 	public int getNewBusPacketID(String name);
+	
+	/**
+	 * @return The instance of the Creative Tab used by StargateTech
+	 */
+	public CreativeTabs getCreativeTab();
 }
