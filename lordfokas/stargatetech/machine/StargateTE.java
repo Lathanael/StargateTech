@@ -40,7 +40,7 @@ public class StargateTE extends BaseTileEntity {
 	public void validate(){
 		super.validate();
 		if(!worldObj.isRemote){
-			myAddress = StargateNetwork.instance(worldObj).getMyAddress(worldObj, xCoord, yCoord, zCoord);
+			myAddress = StargateNetwork.instance().getMyAddress(worldObj, xCoord, yCoord, zCoord);
 			if(myAddress != null) System.out.println("NEW ADDR: " + myAddress.getName());
 		}
 	}

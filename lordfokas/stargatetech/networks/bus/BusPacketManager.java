@@ -17,7 +17,7 @@ public final class BusPacketManager{
 	}
 	
 	public static BusPacketManager manager(){
-		return manager();
+		return mgr;
 	}
 	
 	private BusPacketManager(){

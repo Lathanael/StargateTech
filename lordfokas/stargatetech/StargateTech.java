@@ -24,6 +24,7 @@ import lordfokas.stargatetech.machine.ShieldEmitterTE;
 import lordfokas.stargatetech.machine.Stargate;
 import lordfokas.stargatetech.machine.StargateTE;
 import lordfokas.stargatetech.networks.bus.BusPacketManager;
+import lordfokas.stargatetech.networks.stargate.StargateNetwork;
 import lordfokas.stargatetech.plugins.PluginBC3;
 import lordfokas.stargatetech.plugins.PluginCC;
 import lordfokas.stargatetech.plugins.PluginForestry;
@@ -54,13 +55,13 @@ import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarting;
+import cpw.mods.fml.common.Mod.ServerAboutToStart;
 import cpw.mods.fml.common.Mod.ServerStopping;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -154,7 +155,7 @@ public class StargateTech {
 		personalShield	= new PersonalShield(Config.personalShield);
 		addressMemoryCrystal	= new AddressMemoryCrystal(Config.addressMemoryCrystal);
 		addressReaderCrystal	= new AddressReaderCrystal(Config.addressReaderCrystal);
-		addressReader = new BaseItem(Config.addressReader, "addressreader");
+		addressReader = new BaseItem(Config.addressReader, "addressReader");
 	}
 	
 	@Init
@@ -187,14 +188,14 @@ public class StargateTech {
 		thermalexpansion.init();
 	}
 	
-	@ServerStarting
-	public void onServerStart(FMLServerStartingEvent event){
-		// Load StargateNetwork
+	@ServerAboutToStart
+	public void onServerStart(FMLServerAboutToStartEvent event){
+		StargateNetwork.init();
 	}
 	
 	@ServerStopping
 	public void onServerStop(FMLServerStoppingEvent event){
-		// Unload StargateNetwork
+		StargateNetwork.unload();
 	}
 	
 	private void addBlocks(){
