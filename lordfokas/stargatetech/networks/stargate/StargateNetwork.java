@@ -12,6 +12,7 @@ import lordfokas.stargatetech.machine.StargateTE;
 import lordfokas.stargatetech.util.StargateLogger;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
 /**
@@ -139,7 +140,7 @@ public final class StargateNetwork {
 		String filepath = getStargateAddressFileName();
 		boolean problem = false;
 		try{
-			System.out.println("Loading Stargate address list...");
+			StargateLogger.info("Loading Stargate address list...");
 			file = new RandomAccessFile(filepath, "r");
 			if(file.length() != 0){
 				int count = file.readInt();
@@ -148,22 +149,22 @@ public final class StargateNetwork {
 						addresses.add(new AddressHandler(file));
 					}
 				}
-				System.out.println("Successfully loaded all the addresses. Address count: " + count);
+				StargateLogger.info("Successfully loaded all the addresses. Address count: " + count);
 			}
 		}catch(Exception e){
 			if(e instanceof FileNotFoundException){
-				System.out.println("Unable to load the Stargate Network save file. This is normal when the mod runs for the first time in a world.");
+				StargateLogger.info("Unable to load the Stargate Network save file. This is normal when the mod runs for the first time in a world.");
 				File dummy = new File(filepath);
 				boolean error = false;
 				try{
 					dummy.createNewFile();
 				}catch(IOException ioe){
 					error = true;
-					System.err.println("Failed to create the Stargate Network save file. Perhaps something is wrong?");
+					StargateLogger.warning("Failed to create the Stargate Network save file. Perhaps something is wrong?");
 					ioe.printStackTrace();
 				}
 				if(!error){
-					System.out.println("Successfully created the Stargate Network save file (" + filepath + ")");
+					StargateLogger.info("Successfully created the Stargate Network save file (" + filepath + ")");
 					canSave = true;
 				}
 			}else{
@@ -172,10 +173,10 @@ public final class StargateNetwork {
 			}
 		}
 		if(!problem){
-			System.out.println("...Stargate address list loaded with no problems. All is OK!");
+			StargateLogger.info("...Stargate address list loaded with no problems. All is OK!");
 			canSave = true;
 		}else{
-			System.err.println("Because of errors loading the network file, it will not save to prevent corruption.");
+			StargateLogger.warning("Because of errors loading the network file, it will not save to prevent corruption.");
 		}
 		try{
 			
@@ -189,7 +190,7 @@ public final class StargateNetwork {
 		if(!canSave) return;
 		boolean problem = false;
 		try{
-			System.out.println("Saving Stargate address list...");
+			StargateLogger.info("Saving Stargate address list...");
 			file = new RandomAccessFile(getStargateAddressFileName(), "rw");
 			file.writeInt(addresses.size());
 			int count = 0;
@@ -197,12 +198,12 @@ public final class StargateNetwork {
 				ah.save(file);
 				count++;
 			}
-			System.out.println("Successfully saved all the addresses. Address count: " + count);
+			StargateLogger.info("Successfully saved all the addresses. Address count: " + count);
 		}catch(Exception e){
 			problem = true;
 			e.printStackTrace();
 		}
-		if(!problem) System.out.println("...Stargate address list saved with no problems.");
+		if(!problem) StargateLogger.info("...Stargate address list saved with no problems.");
 		try{
 			file.close();
 		}catch(Exception e){
@@ -215,8 +216,8 @@ public final class StargateNetwork {
 		AddressHandler target = getHandler(tgt);
 		if(source != null && target != null){
 			if(source.getD() != target.getD()){
-				World srcWorld = DimensionManager.getWorld(source.getD());
-				World tgtWorld = DimensionManager.getWorld(target.getD());
+				World srcWorld = getWorld(source.getD());
+				World tgtWorld = getWorld(target.getD());
 				if(srcWorld != null && tgtWorld != null){
 					TileEntity srcte = srcWorld.getBlockTileEntity(source.getX(), source.getY(), source.getZ());
 					TileEntity tgtte = tgtWorld.getBlockTileEntity(target.getX(), target.getY(), target.getZ());
@@ -227,16 +228,26 @@ public final class StargateNetwork {
 						srcGate.openWormhole(time, true, target);
 						tgtGate.openWormhole(time, false, null);
 					}else{
-						System.out.println("Couldn't dial because some gates weren't there!");
+						StargateLogger.warning("Couldn't dial because some gates weren't there!");
 					}
 				}else{
-					System.out.println("Couldn't dial because some worlds were null!");
+					StargateLogger.warning("Couldn't dial because some worlds were null!");
 				}
 			}else{
-				System.out.println("Can't teleport in the same dimension!");
+				//No need to log these... for now.
+				//StargateLogger.warning("Can't teleport in the same dimension!");
 			}
 		}else{
-			System.out.println("Couldn't dial because some addresses were null!");
+			StargateLogger.warning("Couldn't dial because some addresses were null!");
 		}
+	}
+	
+	private WorldServer getWorld(int dim){
+		WorldServer world = DimensionManager.getWorld(dim);
+		if(world == null){
+			DimensionManager.initDimension(dim);
+			world = DimensionManager.getWorld(dim);
+		}
+		return world;
 	}
 }
