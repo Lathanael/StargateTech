@@ -3,6 +3,7 @@ package lordfokas.stargatetech;
 import lordfokas.stargatetech.machine.StargateTE;
 import lordfokas.stargatetech.rendering.RenderBusCable;
 import lordfokas.stargatetech.rendering.RenderIonTube;
+import lordfokas.stargatetech.rendering.RenderMetalBlock;
 import lordfokas.stargatetech.rendering.RenderOre;
 import lordfokas.stargatetech.rendering.RenderParticleIonizer;
 import lordfokas.stargatetech.rendering.RenderPowerConduit;
@@ -34,6 +35,7 @@ public class EnvironmentIntegrated implements IEnvironmentProxy {
 		RenderingRegistry.registerBlockHandler(RenderParticleIonizer.instance());
 		RenderingRegistry.registerBlockHandler(RenderShieldEmitter.instance());
 		RenderingRegistry.registerBlockHandler(RenderOre.instance());
+		RenderingRegistry.registerBlockHandler(RenderMetalBlock.instance());
 		RenderingRegistry.registerBlockHandler(RenderPowerConduit.instance());
 		RenderingRegistry.registerBlockHandler(RenderStargateBlock.instance());
 		RenderingRegistry.registerBlockHandler(RenderBusCable.instance());

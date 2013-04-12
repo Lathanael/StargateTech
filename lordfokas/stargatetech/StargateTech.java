@@ -41,7 +41,9 @@ import lordfokas.stargatetech.util.PacketHandlerServer;
 import lordfokas.stargatetech.util.StargateLogger;
 import lordfokas.stargatetech.util.UnlocalizedNames;
 import lordfokas.stargatetech.world.LanteanBlock;
+import lordfokas.stargatetech.world.NaquadahBlock;
 import lordfokas.stargatetech.world.NaquadahOre;
+import lordfokas.stargatetech.world.NaquadriaBlock;
 import lordfokas.stargatetech.world.NaquadriaOre;
 import lordfokas.stargatetech.world.Placeholder;
 import lordfokas.stargatetech.world.WorldGenerator;
@@ -69,7 +71,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.9.2")
+@Mod(modid="StargateTech", name="Stargate Tech", version="Alpha 0.9.3")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class StargateTech {
 	// General Stuff
@@ -82,7 +84,9 @@ public class StargateTech {
 	public static ParticleIonizer particleIonizer;
 	public static IonTube ionTube;
 	public static NaquadahOre naquadahOre;
+	public static NaquadahBlock naquadahBlock;
 	public static NaquadriaOre naquadriaOre;
+	public static NaquadriaBlock naquadriaBlock;
 	public static PowerConduit powerConduit;
 	public static NaquadahGenerator naquadahGenerator;
 	public static Stargate stargate;
@@ -133,7 +137,9 @@ public class StargateTech {
 		particleIonizer = new ParticleIonizer(Config.particleIonizer);
 		ionTube 		= new IonTube(Config.ionTube);
 		naquadahOre 	= new NaquadahOre(Config.naquadahOre);
+		naquadahBlock	= new NaquadahBlock(Config.naquadahBlock);
 		naquadriaOre 	= new NaquadriaOre(Config.naquadriaOre);
+		naquadriaBlock	= new NaquadriaBlock(Config.naquadriaBlock);
 		powerConduit	= new PowerConduit(Config.powerConduit);
 		naquadahGenerator	= new NaquadahGenerator(Config.naquadahGenerator);
 		stargate		= new Stargate(Config.stargate);
@@ -204,7 +210,9 @@ public class StargateTech {
 		registerBlock(particleIonizer, "Particle Ionizer");
 		registerBlock(ionTube, "Ion Tube");
 		registerBlock(naquadahOre, "Naquadah Ore");
+		registerBlock(naquadahBlock, "Naquadah Block");
 		registerBlock(naquadriaOre, "Naquadria Ore");
+		registerBlock(naquadriaBlock, "NaquadriaBlock");
 		registerBlock(powerConduit, "Power Conduit");
 		registerBlock(naquadahGenerator, "Naquadah Generator");
 		registerBlock(stargate, "Stargate");
@@ -236,11 +244,25 @@ public class StargateTech {
 		ItemStack nqiCluster = new ItemStack(naquadriaCluster);
 		ItemStack nqhIngot = new ItemStack(naquadahIngot);
 		ItemStack nqiIngot = new ItemStack(naquadriaIngot);
+		ItemStack nqhBlock = new ItemStack(naquadahBlock);
+		ItemStack nqiBlock = new ItemStack(naquadriaBlock);
+		ItemStack orange = new ItemStack(Block.cloth, 1, 1);
+		ItemStack green = new ItemStack(Block.cloth, 1, 5);
+		ItemStack blue = new ItemStack(Block.cloth, 1, 11);
+		ItemStack brown = new ItemStack(Block.cloth, 1, 12);
+		ItemStack black = new ItemStack(Block.cloth, 1, 15);
+		
 		GameRegistry.addShapelessRecipe(nqhCluster, new Object[]{nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard, nqhShard});
 		GameRegistry.addShapelessRecipe(nqiCluster, new Object[]{nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard, nqiShard});
 		GameRegistry.addSmelting(nqhCluster.itemID, nqhIngot, 0);
 		GameRegistry.addSmelting(nqiCluster.itemID, nqiIngot, 0);
+		GameRegistry.addShapedRecipe(nqhBlock, "III", "III", "III", 'I', nqhIngot);
+		GameRegistry.addShapedRecipe(nqiBlock, "III", "III", "III", 'I', nqiIngot);
+		GameRegistry.addShapelessRecipe(new ItemStack(naquadahIngot, 9), nqhBlock);
+		GameRegistry.addShapelessRecipe(new ItemStack(naquadriaIngot, 9), nqiBlock);
 		GameRegistry.addShapelessRecipe(new ItemStack(addressReaderCrystal, 1), new Object[]{new ItemStack(addressMemoryCrystal, 1), new ItemStack(addressReader, 1)});
+		GameRegistry.addShapedRecipe(new ItemStack(busCable, 32), "ONG", "NKN", "BNW", 'N', nqhIngot, 'O', orange, 'G', green, 'B', blue, 'W', brown, 'K', black);
+		
 		ParticleIonizerRecipes.add(nqhIngot, 10);
 		ParticleIonizerRecipes.add(nqiIngot, 40);
 	}
