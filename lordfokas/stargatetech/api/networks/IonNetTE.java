@@ -1,6 +1,5 @@
-package lordfokas.stargatetech.networks.ion;
+package lordfokas.stargatetech.api.networks;
 
-import lordfokas.stargatetech.networks.INetworkTE;
 
 /**
  * IonNet TileEntity Specification

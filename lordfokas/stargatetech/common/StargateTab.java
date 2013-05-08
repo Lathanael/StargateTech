@@ -12,25 +12,22 @@ import lordfokas.stargatetech.StargateTech;
 public class StargateTab extends CreativeTabs {
 	public static final StargateTab instance = new StargateTab();
 	
-	public StargateTab() {
+	public StargateTab(){
 		super("stargateTech.creative");
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public int getTabIconItemIndex()
-    {
+	public int getTabIconItemIndex(){
         return StargateTech.naquadriaIngot.itemID;
     }
 	
 	@SideOnly(Side.CLIENT)
-    public String getTabLabel()
-    {
+    public String getTabLabel(){
         return "Stargate Tech";
     }
 	 
 	@SideOnly(Side.CLIENT)
-    public String getTranslatedTabLabel()
-    {
+    public String getTranslatedTabLabel(){
         return this.getTabLabel();
     }
 }

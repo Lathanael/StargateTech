@@ -1,8 +1,8 @@
 package lordfokas.stargatetech.networks.bus;
 
-public abstract class BusPacket {
-	public static final byte PKT_DIAL_STARGATE = 0x01;
-	
+import lordfokas.stargatetech.api.networks.IBusPacket;
+
+public abstract class BusPacket implements IBusPacket{
 	private byte packetID;
 	
 	protected BusPacket(byte ID){

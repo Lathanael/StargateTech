@@ -1,7 +1,7 @@
 package lordfokas.stargatetech.networks.power;
 
 import net.minecraft.nbt.NBTTagCompound;
-import lordfokas.stargatetech.networks.power.PowerNetTE.IPowerSource;
+import lordfokas.stargatetech.api.networks.PowerNetTE.IPowerSource;
 
 public class BasePowerNetSourceTE extends BasePowerNetStorageTE implements IPowerSource {
 	protected BasePowerNetSourceTE(int buffersize) {

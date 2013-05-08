@@ -8,8 +8,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusComponent;
 import lordfokas.stargatetech.common.BaseBlockContainer;
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusComponent;
 import lordfokas.stargatetech.util.GUIHandler;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.IconRegistry;
@@ -49,17 +49,7 @@ public class DialingComputer extends BaseBlockContainer implements IBusComponent
 	}
 
 	@Override
-	public boolean isPropagator() {
-		return false;
-	}
-
-	@Override
-	public boolean isConnector() {
-		return false;
-	}
-
-	@Override
-	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side) {
+	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side, int cableFace) {
 		return side > 1 && side != w.getBlockMetadata(x, y, z);
 	}
 }

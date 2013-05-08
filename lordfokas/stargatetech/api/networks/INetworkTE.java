@@ -1,4 +1,4 @@
-package lordfokas.stargatetech.networks;
+package lordfokas.stargatetech.api.networks;
 
 import lordfokas.stargatetech.util.CoordinateSet;
 

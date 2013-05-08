@@ -1,4 +1,4 @@
-package lordfokas.stargatetech.networks.power;
+package lordfokas.stargatetech.api.networks;
 
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;

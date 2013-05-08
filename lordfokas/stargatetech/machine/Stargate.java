@@ -8,10 +8,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import lordfokas.stargatetech.StargateTech;
+import lordfokas.stargatetech.api.IDismantleable;
+import lordfokas.stargatetech.api.networks.BusBlock.IBusConnector;
+import lordfokas.stargatetech.api.networks.IBusPacket;
 import lordfokas.stargatetech.common.BaseBlockContainer;
-import lordfokas.stargatetech.common.IDismantleable;
-import lordfokas.stargatetech.networks.bus.BusBlock.IBusConnector;
 import lordfokas.stargatetech.networks.bus.BusPacket;
+import lordfokas.stargatetech.networks.bus.BusPacketManager;
 import lordfokas.stargatetech.networks.bus.packets.PacketDialStargate;
 import lordfokas.stargatetech.networks.stargate.Address;
 import lordfokas.stargatetech.networks.stargate.StargateNetwork;
@@ -38,7 +40,7 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 	public void placeStargateWithRotation(World w, int x, int y, int z, int dir){
 		checkPlace(w, x, y, z, dir);
 		if(!w.isRemote){
-			Address addr = StargateNetwork.instance(w).getNewRandomAddress(w, x, y, z);
+			Address addr = StargateNetwork.instance().getNewRandomAddress(w, x, y, z);
 			StargateTE stargate = (StargateTE) w.getBlockTileEntity(x, y, z);
 			stargate.myAddress = addr;
 		}
@@ -99,7 +101,7 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 	@Override
 	public void breakBlock(World w, int x, int y, int z, int id, int meta){
 		setPlaceholders(w, x, y, z, meta, false);
-		if(!w.isRemote) StargateNetwork.instance(w).remove(w, x, y, z);
+		if(!w.isRemote) StargateNetwork.instance().remove(w, x, y, z);
 	}
 	
 	// TODO: Fix this
@@ -173,29 +175,19 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 		w.setBlock(x, y, z, 0, 0, Helper.SETBLOCK_UPDATE);
 		return false;
 	}
-
+	
 	@Override
-	public boolean isPropagator() {
-		return false;
-	}
-
-	@Override
-	public boolean isConnector() {
+	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side, int cableFace){
 		return true;
 	}
-
-	@Override
-	public boolean canBusPlugOnSide(IBlockAccess w, int x, int y, int z, int side) {
-		return true;
-	}
-
+	
 	@Override
 	public boolean canHandlePacketType(IBlockAccess w, int x, int y, int z, byte packetType) {
-		return packetType == BusPacket.PKT_DIAL_STARGATE;
+		return packetType == BusPacketManager.manager().PKT_DIAL_STARGATE;
 	}
-
+	
 	@Override
-	public void handlePacket(IBlockAccess w, int x, int y, int z, BusPacket packet){
+	public void handlePacket(IBlockAccess w, int x, int y, int z, IBusPacket packet, byte targetBusID){
 		if(packet instanceof PacketDialStargate){
 			TileEntity te = w.getBlockTileEntity(x, y, z);
 			if(te != null && te instanceof StargateTE){
@@ -204,9 +196,9 @@ public class Stargate extends BaseBlockContainer implements IDismantleable, IBus
 			}
 		}
 	}
-
+	
 	@Override
-	public int getBusConnectorID(){
+	public byte getBusConnectorID(){
 		return 0;
 	}
 }

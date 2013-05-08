@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 
-import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetComponent;
-import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetSource;
+import lordfokas.stargatetech.api.networks.IonNetBlock.IIonNetComponent;
+import lordfokas.stargatetech.api.networks.IonNetBlock.IIonNetSource;
 import lordfokas.stargatetech.util.CoordinateSet;
 import lordfokas.stargatetech.util.Helper;
 

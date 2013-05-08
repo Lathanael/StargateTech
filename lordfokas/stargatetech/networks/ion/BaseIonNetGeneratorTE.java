@@ -1,6 +1,6 @@
 package lordfokas.stargatetech.networks.ion;
 
-import lordfokas.stargatetech.networks.ion.IonNetTE.IIonGenerator;
+import lordfokas.stargatetech.api.networks.IonNetTE.IIonGenerator;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class BaseIonNetGeneratorTE extends BaseIonNetSourceTE implements IIonGenerator{

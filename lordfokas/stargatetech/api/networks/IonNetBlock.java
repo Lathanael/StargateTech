@@ -1,4 +1,4 @@
-package lordfokas.stargatetech.networks.ion;
+package lordfokas.stargatetech.api.networks;
 
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;

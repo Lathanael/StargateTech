@@ -1,7 +1,7 @@
 package lordfokas.stargatetech.networks.power;
 
 import net.minecraft.nbt.NBTTagCompound;
-import lordfokas.stargatetech.networks.power.PowerNetTE.IPowerGenerator;
+import lordfokas.stargatetech.api.networks.PowerNetTE.IPowerGenerator;
 
 public class BasePowerNetGeneratorTE extends BasePowerNetSourceTE implements IPowerGenerator {
 	/** How much excess power this machine has. Non-zero values mean this machine's main power buffer is full. */

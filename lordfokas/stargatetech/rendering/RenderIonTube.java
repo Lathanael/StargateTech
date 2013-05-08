@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import lordfokas.stargatetech.StargateTech;
+import lordfokas.stargatetech.api.networks.IonNetBlock.IIonNetComponent;
 import lordfokas.stargatetech.common.BaseBlockRenderer;
-import lordfokas.stargatetech.networks.ion.IonNetBlock.IIonNetComponent;
 import lordfokas.stargatetech.util.Helper;
 import lordfokas.stargatetech.util.IconRegistry;
 

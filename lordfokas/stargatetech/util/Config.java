@@ -16,7 +16,9 @@ public final class Config {
 	public static int particleIonizer;
 	public static int ionTube;
 	public static int naquadahOre;
+	public static int naquadahBlock;
 	public static int naquadriaOre;
+	public static int naquadriaBlock;
 	public static int powerConduit;
 	public static int naquadahGenerator;
 	public static int stargate;
@@ -98,7 +100,9 @@ public final class Config {
 		
 		// World:
 		naquadahOre 	= cfg.getBlock(BLOCK, 	"naquadahOre",		block++).getInt();
+		naquadahBlock 	= cfg.getBlock(BLOCK, 	"naquadahBlock",	block++).getInt();
 		naquadriaOre 	= cfg.getBlock(BLOCK, 	"naquadriaOre",		block++).getInt();
+		naquadriaBlock 	= cfg.getBlock(BLOCK, 	"naquadriaBlock",	block++).getInt();
 		placeholder		= cfg.getBlock(BLOCK,	"placeholder",		block++).getInt();
 		lanteanBlock	= cfg.getBlock(BLOCK,	"lanteanBlock",		block++).getInt();
 		

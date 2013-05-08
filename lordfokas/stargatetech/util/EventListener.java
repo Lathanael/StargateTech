@@ -1,24 +1,21 @@
 package lordfokas.stargatetech.util;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 
+<<<<<<< HEAD
 import lathanael.stargatetech.entity.EntityStargatePainting;
 import lathanael.stargatetech.util.BlockUtils;
 import lathanael.stargatetech.util.StargateLogger;
+=======
+>>>>>>> upstream/master
 import lordfokas.stargatetech.StargateTech;
-import lordfokas.stargatetech.networks.stargate.StargateNetwork;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.world.WorldEvent;
 
 public final class EventListener {
 	private static final EventListener instance = new EventListener();
